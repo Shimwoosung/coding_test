@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { formatCpp } from '../utils/formatCpp';
 
 interface Props {
   title: string;
@@ -8,9 +9,10 @@ interface Props {
 
 export default function SolutionModal({ title, code, onClose }: Props) {
   const [copied, setCopied] = useState(false);
+  const pretty = useMemo(() => formatCpp(code), [code]);
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(code);
+      await navigator.clipboard.writeText(pretty);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch { /* noop */ }
@@ -26,7 +28,7 @@ export default function SolutionModal({ title, code, onClose }: Props) {
             <button className="x" onClick={onClose}>✕</button>
           </div>
         </div>
-        <pre className="solution-modal-code">{code}</pre>
+        <pre className="solution-modal-code">{pretty}</pre>
         <p className="solution-modal-foot">막혔을 때 참고하고, 직접 다시 짜보며 익히는 걸 추천해요.</p>
       </div>
     </div>
