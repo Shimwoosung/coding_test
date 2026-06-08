@@ -1,0 +1,46 @@
+{
+  "id": "sp_11",
+  "title": "0-1 BFS: 가중치가 0 또는 1인 그래프",
+  "stage": 2,
+  "level": 3,
+  "topic": "shortest_path",
+  "concept": "shortest_path",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "모든 간선의 가중치가 0 또는 1인 방향 그래프가 주어진다. 시작 정점 S에서 모든 정점까지의 최단 거리를 구하라. 덱(deque)을 이용한 0-1 BFS로 O(N+M)에 해결할 수 있다. 가중치 0인 간선은 덱의 앞에, 가중치 1인 간선은 덱의 뒤에 넣는다. 도달할 수 없는 정점은 -1로 출력한다.",
+  "constraints": ["1 ≤ N ≤ 100000", "0 ≤ M ≤ 300000", "간선 가중치는 0 또는 1", "1 ≤ S ≤ N", "그래프는 방향 그래프"],
+  "ioDescription": {
+    "input": "첫째 줄에 정점 개수 N, 간선 개수 M. 둘째 줄에 시작 정점 S. 이후 M개의 줄에 각각 방향 간선 (u v w), w는 0 또는 1.",
+    "output": "1번부터 N번 정점까지 각 정점에 대한 최단 거리를 한 줄에 하나씩 출력. 도달 불가능하면 -1."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5 6\n1\n1 2 0\n2 3 1\n1 3 1\n3 4 0\n4 5 1\n1 5 1\n",
+      "output": "0\n0\n1\n1\n1\n"
+    },
+    {
+      "input": "3 1\n1\n1 2 1\n",
+      "output": "0\n1\n-1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1 0\n1\n",
+      "output": "0\n"
+    },
+    {
+      "input": "4 4\n1\n1 2 1\n2 3 0\n3 4 0\n1 4 1\n",
+      "output": "0\n1\n1\n1\n"
+    },
+    {
+      "input": "5 5\n1\n1 2 1\n2 3 1\n1 3 0\n3 4 0\n4 5 1\n",
+      "output": "0\n1\n0\n0\n1\n"
+    }
+  ],
+  "hints": [
+    "deque를 사용하고 dist 배열을 INF로 초기화한다.",
+    "가중치 0이면 push_front, 1이면 push_back. 꺼낸 거리가 현재 dist보다 크면 건너뛴다."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int N, M;\n    cin >> N >> M;\n    int S;\n    cin >> S;\n    vector<vector<pair<int,int>>> adj(N + 1);\n    for (int i = 0; i < M; i++) {\n        int u, v, w;\n        cin >> u >> v >> w;\n        adj[u].push_back({v, w});\n    }\n    const int INF = INT_MAX;\n    vector<int> dist(N + 1, INF);\n    deque<int> dq;\n    dist[S] = 0;\n    dq.push_front(S);\n    while (!dq.empty()) {\n        int u = dq.front(); dq.pop_front();\n        for (auto [v, w] : adj[u]) {\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                if (w == 0) dq.push_front(v);\n                else dq.push_back(v);\n            }\n        }\n    }\n    for (int i = 1; i <= N; i++) {\n        if (dist[i] == INF) cout << -1 << \"\\n\";\n        else cout << dist[i] << \"\\n\";\n    }\n    return 0;\n}\n"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "bm_06",
+  "title": "켜진 비트 수 세기",
+  "stage": 1,
+  "level": 1,
+  "topic": "bitmask",
+  "concept": "bitmask",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "음이 아닌 정수 N개가 주어진다. 각 정수를 이진수로 나타냈을 때 1인 비트(켜진 비트)의 개수를 출력하라. 비트마스크에서 켜진 비트의 개수를 세는 기본 연산으로, __builtin_popcount 또는 x &= (x-1) 기법을 사용할 수 있다.",
+  "constraints": ["1 ≤ N ≤ 1000", "0 ≤ 각 정수 ≤ 1,000,000,000"],
+  "ioDescription": {
+    "input": "첫 줄에 정수의 개수 N. 둘째 줄에 N개의 정수가 공백으로 구분되어 주어진다.",
+    "output": "각 정수에 대해 켜진 비트의 개수를 한 줄에 하나씩 출력한다."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    { "input": "3\n5 7 0\n", "output": "2\n3\n0\n" },
+    { "input": "4\n1 2 8 15\n", "output": "1\n1\n1\n4\n" }
+  ],
+  "hiddenTests": [
+    { "input": "1\n1000000000\n", "output": "13\n" },
+    { "input": "5\n3 6 12 24 48\n", "output": "2\n2\n2\n2\n2\n" },
+    { "input": "2\n0 1023\n", "output": "0\n10\n" }
+  ],
+  "hints": [
+    "__builtin_popcount(x)는 32비트 정수의 켜진 비트 수를 반환한다.",
+    "직접 구현하려면 while(x){cnt += x&1; x >>= 1;} 처럼 한 비트씩 확인한다."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n; cin >> n;\n    for (int i = 0; i < n; i++) {\n        unsigned int x; cin >> x;\n        cout << __builtin_popcount(x) << \"\\n\";\n    }\n    return 0;\n}\n"
+}

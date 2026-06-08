@@ -1,0 +1,28 @@
+{
+  "id": "bt_10",
+  "title": "부분수열의 합",
+  "stage": 2,
+  "level": 3,
+  "topic": "backtracking",
+  "concept": "backtracking",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "N개의 정수로 이루어진 수열이 있을 때, 크기가 양수인 부분수열 중에서 그 수열의 원소를 다 더한 값이 S가 되는 경우의 수를 구하는 문제이다. 각 원소를 고르거나 고르지 않는 두 가지 분기로 백트래킹하면 모든 부분집합(2^N개)을 탐색할 수 있다. 공집합은 세지 않는다.",
+  "constraints": ["1 ≤ N ≤ 20", "-1,000,000 ≤ S ≤ 1,000,000", "수열의 각 원소의 절댓값은 100,000 이하", "크기가 양수인 부분수열만 센다(공집합 제외)"],
+  "ioDescription": {
+    "input": "첫째 줄에 정수의 개수 N과 정수 S가 공백으로 구분되어 주어진다. 둘째 줄에 N개의 정수가 공백으로 구분되어 주어진다.",
+    "output": "합이 S가 되는 부분수열의 개수를 출력한다."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    { "input": "5 0\n-7 -3 -2 5 8\n", "output": "1\n" },
+    { "input": "3 3\n1 2 3\n", "output": "2\n" }
+  ],
+  "hiddenTests": [
+    { "input": "1 5\n5\n", "output": "1\n" },
+    { "input": "4 0\n1 -1 2 -2\n", "output": "3\n" },
+    { "input": "3 6\n1 2 3\n", "output": "1\n" }
+  ],
+  "hints": ["각 인덱스에서 '선택'과 '비선택' 두 갈래로 재귀한다.", "모든 원소를 결정한 뒤(depth == N) 고른 개수가 1개 이상이고 합이 S면 카운트한다."],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint N;\nlong long S;\nint a[25];\nlong long cnt = 0;\n\nvoid dfs(int idx, int chosen, long long sum) {\n    if (idx == N) {\n        if (chosen > 0 && sum == S) cnt++;\n        return;\n    }\n    dfs(idx + 1, chosen, sum);\n    dfs(idx + 1, chosen + 1, sum + a[idx]);\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    cin >> N >> S;\n    for (int i = 0; i < N; i++) cin >> a[i];\n    dfs(0, 0, 0);\n    cout << cnt << '\\n';\n    return 0;\n}\n"
+}

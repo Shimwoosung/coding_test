@@ -1,0 +1,46 @@
+{
+  "id": "sp_13",
+  "title": "K번째 최단경로 (가능한 K개 경로 중 최단)",
+  "stage": 4,
+  "level": 5,
+  "topic": "shortest_path",
+  "concept": "shortest_path",
+  "mode": "stdio",
+  "difficulty": "심화",
+  "description": "방향 가중치 그래프에서 1번 정점부터 N번 정점까지의 K번째 최단경로의 길이를 구하라. 같은 정점이나 간선을 여러 번 지나도 되며, 경로의 길이가 작은 순서대로 1번째, 2번째, ... K번째 경로를 정의한다(길이가 같은 서로 다른 경로도 각각 센다). 각 정점마다 도착 거리를 최대 K개까지만 유지하는 변형 다익스트라를 사용한다. K번째 경로가 존재하지 않으면 -1을 출력한다.",
+  "constraints": ["1 ≤ N ≤ 1000", "1 ≤ M ≤ 2000000", "1 ≤ K ≤ 100", "1 ≤ 간선 가중치 ≤ 1000", "그래프는 방향 그래프"],
+  "ioDescription": {
+    "input": "첫째 줄에 정점 개수 N, 간선 개수 M, K. 이후 M개의 줄에 각각 방향 간선 (u v w).",
+    "output": "1번에서 N번까지의 K번째 최단경로 길이. 존재하지 않으면 -1."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5 10 2\n1 2 2\n1 3 7\n1 4 5\n1 5 6\n2 4 2\n2 3 4\n3 4 6\n3 5 8\n4 5 1\n4 2 8\n",
+      "output": "6\n"
+    },
+    {
+      "input": "3 2 2\n1 2 1\n2 3 1\n",
+      "output": "-1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "2 2 2\n1 2 3\n1 2 5\n",
+      "output": "5\n"
+    },
+    {
+      "input": "3 3 1\n1 2 4\n1 3 10\n2 3 4\n",
+      "output": "8\n"
+    },
+    {
+      "input": "4 5 3\n1 2 1\n1 3 1\n2 4 1\n3 4 1\n1 4 5\n",
+      "output": "5\n"
+    }
+  ],
+  "hints": [
+    "각 정점 v마다 길이 우선순위 큐(최대 힙)를 두어 가장 짧은 K개의 도착 거리만 유지한다.",
+    "min-heap에서 (거리, 정점)을 꺼내 v로 가는 거리가 이미 K개 확정되었으면 무시하고, 아니면 인접 정점에 후보를 전파한다. 답은 N번 정점 힙의 K번째(가장 큰) 값."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int N, M, K;\n    cin >> N >> M >> K;\n    vector<vector<pair<int,int>>> adj(N + 1);\n    for (int i = 0; i < M; i++) {\n        int u, v, w;\n        cin >> u >> v >> w;\n        adj[u].push_back({v, w});\n    }\n    // 각 정점마다 최단 K개의 거리를 저장하는 최대 힙\n    vector<priority_queue<long long>> best(N + 1);\n    priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<pair<long long,int>>> pq;\n    pq.push({0, 1});\n    best[1].push(0);\n    while (!pq.empty()) {\n        auto [d, u] = pq.top(); pq.pop();\n        // u까지의 거리가 이미 K개 확정되고 d가 그보다 크면 무시\n        if ((int)best[u].size() > K) continue;\n        // d가 u의 K번째 최단보다 크면 의미 없음 (정확성을 위해 진행 시 검사)\n        for (auto [v, w] : adj[u]) {\n            long long nd = d + w;\n            if ((int)best[v].size() < K) {\n                best[v].push(nd);\n                pq.push({nd, v});\n            } else if (best[v].top() > nd) {\n                best[v].pop();\n                best[v].push(nd);\n                pq.push({nd, v});\n            }\n        }\n    }\n    if ((int)best[N].size() < K) cout << -1 << \"\\n\";\n    else cout << best[N].top() << \"\\n\";\n    return 0;\n}\n"
+}

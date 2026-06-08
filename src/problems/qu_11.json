@@ -1,0 +1,43 @@
+{
+  "id": "qu_11",
+  "title": "나이트의 이동",
+  "stage": 2,
+  "level": 3,
+  "topic": "queue",
+  "concept": "queue",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "체스의 나이트가 I x I 크기의 체스판 위에 있다. 나이트는 한 번에 8가지 L자 방향(2칸+1칸)으로 이동할 수 있다. 시작 위치와 목표 위치가 주어질 때, 나이트가 목표 위치까지 이동하는 데 필요한 최소 이동 횟수를 구하라. 모든 칸에서 가중치가 같으므로 BFS로 최단 이동 횟수를 구할 수 있다.",
+  "constraints": ["여러 개의 테스트 케이스가 주어진다", "4 ≤ I ≤ 300", "좌표는 0 이상 I-1 이하"],
+  "ioDescription": {
+    "input": "첫째 줄에 테스트 케이스 수 T가 주어진다. 각 테스트 케이스마다 첫 줄에 체스판 한 변의 길이 I, 둘째 줄에 시작 좌표 r c, 셋째 줄에 목표 좌표 r c가 주어진다.",
+    "output": "각 테스트 케이스마다 나이트가 목표 위치로 이동하는 최소 횟수를 한 줄에 출력한다."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\n8\n0 0\n7 0\n100\n0 0\n30 50\n10\n1 1\n1 1\n",
+      "output": "5\n28\n0\n"
+    },
+    {
+      "input": "1\n8\n0 0\n1 2\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n5\n0 0\n4 4\n",
+      "output": "4\n"
+    },
+    {
+      "input": "2\n8\n0 0\n2 2\n8\n0 0\n0 1\n",
+      "output": "4\n3\n"
+    },
+    {
+      "input": "1\n6\n2 3\n5 4\n",
+      "output": "2\n"
+    }
+  ],
+  "hints": ["나이트의 8방향 이동 델타 배열을 만들어 BFS를 수행한다.", "시작과 목표가 같으면 0을 출력해야 한다."],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int T;\n    cin >> T;\n    int dx[] = {-2,-2,-1,-1,1,1,2,2};\n    int dy[] = {-1,1,-2,2,-2,2,-1,1};\n    while (T--) {\n        int I;\n        cin >> I;\n        int sr, sc, er, ec;\n        cin >> sr >> sc >> er >> ec;\n        vector<vector<int>> dist(I, vector<int>(I, -1));\n        queue<pair<int,int>> q;\n        q.push({sr, sc});\n        dist[sr][sc] = 0;\n        while (!q.empty()) {\n            auto [x, y] = q.front(); q.pop();\n            if (x == er && y == ec) break;\n            for (int d = 0; d < 8; d++) {\n                int nx = x + dx[d], ny = y + dy[d];\n                if (nx < 0 || ny < 0 || nx >= I || ny >= I) continue;\n                if (dist[nx][ny] == -1) {\n                    dist[nx][ny] = dist[x][y] + 1;\n                    q.push({nx, ny});\n                }\n            }\n        }\n        cout << dist[er][ec] << \"\\n\";\n    }\n    return 0;\n}\n"
+}

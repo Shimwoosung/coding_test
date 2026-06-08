@@ -1,0 +1,43 @@
+{
+  "id": "qu_12",
+  "title": "회전하는 큐",
+  "stage": 4,
+  "level": 4,
+  "topic": "queue",
+  "concept": "queue",
+  "mode": "stdio",
+  "difficulty": "심화",
+  "description": "1번부터 N번까지의 원소가 양방향 순환 큐(덱)에 차례대로 들어 있다. 첫 번째 원소를 뽑아내는 연산만 가능하며, 원하는 원소를 첫 번째로 만들기 위해 두 가지 회전 연산을 쓸 수 있다. 연산 2는 왼쪽으로 한 칸 회전(첫 원소를 맨 뒤로), 연산 3은 오른쪽으로 한 칸 회전(맨 뒤 원소를 맨 앞으로)이다. 뽑아야 할 원소들의 위치가 순서대로 주어질 때, 모든 원소를 뽑기 위해 필요한 회전 연산(2번·3번) 횟수의 최소 합을 구하라. 각 목표 원소마다 현재 큐에서의 위치를 찾아 왼쪽 회전 거리와 오른쪽 회전 거리 중 작은 쪽을 택하면 된다.",
+  "constraints": ["1 ≤ N ≤ 50", "1 ≤ M ≤ N", "뽑아야 할 원소들은 서로 다르며 모두 1 이상 N 이하"],
+  "ioDescription": {
+    "input": "첫째 줄에 큐의 크기 N과 뽑아야 할 원소의 개수 M이 공백으로 주어진다. 둘째 줄에 뽑아야 할 원소들이 뽑는 순서대로 M개 공백으로 주어진다.",
+    "output": "필요한 최소 회전 연산 횟수를 출력한다."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "10 3\n1 2 3\n",
+      "output": "0\n"
+    },
+    {
+      "input": "10 3\n2 9 5\n",
+      "output": "8\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "32 6\n27 16 30 11 6 23\n",
+      "output": "59\n"
+    },
+    {
+      "input": "5 5\n1 2 3 4 5\n",
+      "output": "0\n"
+    },
+    {
+      "input": "5 1\n4\n",
+      "output": "2\n"
+    }
+  ],
+  "hints": ["덱에 1..N을 넣고, 목표 원소의 현재 인덱스를 찾는다.", "왼쪽 회전 횟수 idx와 오른쪽 회전 횟수 size-idx 중 작은 값을 더한 뒤, 그만큼 실제로 회전시키고 front를 제거한다."],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int N, M;\n    cin >> N >> M;\n    deque<int> dq;\n    for (int i = 1; i <= N; i++) dq.push_back(i);\n    long long ops = 0;\n    for (int t = 0; t < M; t++) {\n        int target;\n        cin >> target;\n        int idx = -1;\n        int sz = dq.size();\n        for (int i = 0; i < sz; i++) if (dq[i] == target) { idx = i; break; }\n        int leftCnt = idx;\n        int rightCnt = sz - idx;\n        if (leftCnt <= rightCnt) {\n            ops += leftCnt;\n            for (int i = 0; i < leftCnt; i++) { dq.push_back(dq.front()); dq.pop_front(); }\n        } else {\n            ops += rightCnt;\n            for (int i = 0; i < rightCnt; i++) { dq.push_front(dq.back()); dq.pop_back(); }\n        }\n        dq.pop_front();\n    }\n    cout << ops << \"\\n\";\n    return 0;\n}\n"
+}

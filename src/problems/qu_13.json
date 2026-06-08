@@ -1,0 +1,43 @@
+{
+  "id": "qu_13",
+  "title": "숫자 변환 BFS",
+  "stage": 4,
+  "level": 5,
+  "topic": "queue",
+  "concept": "queue",
+  "mode": "stdio",
+  "difficulty": "심화",
+  "description": "네 자리 소수 A가 주어진다. 한 번에 한 자리 숫자만 바꿔 다른 네 자리 소수로 변환할 수 있다. 단, 중간 단계에서 나오는 수도 항상 네 자리 소수여야 하며(맨 앞자리는 0이 될 수 없다), 한 번에 정확히 한 자리만 바꿀 수 있다. 소수 A를 소수 B로 바꾸는 데 필요한 최소 변환 횟수를 구하라. 변환이 불가능하면 Impossible을 출력한다. 각 소수를 정점으로, 한 자리 차이로 변환 가능한 소수 쌍을 간선으로 보는 BFS로 풀 수 있다.",
+  "constraints": ["여러 개의 테스트 케이스가 주어진다", "A와 B는 모두 네 자리 소수 (1000 이상 9999 이하)"],
+  "ioDescription": {
+    "input": "첫째 줄에 테스트 케이스 수 T가 주어진다. 각 테스트 케이스마다 한 줄에 네 자리 소수 A와 B가 공백으로 주어진다.",
+    "output": "각 테스트 케이스마다 A를 B로 바꾸는 최소 변환 횟수를 출력한다. 불가능하면 Impossible."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\n1033 8179\n1373 8017\n1033 1033\n",
+      "output": "6\n7\n0\n"
+    },
+    {
+      "input": "1\n1009 1019\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n1033 1051\n",
+      "output": "2\n"
+    },
+    {
+      "input": "2\n1033 1733\n3733 3739\n",
+      "output": "1\n1\n"
+    },
+    {
+      "input": "1\n1153 1009\n",
+      "output": "3\n"
+    }
+  ],
+  "hints": ["1000~9999 범위의 소수를 에라토스테네스의 체로 미리 구한다.", "현재 수에서 각 자리(맨 앞은 1~9, 나머지는 0~9)를 바꿔 만든 네 자리 소수로만 BFS를 확장한다."],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nbool isPrime[10000];\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    fill(isPrime, isPrime + 10000, true);\n    isPrime[0] = isPrime[1] = false;\n    for (int i = 2; i < 10000; i++) {\n        if (isPrime[i]) {\n            for (int j = 2 * i; j < 10000; j += i) isPrime[j] = false;\n        }\n    }\n    int T;\n    cin >> T;\n    while (T--) {\n        int A, B;\n        cin >> A >> B;\n        vector<int> dist(10000, -1);\n        queue<int> q;\n        q.push(A);\n        dist[A] = 0;\n        while (!q.empty()) {\n            int cur = q.front(); q.pop();\n            if (cur == B) break;\n            int digits[4];\n            digits[0] = cur / 1000;\n            digits[1] = (cur / 100) % 10;\n            digits[2] = (cur / 10) % 10;\n            digits[3] = cur % 10;\n            int place[4] = {1000, 100, 10, 1};\n            for (int p = 0; p < 4; p++) {\n                int startD = (p == 0) ? 1 : 0;\n                for (int d = startD; d <= 9; d++) {\n                    if (d == digits[p]) continue;\n                    int nxt = cur + (d - digits[p]) * place[p];\n                    if (isPrime[nxt] && dist[nxt] == -1) {\n                        dist[nxt] = dist[cur] + 1;\n                        q.push(nxt);\n                    }\n                }\n            }\n        }\n        if (dist[B] == -1) cout << \"Impossible\\n\";\n        else cout << dist[B] << \"\\n\";\n    }\n    return 0;\n}\n"
+}

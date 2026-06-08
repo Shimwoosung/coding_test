@@ -1,0 +1,28 @@
+{
+  "id": "tr_06",
+  "title": "트리의 리프 노드 개수",
+  "stage": 1,
+  "level": 1,
+  "topic": "tree",
+  "concept": "tree",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "정점이 N개인 트리가 주어진다. 정점 번호는 1번부터 N번까지이며, 1번이 루트이다. 각 정점의 부모 번호가 주어질 때, 리프(자식이 하나도 없는 정점)의 개수를 구하여 출력하라. 각 정점이 자식을 몇 개 가지는지 세고, 자식이 0개인 정점을 세면 된다.",
+  "constraints": ["1 ≤ N ≤ 100000", "루트(1번)의 부모는 0으로 주어진다", "입력으로 주어지는 그래프는 항상 트리이다"],
+  "ioDescription": {
+    "input": "첫째 줄에 정점의 개수 N이 주어진다. 둘째 줄에 1번부터 N번 정점까지의 부모 번호가 공백으로 구분되어 주어진다. 1번(루트)의 부모는 0이다.",
+    "output": "리프 노드의 개수를 한 줄에 출력한다."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    { "input": "5\n0 1 1 2 2\n", "output": "3\n" },
+    { "input": "1\n0\n", "output": "1\n" }
+  ],
+  "hiddenTests": [
+    { "input": "3\n0 1 1\n", "output": "2\n" },
+    { "input": "7\n0 1 1 2 2 3 3\n", "output": "4\n" },
+    { "input": "4\n0 1 2 3\n", "output": "1\n" }
+  ],
+  "hints": ["각 정점의 자식 수를 배열로 센다.", "부모가 p인 정점이 있으면 child[p]를 1 증가시킨다."],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n; cin >> n;\n    vector<int> childCnt(n + 1, 0);\n    for (int i = 1; i <= n; i++) {\n        int p; cin >> p;\n        if (p >= 1 && p <= n) childCnt[p]++;\n    }\n    int leaves = 0;\n    for (int i = 1; i <= n; i++) if (childCnt[i] == 0) leaves++;\n    cout << leaves << \"\\n\";\n    return 0;\n}\n"
+}

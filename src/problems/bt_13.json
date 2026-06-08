@@ -1,0 +1,28 @@
+{
+  "id": "bt_13",
+  "title": "N-Queen",
+  "stage": 4,
+  "level": 5,
+  "topic": "backtracking",
+  "concept": "backtracking",
+  "mode": "stdio",
+  "difficulty": "심화",
+  "description": "N×N 크기의 체스판 위에 퀸 N개를 서로 공격할 수 없게 놓는 경우의 수를 구하는 문제이다. 퀸은 같은 행, 같은 열, 같은 대각선에 있는 다른 퀸을 공격한다. 한 행에 퀸 하나를 배치하며 열과 두 방향 대각선의 사용 여부를 체크하는 백트래킹으로 모든 배치를 센다.",
+  "constraints": ["1 ≤ N < 15", "퀸은 서로 공격할 수 없어야 한다"],
+  "ioDescription": {
+    "input": "첫째 줄에 N이 주어진다.",
+    "output": "퀸 N개를 서로 공격할 수 없게 놓는 경우의 수를 출력한다."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    { "input": "4\n", "output": "2\n" },
+    { "input": "8\n", "output": "92\n" }
+  ],
+  "hiddenTests": [
+    { "input": "1\n", "output": "1\n" },
+    { "input": "2\n", "output": "0\n" },
+    { "input": "6\n", "output": "4\n" }
+  ],
+  "hints": ["행 단위로 퀸을 놓으며, 열(col), 대각선(row+col), 역대각선(row-col+N) 사용 여부를 배열로 체크한다.", "row가 N에 도달하면 유효한 배치 하나를 찾은 것이므로 카운트를 1 증가시킨다."],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint N;\nbool col[15], diag1[30], diag2[30];\nint cnt = 0;\n\nvoid dfs(int row) {\n    if (row == N) {\n        cnt++;\n        return;\n    }\n    for (int c = 0; c < N; c++) {\n        if (col[c] || diag1[row + c] || diag2[row - c + N]) continue;\n        col[c] = diag1[row + c] = diag2[row - c + N] = true;\n        dfs(row + 1);\n        col[c] = diag1[row + c] = diag2[row - c + N] = false;\n    }\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    cin >> N;\n    dfs(0);\n    cout << cnt << '\\n';\n    return 0;\n}\n"
+}

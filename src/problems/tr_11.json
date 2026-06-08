@@ -1,0 +1,28 @@
+{
+  "id": "tr_11",
+  "title": "이진트리 후위 순회",
+  "stage": 2,
+  "level": 3,
+  "topic": "tree",
+  "concept": "tree",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "정점이 N개인 이진트리가 주어진다. 정점 번호는 1번부터 N번까지이며 1번이 루트이다. 각 정점의 왼쪽 자식과 오른쪽 자식 번호가 주어지며 자식이 없으면 -1이다. 이 이진트리를 후위 순회(왼쪽 서브트리 → 오른쪽 서브트리 → 자기 자신)한 결과를 출력하라. 재귀로 왼쪽, 오른쪽을 먼저 방문한 뒤 현재 정점을 방문하면 된다.",
+  "constraints": ["1 ≤ N ≤ 100000", "정점 번호는 1 이상 N 이하", "입력으로 주어지는 그래프는 항상 1번을 루트로 하는 이진트리이다"],
+  "ioDescription": {
+    "input": "첫째 줄에 정점의 개수 N이 주어진다. 다음 N개의 줄에 각각 정점 번호 x, 왼쪽 자식 번호, 오른쪽 자식 번호가 공백으로 구분되어 주어진다. 자식이 없으면 -1이다.",
+    "output": "후위 순회한 정점 번호를 공백으로 구분하여 한 줄에 출력한다."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    { "input": "5\n1 2 3\n2 4 5\n3 -1 -1\n4 -1 -1\n5 -1 -1\n", "output": "4 5 2 3 1\n" },
+    { "input": "1\n1 -1 -1\n", "output": "1\n" }
+  ],
+  "hiddenTests": [
+    { "input": "3\n1 2 -1\n2 3 -1\n3 -1 -1\n", "output": "3 2 1\n" },
+    { "input": "3\n1 2 3\n2 -1 -1\n3 -1 -1\n", "output": "2 3 1\n" },
+    { "input": "7\n1 2 3\n2 4 5\n3 6 7\n4 -1 -1\n5 -1 -1\n6 -1 -1\n7 -1 -1\n", "output": "4 5 2 6 7 3 1\n" }
+  ],
+  "hints": ["왼쪽/오른쪽 자식 배열을 만든다.", "후위 순회: postorder(L), postorder(R), 그 다음 현재 노드 출력."],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint L[100005], R[100005];\nvector<int> result;\n\nvoid postorder(int x) {\n    if (x == -1) return;\n    postorder(L[x]);\n    postorder(R[x]);\n    result.push_back(x);\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n; cin >> n;\n    for (int i = 1; i <= n; i++) { L[i] = -1; R[i] = -1; }\n    for (int i = 0; i < n; i++) {\n        int x, l, r; cin >> x >> l >> r;\n        L[x] = l; R[x] = r;\n    }\n    postorder(1);\n    for (size_t i = 0; i < result.size(); i++) {\n        if (i) cout << ' ';\n        cout << result[i];\n    }\n    cout << \"\\n\";\n    return 0;\n}\n"
+}

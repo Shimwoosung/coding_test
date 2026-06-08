@@ -1,0 +1,46 @@
+{
+  "id": "sp_10",
+  "title": "특정 정점 두 곳을 모두 경유하는 최단경로",
+  "stage": 2,
+  "level": 3,
+  "topic": "shortest_path",
+  "concept": "shortest_path",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "무방향 가중치 그래프에서 1번 정점부터 N번 정점까지 이동하되, 반드시 정점 V1과 V2를 모두 거쳐 가야 한다. 이때 최단 거리를 구하라. 경로는 1 -> V1 -> V2 -> N 또는 1 -> V2 -> V1 -> N 두 순서가 가능하다. 각 구간의 최단 거리를 다익스트라로 구한 뒤 둘 중 작은 합을 출력한다. V1과 V2를 모두 거치는 경로가 존재하지 않으면 -1을 출력한다.",
+  "constraints": ["1 ≤ N ≤ 800", "0 ≤ M ≤ 200000", "1 ≤ 간선 가중치 ≤ 1000", "1 ≤ V1, V2 ≤ N", "그래프는 무방향, 정점은 재방문해도 된다"],
+  "ioDescription": {
+    "input": "첫째 줄에 정점 개수 N, 간선 개수 M. 이후 M개의 줄에 무방향 간선 (u v w). 마지막 줄에 반드시 경유할 두 정점 V1 V2.",
+    "output": "1에서 N까지 V1, V2를 모두 거치는 최단 거리. 불가능하면 -1."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4 6\n1 2 3\n2 3 3\n3 4 1\n1 3 5\n2 4 5\n1 4 4\n2 3\n",
+      "output": "7\n"
+    },
+    {
+      "input": "3 1\n1 2 5\n2 3\n",
+      "output": "-1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "5 5\n1 2 1\n2 3 1\n3 4 1\n4 5 1\n1 5 10\n2 4\n",
+      "output": "4\n"
+    },
+    {
+      "input": "2 1\n1 2 7\n1 2\n",
+      "output": "7\n"
+    },
+    {
+      "input": "4 4\n1 2 2\n2 3 2\n3 4 2\n1 4 1\n2 3\n",
+      "output": "6\n"
+    }
+  ],
+  "hints": [
+    "1, V1, V2 각각을 시작점으로 다익스트라를 3번 돌리면 필요한 모든 구간 거리를 얻을 수 있다.",
+    "정답 = min(d(1,V1)+d(V1,V2)+d(V2,N), d(1,V2)+d(V2,V1)+d(V1,N)) 이며 어느 구간이라도 도달 불가면 -1."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nconst long long INF = (long long)1e18;\n\nvector<long long> dijkstra(int src, int N, vector<vector<pair<int,int>>>& adj) {\n    vector<long long> dist(N + 1, INF);\n    dist[src] = 0;\n    priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<pair<long long,int>>> pq;\n    pq.push({0, src});\n    while (!pq.empty()) {\n        auto [d, u] = pq.top(); pq.pop();\n        if (d > dist[u]) continue;\n        for (auto [v, w] : adj[u]) {\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                pq.push({dist[v], v});\n            }\n        }\n    }\n    return dist;\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int N, M;\n    cin >> N >> M;\n    vector<vector<pair<int,int>>> adj(N + 1);\n    for (int i = 0; i < M; i++) {\n        int u, v, w;\n        cin >> u >> v >> w;\n        adj[u].push_back({v, w});\n        adj[v].push_back({u, w});\n    }\n    int V1, V2;\n    cin >> V1 >> V2;\n    auto d1 = dijkstra(1, N, adj);\n    auto dv1 = dijkstra(V1, N, adj);\n    auto dv2 = dijkstra(V2, N, adj);\n    long long ans = INF;\n    long long path1 = (d1[V1] >= INF || dv1[V2] >= INF || dv2[N] >= INF) ? INF : d1[V1] + dv1[V2] + dv2[N];\n    long long path2 = (d1[V2] >= INF || dv2[V1] >= INF || dv1[N] >= INF) ? INF : d1[V2] + dv2[V1] + dv1[N];\n    ans = min(path1, path2);\n    if (ans >= INF) cout << -1 << \"\\n\";\n    else cout << ans << \"\\n\";\n    return 0;\n}\n"
+}

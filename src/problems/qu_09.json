@@ -1,0 +1,43 @@
+{
+  "id": "qu_09",
+  "title": "미로 탐색 (격자 최단거리)",
+  "stage": 2,
+  "level": 3,
+  "topic": "queue",
+  "concept": "queue",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "N x M 크기의 미로가 주어진다. 1은 이동할 수 있는 칸, 0은 이동할 수 없는 칸이다. (1,1)에서 출발하여 (N,M)까지 상하좌우로 인접한 칸으로만 이동할 때, 지나야 하는 최소 칸 수를 구하라. 시작 칸과 도착 칸을 모두 포함해서 센다. BFS로 최단 거리를 구할 수 있으며, 항상 도착 가능한 입력만 주어진다.",
+  "constraints": ["2 ≤ N, M ≤ 100", "각 칸은 0 또는 1", "(1,1)과 (N,M)은 항상 1이며 도착 가능"],
+  "ioDescription": {
+    "input": "첫째 줄에 N과 M이 공백으로 주어진다. 다음 N개의 줄에 각각 M개의 숫자(공백 없이 붙어 있음)가 주어진다.",
+    "output": "(1,1)에서 (N,M)까지 지나야 하는 최소 칸 수를 출력한다."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4 6\n101111\n101010\n101011\n111011\n",
+      "output": "15\n"
+    },
+    {
+      "input": "2 2\n11\n11\n",
+      "output": "3\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "3 3\n111\n111\n111\n",
+      "output": "5\n"
+    },
+    {
+      "input": "2 3\n111\n001\n",
+      "output": "4\n"
+    },
+    {
+      "input": "5 5\n11111\n10001\n10101\n10101\n11101\n",
+      "output": "9\n"
+    }
+  ],
+  "hints": ["dist 배열을 0으로 초기화하고 시작점 거리를 1로 두며 BFS를 진행한다.", "방문하지 않은(거리 0인) 칸만 큐에 넣는다."],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int N, M;\n    cin >> N >> M;\n    vector<string> g(N);\n    for (int i = 0; i < N; i++) cin >> g[i];\n    vector<vector<int>> dist(N, vector<int>(M, 0));\n    queue<pair<int,int>> q;\n    q.push({0,0});\n    dist[0][0] = 1;\n    int dx[] = {1,-1,0,0};\n    int dy[] = {0,0,1,-1};\n    while (!q.empty()) {\n        auto [x, y] = q.front(); q.pop();\n        for (int d = 0; d < 4; d++) {\n            int nx = x + dx[d], ny = y + dy[d];\n            if (nx < 0 || ny < 0 || nx >= N || ny >= M) continue;\n            if (g[nx][ny] == '1' && dist[nx][ny] == 0) {\n                dist[nx][ny] = dist[x][y] + 1;\n                q.push({nx, ny});\n            }\n        }\n    }\n    cout << dist[N-1][M-1] << \"\\n\";\n    return 0;\n}\n"
+}

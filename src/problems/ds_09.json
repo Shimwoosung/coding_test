@@ -1,0 +1,46 @@
+{
+  "id": "ds_09",
+  "title": "친구 네트워크",
+  "stage": 2,
+  "level": 3,
+  "topic": "dsu",
+  "concept": "dsu",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "소셜 네트워크에서 새로운 친구 관계가 하나씩 만들어진다. 친구 관계가 형성될 때마다, 두 사람이 속한 친구 네트워크(서로 친구로 이어진 사람들의 집합)에 몇 명이 있는지 출력하라. 사람은 문자열 이름으로 주어진다. 이름을 정수 인덱스로 매핑한 뒤 분리집합으로 집합 크기를 관리하면 된다. 입력은 여러 개의 테스트 케이스로 구성된다.",
+  "constraints": ["1 ≤ T ≤ 10", "1 ≤ F ≤ 100,000", "이름은 알파벳 대소문자로 이루어진 길이 1~20의 문자열"],
+  "ioDescription": {
+    "input": "첫 줄에 테스트 케이스 수 T가 주어진다. 각 테스트 케이스의 첫 줄에 친구 관계의 수 F가 주어지고, 다음 F개의 줄에 친구가 된 두 사람의 이름이 공백으로 주어진다.",
+    "output": "각 친구 관계가 형성될 때마다, 두 사람이 속한 친구 네트워크의 사람 수를 한 줄에 출력한다."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "1\n3\nFred Barney\nBarney Betty\nBetty Wilma\n",
+      "output": "2\n3\n4\n"
+    },
+    {
+      "input": "1\n3\nAhn Baek\nBaek Ahn\nAhn Baek\n",
+      "output": "2\n2\n2\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "2\n2\na b\nc d\n1\nx y\n",
+      "output": "2\n2\n2\n"
+    },
+    {
+      "input": "1\n4\np q\nr s\nq r\np s\n",
+      "output": "2\n2\n4\n4\n"
+    },
+    {
+      "input": "1\n5\nA B\nC D\nE F\nA C\nA E\n",
+      "output": "2\n2\n2\n4\n6\n"
+    }
+  ],
+  "hints": [
+    "unordered_map<string,int> 로 이름을 처음 본 순서대로 인덱스에 매핑한다.",
+    "각 union 직후 두 사람이 속한 집합의 크기를 출력한다. 이미 같은 집합이면 그대로 크기를 출력한다."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nvector<int> par, sz;\nint find(int x){ return par[x]==x?x:par[x]=find(par[x]); }\n\nint getId(unordered_map<string,int>& mp, const string& s){\n    auto it=mp.find(s);\n    if(it!=mp.end()) return it->second;\n    int id=par.size();\n    mp[s]=id; par.push_back(id); sz.push_back(1);\n    return id;\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int T; cin >> T;\n    string out;\n    while(T--){\n        int F; cin >> F;\n        unordered_map<string,int> mp;\n        par.clear(); sz.clear();\n        for(int i=0;i<F;i++){\n            string x,y; cin >> x >> y;\n            int a=getId(mp,x), b=getId(mp,y);\n            int ra=find(a), rb=find(b);\n            if(ra!=rb){ par[ra]=rb; sz[rb]+=sz[ra]; }\n            out += to_string(sz[find(a)]);\n            out += '\\n';\n        }\n    }\n    cout << out;\n    return 0;\n}\n"
+}

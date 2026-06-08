@@ -1,0 +1,28 @@
+{
+  "id": "bt_12",
+  "title": "연산자 끼워넣기",
+  "stage": 4,
+  "level": 4,
+  "topic": "backtracking",
+  "concept": "backtracking",
+  "mode": "stdio",
+  "difficulty": "심화",
+  "description": "N개의 수로 이루어진 수열 A가 있고, 수와 수 사이에 끼워넣을 N-1개의 연산자가 주어진다. 연산자는 덧셈(+), 뺄셈(-), 곱셈(×), 나눗셈(÷)이다. 주어진 수의 순서는 바꿀 수 없고, 연산자 우선순위를 무시하고 앞에서부터 순서대로 계산한다. 나눗셈은 정수 나눗셈으로 몫만 취하며, 음수를 양수로 나눌 때는 C++14 방식(0을 향한 절단)을 따른다. 즉 양수로 바꾼 뒤 몫을 취하고 음수 부호를 붙인다. 만들 수 있는 식의 결과의 최댓값과 최솟값을 구하라. 연산자를 어떤 순서로 배치할지 백트래킹으로 모든 경우를 탐색한다.",
+  "constraints": ["2 ≤ N ≤ 11", "각 수는 1 이상 100 이하의 자연수", "연산자 개수의 합은 N-1이다", "계산 중간값과 결과는 -10억 이상 10억 이하"],
+  "ioDescription": {
+    "input": "첫째 줄에 수의 개수 N이 주어진다. 둘째 줄에 N개의 수가 공백으로 구분되어 주어진다. 셋째 줄에 합이 N-1인 덧셈, 뺄셈, 곱셈, 나눗셈 연산자의 개수가 차례대로 공백으로 구분되어 주어진다.",
+    "output": "첫째 줄에 만들 수 있는 식의 결과의 최댓값을, 둘째 줄에 최솟값을 출력한다."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    { "input": "2\n5 6\n0 0 1 0\n", "output": "30\n30\n" },
+    { "input": "3\n3 4 5\n1 0 1 0\n", "output": "35\n17\n" }
+  ],
+  "hiddenTests": [
+    { "input": "6\n1 2 3 4 5 6\n2 1 1 1\n", "output": "54\n-24\n" },
+    { "input": "2\n7 3\n0 1 0 0\n", "output": "4\n4\n" },
+    { "input": "4\n10 2 3 4\n0 0 0 3\n", "output": "0\n0\n" }
+  ],
+  "hints": ["남은 연산자 개수를 배열 cnt[4]로 관리하며 재귀적으로 한 개씩 사용한다.", "나눗셈은 음수일 때 부호를 분리해 (절댓값 나눗셈) 후 부호를 다시 붙여 C++ 정수 나눗셈과 일치시킨다."],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint N;\nint a[12];\nint op[4];\nlong long maxV = LLONG_MIN, minV = LLONG_MAX;\n\nvoid dfs(int idx, long long cur) {\n    if (idx == N) {\n        maxV = max(maxV, cur);\n        minV = min(minV, cur);\n        return;\n    }\n    for (int o = 0; o < 4; o++) {\n        if (op[o] == 0) continue;\n        op[o]--;\n        long long nv;\n        if (o == 0) nv = cur + a[idx];\n        else if (o == 1) nv = cur - a[idx];\n        else if (o == 2) nv = cur * a[idx];\n        else {\n            long long q = llabs(cur) / a[idx];\n            nv = (cur < 0) ? -q : q;\n        }\n        dfs(idx + 1, nv);\n        op[o]++;\n    }\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    cin >> N;\n    for (int i = 0; i < N; i++) cin >> a[i];\n    for (int i = 0; i < 4; i++) cin >> op[i];\n    dfs(1, a[0]);\n    cout << maxV << '\\n' << minV << '\\n';\n    return 0;\n}\n"
+}

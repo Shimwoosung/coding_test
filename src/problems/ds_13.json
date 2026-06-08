@@ -1,0 +1,46 @@
+{
+  "id": "ds_13",
+  "title": "네트워크 완성과 추가 비용",
+  "stage": 4,
+  "level": 5,
+  "topic": "dsu",
+  "concept": "dsu",
+  "mode": "stdio",
+  "difficulty": "심화",
+  "description": "N개의 컴퓨터가 있고, 이미 일부 컴퓨터들은 케이블로 직접 연결되어 있다(이미 설치된 케이블은 비용 0). 추가로 설치할 수 있는 케이블 후보 M개가 각각 비용과 함께 주어진다. 모든 컴퓨터가 서로 통신할 수 있도록(직접 또는 중계) 만들기 위해 추가로 설치해야 하는 케이블 비용의 최소 합을 구하라. 이미 연결된 부분을 먼저 union 한 뒤, 크루스칼로 남은 후보 간선을 비용 오름차순으로 추가하면 된다. 모든 컴퓨터를 연결할 수 없으면 -1을 출력한다.",
+  "constraints": ["1 ≤ N ≤ 100,000", "0 ≤ K ≤ 200,000 (이미 설치된 케이블 수)", "0 ≤ M ≤ 500,000 (후보 케이블 수)", "1 ≤ 비용 ≤ 1,000,000"],
+  "ioDescription": {
+    "input": "첫 줄에 컴퓨터 수 N, 이미 설치된 케이블 수 K, 후보 케이블 수 M이 주어진다. 다음 K개의 줄에 이미 연결된 두 컴퓨터 a b가 주어진다. 다음 M개의 줄에 후보 케이블 정보 u v w가 주어진다.",
+    "output": "모든 컴퓨터를 연결하는 데 필요한 추가 비용의 최솟값을 출력한다. 불가능하면 -1을 출력한다."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4 1 3\n1 2\n2 3 5\n3 4 2\n1 4 10\n",
+      "output": "7\n"
+    },
+    {
+      "input": "3 0 1\n1 2 4\n",
+      "output": "-1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "5 2 3\n1 2\n4 5\n2 3 3\n3 4 4\n1 5 100\n",
+      "output": "7\n"
+    },
+    {
+      "input": "3 3 0\n1 2\n2 3\n1 3\n",
+      "output": "0\n"
+    },
+    {
+      "input": "4 0 4\n1 2 1\n2 3 2\n3 4 3\n1 4 4\n",
+      "output": "6\n"
+    }
+  ],
+  "hints": [
+    "이미 설치된 케이블들을 모두 union 하여 초기 연결 상태를 만든다(비용 0).",
+    "후보 간선을 비용 오름차순으로 보며 서로 다른 집합일 때만 추가한다. 마지막에 전체가 하나의 집합이 아니면 -1."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint par[100001];\nint find(int x){ return par[x]==x?x:par[x]=find(par[x]); }\nbool uni(int a,int b){ int ra=find(a),rb=find(b); if(ra==rb) return false; par[ra]=rb; return true; }\n\nstruct E{ int u,v,w; };\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n, k, m; cin >> n >> k >> m;\n    for(int i=1;i<=n;i++) par[i]=i;\n    int comp=n;\n    for(int i=0;i<k;i++){\n        int a,b; cin >> a >> b;\n        if(uni(a,b)) comp--;\n    }\n    vector<E> e(m);\n    for(int i=0;i<m;i++) cin >> e[i].u >> e[i].v >> e[i].w;\n    sort(e.begin(), e.end(), [](const E&a,const E&b){ return a.w < b.w; });\n    long long total=0;\n    for(int i=0;i<m && comp>1;i++){\n        if(uni(e[i].u, e[i].v)){ total+=e[i].w; comp--; }\n    }\n    if(comp>1) cout << -1 << \"\\n\";\n    else cout << total << \"\\n\";\n    return 0;\n}\n"
+}

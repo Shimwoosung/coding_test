@@ -1,0 +1,46 @@
+{
+  "id": "sp_09",
+  "title": "플로이드-워셜 모든 쌍 최단경로",
+  "stage": 2,
+  "level": 3,
+  "topic": "shortest_path",
+  "concept": "shortest_path",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "정점 N개와 방향 간선 M개로 이루어진 가중치 그래프가 주어진다. 모든 정점 쌍 (i, j)에 대해 i에서 j로 가는 최단 거리를 구하라. 플로이드-워셜 알고리즘으로 O(N^3)에 해결할 수 있다. 같은 (u, v)에 여러 간선이 있을 수 있으니 가장 작은 가중치를 사용한다. i==j 거리는 0이다. 도달할 수 없으면 0을 출력한다.",
+  "constraints": ["1 ≤ N ≤ 100", "1 ≤ M ≤ 100000", "1 ≤ 간선 가중치 ≤ 100000", "간선은 방향이며 자기 자신으로의 간선과 중복 간선이 있을 수 있다"],
+  "ioDescription": {
+    "input": "첫째 줄에 정점 개수 N. 둘째 줄에 간선 개수 M. 이후 M개의 줄에 각각 간선 (u v w).",
+    "output": "N개의 줄에 걸쳐, i번째 줄에는 i에서 1..N으로 가는 최단 거리를 공백으로 구분해 출력. 도달 불가능하면 해당 칸에 0."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\n4\n1 2 2\n1 3 5\n2 3 1\n3 1 4\n",
+      "output": "0 2 3\n5 0 1\n4 6 0\n"
+    },
+    {
+      "input": "2\n1\n1 2 7\n",
+      "output": "0 7\n0 0\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n1\n1 1 5\n",
+      "output": "0\n"
+    },
+    {
+      "input": "3\n2\n1 2 3\n1 2 1\n",
+      "output": "0 1 0\n0 0 0\n0 0 0\n"
+    },
+    {
+      "input": "4\n5\n1 2 1\n2 3 1\n3 4 1\n4 1 1\n1 3 10\n",
+      "output": "0 1 2 3\n3 0 1 2\n2 3 0 1\n1 2 3 0\n"
+    }
+  ],
+  "hints": [
+    "거리 행렬을 INF로 초기화하고 대각선은 0으로 둔다.",
+    "k, i, j 삼중 루프에서 dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int N, M;\n    cin >> N >> M;\n    const long long INF = (long long)1e18;\n    vector<vector<long long>> dist(N + 1, vector<long long>(N + 1, INF));\n    for (int i = 1; i <= N; i++) dist[i][i] = 0;\n    for (int e = 0; e < M; e++) {\n        int u, v; long long w;\n        cin >> u >> v >> w;\n        if (u == v) continue;\n        dist[u][v] = min(dist[u][v], w);\n    }\n    for (int k = 1; k <= N; k++)\n        for (int i = 1; i <= N; i++) {\n            if (dist[i][k] == INF) continue;\n            for (int j = 1; j <= N; j++) {\n                if (dist[k][j] == INF) continue;\n                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);\n            }\n        }\n    for (int i = 1; i <= N; i++) {\n        for (int j = 1; j <= N; j++) {\n            if (j > 1) cout << ' ';\n            if (dist[i][j] == INF) cout << 0;\n            else cout << dist[i][j];\n        }\n        cout << \"\\n\";\n    }\n    return 0;\n}\n"
+}

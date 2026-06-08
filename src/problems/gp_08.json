@@ -1,0 +1,28 @@
+{
+  "id": "gp_08",
+  "title": "섬의 개수",
+  "stage": 1,
+  "level": 3,
+  "topic": "graph",
+  "concept": "graph",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "h행 w열의 지도가 주어진다. 1은 땅, 0은 바다를 의미한다. 한 땅에서 상하좌우 및 대각선 8방향으로 인접한 땅은 같은 섬에 속한다. 지도에 존재하는 섬의 개수를 구해 출력하라. 각 땅 칸에서 아직 방문하지 않았다면 DFS/BFS로 연결된 모든 땅을 방문 처리하고, 탐색을 시작한 횟수를 센다.",
+  "constraints": ["1 ≤ w, h ≤ 50", "지도의 각 칸은 0 또는 1이다."],
+  "ioDescription": {
+    "input": "첫째 줄에 지도의 너비 w와 높이 h가 공백으로 구분되어 주어진다. 다음 h개의 줄에 각각 w개의 정수(0 또는 1)가 공백으로 구분되어 주어진다.",
+    "output": "섬의 개수를 한 줄에 출력한다."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    { "input": "5 4\n1 0 1 0 0\n1 0 0 0 0\n1 0 1 0 1\n1 0 0 1 0\n", "output": "3\n" },
+    { "input": "3 3\n1 0 1\n0 0 0\n1 0 1\n", "output": "4\n" }
+  ],
+  "hiddenTests": [
+    { "input": "1 1\n0\n", "output": "0\n" },
+    { "input": "2 2\n1 1\n1 1\n", "output": "1\n" },
+    { "input": "5 5\n1 0 0 0 1\n0 0 0 0 0\n0 0 1 0 0\n0 0 0 0 0\n1 0 0 0 1\n", "output": "5\n" }
+  ],
+  "hints": ["8방향(상하좌우 + 대각선)을 모두 확인해야 한다.", "방문하지 않은 땅 칸에서 탐색을 새로 시작한 횟수가 섬의 개수이다."],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint w, h;\nint g[55][55];\nbool vis[55][55];\nint dx[8] = {-1,-1,-1,0,0,1,1,1};\nint dy[8] = {-1,0,1,-1,1,-1,0,1};\n\nvoid bfs(int sy, int sx) {\n    queue<pair<int,int>> q;\n    q.push({sy, sx});\n    vis[sy][sx] = true;\n    while (!q.empty()) {\n        auto [y, x] = q.front(); q.pop();\n        for (int d = 0; d < 8; d++) {\n            int ny = y + dy[d], nx = x + dx[d];\n            if (ny < 0 || ny >= h || nx < 0 || nx >= w) continue;\n            if (vis[ny][nx] || g[ny][nx] == 0) continue;\n            vis[ny][nx] = true;\n            q.push({ny, nx});\n        }\n    }\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    cin >> w >> h;\n    for (int i = 0; i < h; i++)\n        for (int j = 0; j < w; j++)\n            cin >> g[i][j];\n    int cnt = 0;\n    for (int i = 0; i < h; i++)\n        for (int j = 0; j < w; j++)\n            if (g[i][j] == 1 && !vis[i][j]) { bfs(i, j); cnt++; }\n    cout << cnt << \"\\n\";\n    return 0;\n}\n"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "ds_08",
+  "title": "가장 큰 집합의 크기",
+  "stage": 1,
+  "level": 2,
+  "topic": "dsu",
+  "concept": "dsu",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "N명의 사람이 1번부터 N번까지 있다. M개의 친구 관계가 주어지며, 친구 관계는 양방향이고 추이적이다(A와 B가 친구이고 B와 C가 친구이면 A, B, C는 같은 그룹). 모든 관계를 처리한 뒤 가장 큰 친구 그룹에 속한 사람 수를 출력하라. 분리집합에서 union 시 집합 크기를 함께 관리하면 된다.",
+  "constraints": ["1 ≤ N ≤ 100,000", "0 ≤ M ≤ 200,000", "1 ≤ a, b ≤ N"],
+  "ioDescription": {
+    "input": "첫 줄에 N과 M이 주어진다. 다음 M개의 줄에 친구 관계 a b가 주어진다.",
+    "output": "가장 큰 그룹의 크기를 한 줄에 출력한다."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "6 4\n1 2\n2 3\n4 5\n5 6\n",
+      "output": "3\n"
+    },
+    {
+      "input": "5 1\n1 2\n",
+      "output": "2\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "4 0\n",
+      "output": "1\n"
+    },
+    {
+      "input": "7 5\n1 2\n2 3\n3 4\n5 6\n6 7\n",
+      "output": "4\n"
+    },
+    {
+      "input": "5 4\n1 2\n3 4\n2 3\n4 5\n",
+      "output": "5\n"
+    }
+  ],
+  "hints": [
+    "sz 배열을 두어 각 루트의 집합 크기를 저장한다.",
+    "union 할 때 합쳐진 집합의 크기를 더하고, 최댓값을 갱신한다."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint par[100001], sz[100001];\nint find(int x){ return par[x]==x?x:par[x]=find(par[x]); }\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n, m; cin >> n >> m;\n    for(int i=1;i<=n;i++){ par[i]=i; sz[i]=1; }\n    for(int i=0;i<m;i++){\n        int a,b; cin >> a >> b;\n        int ra=find(a), rb=find(b);\n        if(ra!=rb){ par[ra]=rb; sz[rb]+=sz[ra]; }\n    }\n    int best=0;\n    for(int i=1;i<=n;i++) if(find(i)==i) best=max(best, sz[i]);\n    cout << best << \"\\n\";\n    return 0;\n}\n"
+}

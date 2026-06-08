@@ -1,0 +1,46 @@
+{
+  "id": "sp_07",
+  "title": "두 정점 사이의 최단경로 길이",
+  "stage": 1,
+  "level": 2,
+  "topic": "shortest_path",
+  "concept": "shortest_path",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "무방향 가중치 그래프가 주어진다. 모든 간선의 가중치는 양수다. 출발 정점 A에서 도착 정점 B까지의 최단 거리를 구하라. 다익스트라 알고리즘을 사용한다. 도달할 수 없으면 -1을 출력한다.",
+  "constraints": ["1 ≤ N ≤ 1000", "0 ≤ M ≤ 100000", "1 ≤ 간선 가중치 ≤ 1000", "1 ≤ A, B ≤ N", "그래프는 무방향이다"],
+  "ioDescription": {
+    "input": "첫째 줄에 정점 개수 N, 간선 개수 M. 둘째 줄에 출발 정점 A와 도착 정점 B. 이후 M개의 줄에 각각 무방향 간선 (u v w).",
+    "output": "A에서 B까지의 최단 거리를 한 줄에 출력. 도달 불가능하면 -1."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4 4\n1 4\n1 2 1\n2 3 1\n3 4 1\n1 4 10\n",
+      "output": "3\n"
+    },
+    {
+      "input": "3 1\n1 3\n1 2 5\n",
+      "output": "-1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "2 1\n1 2\n1 2 7\n",
+      "output": "7\n"
+    },
+    {
+      "input": "5 6\n1 5\n1 2 2\n2 5 9\n1 3 1\n3 4 1\n4 5 1\n2 3 1\n",
+      "output": "3\n"
+    },
+    {
+      "input": "3 0\n2 2\n",
+      "output": "0\n"
+    }
+  ],
+  "hints": [
+    "무방향 간선은 양쪽 방향으로 모두 인접 리스트에 추가한다.",
+    "A == B 인 경우 거리는 0이다."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int N, M;\n    cin >> N >> M;\n    int A, B;\n    cin >> A >> B;\n    vector<vector<pair<int,int>>> adj(N + 1);\n    for (int i = 0; i < M; i++) {\n        int u, v, w;\n        cin >> u >> v >> w;\n        adj[u].push_back({v, w});\n        adj[v].push_back({u, w});\n    }\n    const long long INF = LLONG_MAX;\n    vector<long long> dist(N + 1, INF);\n    dist[A] = 0;\n    priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<pair<long long,int>>> pq;\n    pq.push({0, A});\n    while (!pq.empty()) {\n        auto [d, u] = pq.top(); pq.pop();\n        if (d > dist[u]) continue;\n        for (auto [v, w] : adj[u]) {\n            if (dist[u] + w < dist[v]) {\n                dist[v] = dist[u] + w;\n                pq.push({dist[v], v});\n            }\n        }\n    }\n    if (dist[B] == INF) cout << -1 << \"\\n\";\n    else cout << dist[B] << \"\\n\";\n    return 0;\n}\n"
+}
