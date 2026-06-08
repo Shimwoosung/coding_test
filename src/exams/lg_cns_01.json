@@ -1,0 +1,9 @@
+{
+  "id": "lg_cns_01",
+  "group": "LG",
+  "affiliate": "LG CNS",
+  "title": "LG CNS 코딩테스트 모의 1회",
+  "timeLimitMinutes": 150,
+  "description": "SI/플랫폼 직군 스타일. 해시·분리집합·그래프·최단경로 비중이 높음.",
+  "problemIds": ["hs_03", "ds_01", "gp_04", "sp_02", "dp_05", "bt_02", "so_04", "bs_05"]
+}

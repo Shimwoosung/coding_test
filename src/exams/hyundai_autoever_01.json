@@ -1,0 +1,9 @@
+{
+  "id": "hyundai_autoever_01",
+  "group": "현대",
+  "affiliate": "현대오토에버",
+  "title": "현대오토에버 코딩테스트 모의 1회",
+  "timeLimitMinutes": 150,
+  "description": "현대차그룹 SW 직군 스타일. 구현·누적합·투포인터·DP 혼합.",
+  "problemIds": ["im_03", "im_05", "gr_02", "ps_02", "tp_02", "dp_04", "bs_04", "tr_01"]
+}

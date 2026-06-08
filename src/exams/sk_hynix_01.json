@@ -1,0 +1,9 @@
+{
+  "id": "sk_hynix_01",
+  "group": "SK",
+  "affiliate": "SK하이닉스",
+  "title": "SK하이닉스 코딩테스트 모의 1회",
+  "timeLimitMinutes": 120,
+  "description": "정렬·자료구조(스택/큐)·해시 기반 처리 위주. 데이터 가공 문제 비중이 높음.",
+  "problemIds": ["so_01", "so_02", "st_01", "qu_01", "bs_03", "dp_03", "hs_02", "gp_03"]
+}

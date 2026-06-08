@@ -47,6 +47,29 @@ export interface Problem {
   hiddenTests: (StdioExample | FunctionExample)[];
   hints?: string[];
   solution?: string;
+  timeLimit?: number;       // 실행 시간 제한(ms). 없으면 기본값(러너에서 적용)
+  difficulty?: Difficulty;  // 명시 안 하면 stage로부터 유추
+}
+
+export type Difficulty = '기초' | '중간' | '심화';
+
+// 회사/계열사별 모의고사
+export interface Exam {
+  id: string;
+  group: string;          // 그룹사 (예: 'LG', '현대', '한화', 'SK', 'NC', 'LIG넥스원')
+  affiliate?: string;     // 계열사 (예: 'LG CNS', '현대오토에버')
+  title: string;
+  timeLimitMinutes: number;
+  description?: string;
+  problemIds: string[];   // 기존 문제 id 참조
+}
+
+export interface ExamResult {
+  examId: string;
+  solvedIds: string[];
+  total: number;
+  durationSec: number;
+  finishedAt: number;
 }
 
 export interface Concept {

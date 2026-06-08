@@ -1,11 +1,13 @@
-import { problems, topics, TOPIC_LABELS, problemsByTopic } from '../data/problems';
+import { problems, topics, TOPIC_LABELS, problemsByTopic, tierOf, TIERS } from '../data/problems';
 import { concepts, conceptsById } from '../data/concepts';
+import { examsByGroup } from '../data/exams';
 import type { SyncState } from '../storage/progress';
 
 export type View =
   | { kind: 'home' }
   | { kind: 'concept'; id: string }
-  | { kind: 'problem'; id: string };
+  | { kind: 'problem'; id: string }
+  | { kind: 'exam'; id: string };
 
 interface Props {
   view: View;
@@ -14,22 +16,27 @@ interface Props {
   syncState: SyncState;
   syncMessage: string;
   onOpenSettings: () => void;
+  onCollapse: () => void;
 }
 
-export default function Sidebar({ view, onNavigate, solvedIds, syncState, syncMessage, onOpenSettings }: Props) {
+const TIER_CLASS: Record<string, string> = { '기초': 'tier-1', '중간': 'tier-2', '심화': 'tier-3' };
+
+export default function Sidebar({ view, onNavigate, solvedIds, syncState, syncMessage, onOpenSettings, onCollapse }: Props) {
   const total = problems.length;
   const done = problems.filter(p => solvedIds.has(p.id)).length;
   const pct = total ? Math.round((done / total) * 100) : 0;
+  const groups = examsByGroup();
 
-  const syncDot: Record<SyncState, string> = {
-    off: '○', syncing: '◐', synced: '●', error: '⚠',
-  };
+  const syncDot: Record<SyncState, string> = { off: '○', syncing: '◐', synced: '●', error: '⚠' };
 
   return (
     <aside className="sidebar">
-      <div className="brand" onClick={() => onNavigate({ kind: 'home' })}>
-        <span className="brand-logo">⌨</span>
-        <span className="brand-name">C++ 코테 연습</span>
+      <div className="brand-row">
+        <div className="brand" onClick={() => onNavigate({ kind: 'home' })}>
+          <span className="brand-logo">⌨</span>
+          <span className="brand-name">C++ 코테 연습</span>
+        </div>
+        <button className="collapse-btn" onClick={onCollapse} title="사이드바 접기">◀</button>
       </div>
 
       <div className="progress-block">
@@ -43,6 +50,7 @@ export default function Sidebar({ view, onNavigate, solvedIds, syncState, syncMe
       </button>
 
       <nav className="nav">
+        {/* 개념 */}
         <div className="nav-section">
           <div className="nav-head">📖 개념</div>
           {concepts.map(c => (
@@ -54,11 +62,34 @@ export default function Sidebar({ view, onNavigate, solvedIds, syncState, syncMe
               {c.title}
             </button>
           ))}
-          {concepts.length === 0 && <div className="nav-empty">개념 파일이 없습니다.</div>}
         </div>
 
+        {/* 모의고사 */}
+        {groups.length > 0 && (
+          <div className="nav-section">
+            <div className="nav-head">📝 모의고사 (회사별)</div>
+            {groups.map(({ group, list }) => (
+              <div key={group} className="stage-group">
+                <div className="stage-label">{group}</div>
+                {list.map(e => (
+                  <button
+                    key={e.id}
+                    className={`nav-item exam ${view.kind === 'exam' && view.id === e.id ? 'active' : ''}`}
+                    onClick={() => onNavigate({ kind: 'exam', id: e.id })}
+                  >
+                    <span className="exam-ico">🏢</span>
+                    <span className="problem-title">{e.affiliate || e.title}</span>
+                    <span className="lv">{e.timeLimitMinutes}분</span>
+                  </button>
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* 문제 (유형 → 난이도) */}
         <div className="nav-section">
-          <div className="nav-head">🧩 문제</div>
+          <div className="nav-head">🧩 문제 (유형별)</div>
           {topics.map(topic => {
             const list = problemsByTopic(topic);
             if (!list.length) return null;
@@ -73,25 +104,33 @@ export default function Sidebar({ view, onNavigate, solvedIds, syncState, syncMe
                 >
                   {TOPIC_LABELS[topic] || topic} <span className="topic-count">{doneInTopic}/{list.length}</span>
                 </div>
-                {list.map(p => {
-                  const solved = solvedIds.has(p.id);
-                  const active = view.kind === 'problem' && view.id === p.id;
+                {TIERS.map(tier => {
+                  const tlist = list.filter(p => tierOf(p) === tier);
+                  if (!tlist.length) return null;
                   return (
-                    <button
-                      key={p.id}
-                      className={`nav-item problem ${active ? 'active' : ''}`}
-                      onClick={() => onNavigate({ kind: 'problem', id: p.id })}
-                    >
-                      <span className={`check ${solved ? 'on' : ''}`}>{solved ? '✓' : '○'}</span>
-                      <span className="problem-title">{p.title}</span>
-                      <span className="lv">Lv.{p.level}</span>
-                    </button>
+                    <div key={tier} className="tier-group">
+                      <div className={`tier-label ${TIER_CLASS[tier]}`}>{tier}</div>
+                      {tlist.map(p => {
+                        const solved = solvedIds.has(p.id);
+                        const active = view.kind === 'problem' && view.id === p.id;
+                        return (
+                          <button
+                            key={p.id}
+                            className={`nav-item problem ${active ? 'active' : ''}`}
+                            onClick={() => onNavigate({ kind: 'problem', id: p.id })}
+                          >
+                            <span className={`check ${solved ? 'on' : ''}`}>{solved ? '✓' : '○'}</span>
+                            <span className="problem-title">{p.title}</span>
+                            <span className="lv">Lv.{p.level}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
                   );
                 })}
               </div>
             );
           })}
-          {problems.length === 0 && <div className="nav-empty">문제 파일이 없습니다.</div>}
         </div>
       </nav>
     </aside>

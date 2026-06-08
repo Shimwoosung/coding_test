@@ -7,6 +7,7 @@ import { getProblem, saveCode, markSolved, isSolved } from '../storage/progress'
 import CodeEditor from './CodeEditor';
 import ResultPanel from './ResultPanel';
 import Markdown from './Markdown';
+import SolutionModal from './SolutionModal';
 import type { View } from './Sidebar';
 
 interface Props {
@@ -22,7 +23,7 @@ export default function ProblemPage({ id, onNavigate }: Props) {
   const [outcome, setOutcome] = useState<RunOutcome | null>(null);
   const [mode, setMode] = useState<'run' | 'submit' | null>(null);
   const [toolStatus, setToolStatus] = useState('');
-  const [showSolution, setShowSolution] = useState(false);
+  const [showSolutionModal, setShowSolutionModal] = useState(false);
   const [solved, setSolvedState] = useState(() => isSolved(id));
 
   // 패널 크기(드래그로 조절, localStorage에 기억)
@@ -158,12 +159,9 @@ export default function ProblemPage({ id, onNavigate }: Props) {
         )}
 
         {problem.solution && (
-          <details className="solution" open={showSolution}>
-            <summary onClick={(e) => { e.preventDefault(); setShowSolution(s => !s); }}>
-              {solved ? '✅ 모범답안 보기' : '🔒 모범답안 보기 (막혔을 때만)'}
-            </summary>
-            <pre className="solution-code">{problem.solution}</pre>
-          </details>
+          <button className="solution-open-btn" onClick={() => setShowSolutionModal(true)}>
+            💡 모범답안 크게 보기 {solved ? '' : '(막혔을 때만)'}
+          </button>
         )}
       </div>
 
@@ -191,6 +189,10 @@ export default function ProblemPage({ id, onNavigate }: Props) {
           <ResultPanel running={running} outcome={outcome} mode={mode} toolStatus={toolStatus} />
         </div>
       </div>
+
+      {showSolutionModal && problem.solution && (
+        <SolutionModal title={problem.title} code={problem.solution} onClose={() => setShowSolutionModal(false)} />
+      )}
     </div>
   );
 }

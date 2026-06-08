@@ -51,3 +51,14 @@ export const TOPIC_LABELS: Record<string, string> = {
 export function problemsByTopic(topic: string): Problem[] {
   return problems.filter(p => p.topic === topic);
 }
+
+// 난이도: 명시값 우선, 없으면 stage 로 유추 (0~1 기초, 2~3 중간, 4~5 심화)
+export type Tier = '기초' | '중간' | '심화';
+export const TIERS: Tier[] = ['기초', '중간', '심화'];
+
+export function tierOf(p: Problem): Tier {
+  if (p.difficulty) return p.difficulty;
+  if (p.stage <= 1) return '기초';
+  if (p.stage <= 3) return '중간';
+  return '심화';
+}

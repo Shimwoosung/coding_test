@@ -85,11 +85,13 @@ self.onmessage = async (e: MessageEvent) => {
       return;
     }
 
-    // 2) 각 stdin 으로 실행
-    const runs: { stdout: string; error: string | null }[] = [];
-    for (const stdin of stdins) {
+    // 컴파일 성공 알림 → 메인 스레드가 여기서부터 시간초과 워치독을 시작
+    (self as any).postMessage({ type: 'compiled', id });
+
+    // 2) 각 stdin 으로 실행 (케이스별로 즉시 전송 → 메인이 진행상황 추적/TLE 판정)
+    for (let i = 0; i < stdins.length; i++) {
       captureBuf = '';
-      api.memfs.setStdinStr(stdin || '');
+      api.memfs.setStdinStr(stdins[i] || '');
       let error: string | null = null;
       try {
         await api.run(mod, 'prog.wasm');
@@ -98,10 +100,10 @@ self.onmessage = async (e: MessageEvent) => {
           error = stripAnsi(String(ex?.message || ex));
         }
       }
-      runs.push({ stdout: captureBuf, error });
+      (self as any).postMessage({ type: 'case', id, index: i, stdout: captureBuf, error });
     }
 
-    (self as any).postMessage({ type: 'result', id, runs });
+    (self as any).postMessage({ type: 'done', id });
     return;
   }
 };

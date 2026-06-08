@@ -48,7 +48,7 @@ let current: Progress = loadLocal();
 const listeners = new Set<() => void>();
 export function subscribe(cb: () => void) {
   listeners.add(cb);
-  return () => listeners.delete(cb);
+  return () => { listeners.delete(cb); };
 }
 function notify() { listeners.forEach(cb => cb()); }
 
@@ -59,7 +59,7 @@ const syncListeners = new Set<(s: SyncState, m: string) => void>();
 export function onSyncStatus(cb: (s: SyncState, m: string) => void) {
   syncListeners.add(cb);
   cb(syncState, syncMessage);
-  return () => syncListeners.delete(cb);
+  return () => { syncListeners.delete(cb); };
 }
 function setSync(s: SyncState, m = '') {
   syncState = s; syncMessage = m;
