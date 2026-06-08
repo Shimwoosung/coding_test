@@ -1,0 +1,40 @@
+{
+  "id": "st_03",
+  "title": "쇠막대기",
+  "stage": 2,
+  "level": 2,
+  "topic": "stack",
+  "concept": "stack",
+  "mode": "stdio",
+  "description": "'('와 ')'로 이루어진 표현에서 '()'는 레이저, 그 외 '('는 막대 시작, ')'는 막대 끝이다. 레이저로 잘린 막대 조각의 총 개수를 구하라.",
+  "constraints": [
+    "문자열 길이 ≤ 100,000"
+  ],
+  "ioDescription": {
+    "input": "한 줄에 괄호 문자열.",
+    "output": "잘린 조각의 총 개수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "()(((()())(())()))(())\n",
+      "output": "17\n"
+    },
+    {
+      "input": "(((()(()()))(())()))(()())\n",
+      "output": "24\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "()\n",
+      "output": "0\n"
+    }
+  ],
+  "hints": [
+    "'('를 만나면 스택 push.",
+    ")인데 직전이 '('이면 레이저 → 현재 열린 막대 수만큼 조각 추가.",
+    ")인데 직전이 ')'이면 막대 하나가 끝남 → +1."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){string s;cin>>s;long long ans=0;int open=0;for(int i=0;i<(int)s.size();i++){if(s[i]=='(')open++;else{open--;if(s[i-1]=='(')ans+=open;else ans+=1;}}cout<<ans<<\"\\n\";}\n"
+}

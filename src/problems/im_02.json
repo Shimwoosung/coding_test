@@ -1,0 +1,34 @@
+{
+  "id": "im_02",
+  "title": "행렬 90도 회전",
+  "stage": 1,
+  "level": 2,
+  "topic": "implementation",
+  "concept": "implementation",
+  "mode": "stdio",
+  "description": "N×M 행렬을 시계 방향으로 90도 회전한 결과를 출력하라.",
+  "constraints": [
+    "1 ≤ N, M ≤ 100"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M. 다음 N줄 각 행(공백 구분 정수).",
+    "output": "회전된 M×N 행렬."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "2 3\n1 2 3\n4 5 6\n",
+      "output": "4 1\n5 2\n6 3\n"
+    },
+    {
+      "input": "1 1\n7\n",
+      "output": "7\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "회전 후 result[j][N-1-i] = original[i][j].",
+    "출력 행/열 크기가 바뀜(M행 N열)."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n,m;cin>>n>>m;vector<vector<int>>a(n,vector<int>(m));for(auto&r:a)for(auto&x:r)cin>>x;vector<vector<int>>b(m,vector<int>(n));for(int i=0;i<n;i++)for(int j=0;j<m;j++)b[j][n-1-i]=a[i][j];string out;for(int i=0;i<m;i++){for(int j=0;j<n;j++){out+=to_string(b[i][j]);out+=(j+1<n?' ':'\\n');}}cout<<out;}\n"
+}

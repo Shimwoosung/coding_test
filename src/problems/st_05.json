@@ -1,0 +1,36 @@
+{
+  "id": "st_05",
+  "title": "탑",
+  "stage": 2,
+  "level": 2,
+  "topic": "stack",
+  "concept": "stack",
+  "mode": "stdio",
+  "description": "높이가 다른 탑들이 일렬로 있다. 각 탑에서 발사한 레이저는 왼쪽으로 가다가 자신보다 높은 가장 가까운 탑에서 수신된다. 각 탑의 신호를 수신하는 탑의 번호(1-based)를 구하라. 없으면 0.",
+  "constraints": [
+    "1 ≤ N ≤ 500,000",
+    "1 ≤ 높이 ≤ 100,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 둘째 줄 탑들의 높이.",
+    "output": "각 탑이 수신되는 탑 번호를 공백으로 한 줄에."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5\n6 9 5 7 4\n",
+      "output": "0 0 2 2 4\n"
+    },
+    {
+      "input": "3\n3 9 9\n",
+      "output": "0 0 2\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "(높이, 번호)를 담는 단조 스택.",
+    "현재보다 낮은 top은 절대 다시 수신 못 하므로 pop.",
+    "남은 top이 답."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);vector<int>h(n+1);for(int i=1;i<=n;i++)scanf(\"%d\",&h[i]);stack<int>st;string out;for(int i=1;i<=n;i++){while(!st.empty()&&h[st.top()]<h[i])st.pop();out+=to_string(st.empty()?0:st.top());out+=' ';st.push(i);}out.pop_back();printf(\"%s\\n\",out.c_str());}\n"
+}

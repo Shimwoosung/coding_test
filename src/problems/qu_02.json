@@ -1,0 +1,34 @@
+{
+  "id": "qu_02",
+  "title": "요세푸스 문제",
+  "stage": 1,
+  "level": 2,
+  "topic": "queue",
+  "concept": "queue",
+  "mode": "stdio",
+  "description": "1~N이 원으로 앉아 있다. 매번 K번째 사람을 제거하는 것을 반복해 제거되는 순서(요세푸스 순열)를 구하라.",
+  "constraints": [
+    "1 ≤ K ≤ N ≤ 5,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N K.",
+    "output": "<a, b, ...> 형식으로 제거 순서 출력."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "7 3\n",
+      "output": "<3, 6, 2, 7, 5, 1, 4>\n"
+    },
+    {
+      "input": "5 2\n",
+      "output": "<2, 4, 1, 5, 3>\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "queue에 1~N 넣고, K-1명을 뒤로 돌린 뒤 K번째를 제거.",
+    "출력 형식: <3, 6, 2, ...>"
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n,k;cin>>n>>k;queue<int>q;for(int i=1;i<=n;i++)q.push(i);string out=\"<\";bool first=true;while(!q.empty()){for(int i=0;i<k-1;i++){q.push(q.front());q.pop();}if(!first)out+=\", \";out+=to_string(q.front());q.pop();first=false;}out+=\">\";cout<<out<<\"\\n\";}\n"
+}

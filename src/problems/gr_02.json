@@ -1,0 +1,35 @@
+{
+  "id": "gr_02",
+  "title": "회의실 배정",
+  "stage": 1,
+  "level": 2,
+  "topic": "greedy",
+  "concept": "greedy",
+  "mode": "stdio",
+  "description": "시작/종료 시간이 주어진 N개의 회의 중, 겹치지 않게 배정할 수 있는 회의의 최대 개수를 구하라(끝나는 시각과 시작 시각이 같아도 됨).",
+  "constraints": [
+    "1 ≤ N ≤ 100,000",
+    "0 ≤ 시작 ≤ 종료 ≤ 2^31-1"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 다음 N줄 시작 종료.",
+    "output": "최대 회의 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "11\n1 4\n3 5\n0 6\n5 7\n3 8\n5 9\n6 10\n8 11\n8 12\n2 13\n12 14\n",
+      "output": "4\n"
+    },
+    {
+      "input": "3\n1 2\n2 3\n3 4\n",
+      "output": "3\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "끝나는 시간 기준 오름차순 정렬(같으면 시작 오름차순).",
+    "현재 시간 이후 시작 가능한 회의를 차례로 선택."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;cin>>n;vector<pair<long long,long long>>v(n);for(auto&p:v){cin>>p.second>>p.first;}sort(v.begin(),v.end());long long cur=-1,cnt=0;for(auto&p:v){long long s=p.second,e=p.first;if(s>=cur){cnt++;cur=e;}}cout<<cnt<<\"\\n\";}\n"
+}

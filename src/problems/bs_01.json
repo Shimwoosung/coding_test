@@ -1,0 +1,48 @@
+{
+  "id": "bs_01",
+  "title": "정수 제곱근",
+  "stage": 0,
+  "level": 2,
+  "topic": "binary_search",
+  "concept": "binary_search",
+  "mode": "stdio",
+  "description": "정수 N이 주어질 때 k*k ≤ N 을 만족하는 가장 큰 정수 k(정수 제곱근, 내림)를 출력하라. N이 최대 10억이라 선형 탐색은 느리다.",
+  "constraints": [
+    "1 ≤ N ≤ 1,000,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄에 정수 N.",
+    "output": "정수 제곱근(내림) 한 줄."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "16\n",
+      "output": "4\n"
+    },
+    {
+      "input": "10\n",
+      "output": "3\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n",
+      "output": "1\n"
+    },
+    {
+      "input": "2\n",
+      "output": "1\n"
+    },
+    {
+      "input": "1000000000\n",
+      "output": "31622\n"
+    }
+  ],
+  "hints": [
+    "0~N 범위를 이분 탐색.",
+    "최대값을 찾는 형태: mid=lo+(hi-lo+1)/2, 조건 만족 시 lo=mid.",
+    "mid*mid는 long long."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){long long n;cin>>n;long long lo=0,hi=n;while(lo<hi){long long m=lo+(hi-lo+1)/2;if(m*m<=n)lo=m;else hi=m-1;}cout<<lo<<\"\\n\";}\n"
+}

@@ -1,0 +1,36 @@
+{
+  "id": "bs_05",
+  "title": "수의 등장 횟수",
+  "stage": 2,
+  "level": 2,
+  "topic": "binary_search",
+  "concept": "binary_search",
+  "mode": "stdio",
+  "description": "정수 카드 N장이 있다. 질문으로 주어진 수가 카드에 몇 번 나오는지 각각 출력하라. (정렬 후 lower/upper bound 활용)",
+  "constraints": [
+    "1 ≤ N ≤ 500,000",
+    "1 ≤ Q ≤ 500,000",
+    "값의 절댓값 ≤ 10^7"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 둘째 줄 카드 N개, 셋째 줄 Q, 넷째 줄 질문 Q개.",
+    "output": "각 질문의 등장 횟수를 공백으로 한 줄에."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "10\n6 3 2 10 10 10 -10 -10 7 3\n8\n10 9 -5 2 3 4 5 -10\n",
+      "output": "3 0 0 1 2 0 0 2\n"
+    },
+    {
+      "input": "3\n1 1 1\n2\n1 2\n",
+      "output": "3 0\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "배열 정렬 후 upper_bound - lower_bound = 개수.",
+    "map으로 세도 되지만 이분 탐색 연습용."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);vector<int>a(n);for(auto&x:a)scanf(\"%d\",&x);sort(a.begin(),a.end());int q;scanf(\"%d\",&q);string out;while(q--){int x;scanf(\"%d\",&x);long long c=upper_bound(a.begin(),a.end(),x)-lower_bound(a.begin(),a.end(),x);out+=to_string(c);out+=' ';}if(!out.empty())out.pop_back();printf(\"%s\\n\",out.c_str());}\n"
+}

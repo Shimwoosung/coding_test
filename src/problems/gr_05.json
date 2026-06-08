@@ -1,0 +1,40 @@
+{
+  "id": "gr_05",
+  "title": "카드 정렬하기",
+  "stage": 2,
+  "level": 3,
+  "topic": "greedy",
+  "concept": "greedy",
+  "mode": "stdio",
+  "description": "여러 묶음의 카드를 합칠 때, 두 묶음을 합치는 비용은 두 묶음 카드 수의 합이다. 전부 한 묶음으로 만드는 최소 비용을 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 100,000",
+    "묶음 크기 ≤ 1,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 다음 N줄 각 묶음의 카드 수.",
+    "output": "최소 합치기 비용."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\n10\n20\n40\n",
+      "output": "100\n"
+    },
+    {
+      "input": "1\n5\n",
+      "output": "0\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "4\n1 1 1 1\n",
+      "output": "8\n"
+    }
+  ],
+  "hints": [
+    "항상 가장 작은 두 묶음을 먼저 합쳐야 한다 → 최소 힙(priority_queue).",
+    "합친 결과를 다시 힙에 넣고 반복."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;cin>>n;priority_queue<long long,vector<long long>,greater<>>pq;for(int i=0;i<n;i++){long long x;cin>>x;pq.push(x);}long long ans=0;while(pq.size()>1){long long a=pq.top();pq.pop();long long b=pq.top();pq.pop();ans+=a+b;pq.push(a+b);}cout<<ans<<\"\\n\";}\n"
+}

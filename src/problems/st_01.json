@@ -1,0 +1,36 @@
+{
+  "id": "st_01",
+  "title": "올바른 괄호(VPS)",
+  "stage": 0,
+  "level": 1,
+  "topic": "stack",
+  "concept": "stack",
+  "mode": "stdio",
+  "description": "여러 괄호 문자열이 주어진다. 각 문자열이 올바른 괄호 문자열(VPS)인지 판별해 YES/NO를 출력하라.",
+  "constraints": [
+    "1 ≤ T ≤ 50",
+    "문자열 길이 ≤ 50"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 T. 다음 T줄 각각 '('와 ')'로 이루어진 문자열.",
+    "output": "각 줄마다 YES 또는 NO."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\n(())())\n(((()())()\n(()())((()))\n",
+      "output": "NO\nNO\nYES\n"
+    },
+    {
+      "input": "2\n()\n)(\n",
+      "output": "YES\nNO\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "'('면 카운트 +1, ')'면 -1. 도중에 음수가 되면 NO.",
+    "끝에서 0이면 YES.",
+    "스택을 명시적으로 써도 됨."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int t;cin>>t;while(t--){string s;cin>>s;int c=0;bool ok=true;for(char ch:s){if(ch=='(')c++;else if(--c<0){ok=false;break;}}cout<<((ok&&c==0)?\"YES\":\"NO\")<<\"\\n\";}}\n"
+}

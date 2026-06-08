@@ -1,0 +1,39 @@
+{
+  "id": "qu_01",
+  "title": "카드2",
+  "stage": 0,
+  "level": 2,
+  "topic": "queue",
+  "concept": "queue",
+  "mode": "stdio",
+  "description": "1~N 카드가 순서대로 큐에 있다. 맨 위 카드를 버리고, 그 다음 카드를 맨 아래로 옮기는 동작을 반복한다. 마지막에 남는 카드를 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 500,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N.",
+    "output": "마지막에 남는 카드 번호."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "6\n",
+      "output": "4\n"
+    },
+    {
+      "input": "1\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "7\n",
+      "output": "6\n"
+    }
+  ],
+  "hints": [
+    "queue<int> 사용.",
+    "front() 버리고 pop, 그 다음 front()를 push 후 pop 반복."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;cin>>n;queue<int>q;for(int i=1;i<=n;i++)q.push(i);while(q.size()>1){q.pop();q.push(q.front());q.pop();}cout<<q.front()<<\"\\n\";}\n"
+}

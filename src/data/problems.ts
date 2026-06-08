@@ -11,4 +11,23 @@ export const problemsById: Record<string, Problem> = Object.fromEntries(
   problems.map(p => [p.id, p]),
 );
 
-export const stages: number[] = Array.from(new Set(problems.map(p => p.stage))).sort((a, b) => a - b);
+// 토픽(개념) 단위로 묶어 보여준다. stage 는 토픽 내부 난이도(0~5)로 사용.
+const TOPIC_ORDER = ['binary_search', 'stack', 'queue', 'greedy', 'dp', 'implementation'];
+
+export const topics: string[] = [
+  ...TOPIC_ORDER.filter(t => problems.some(p => p.topic === t)),
+  ...Array.from(new Set(problems.map(p => p.topic))).filter(t => !TOPIC_ORDER.includes(t)).sort(),
+];
+
+export const TOPIC_LABELS: Record<string, string> = {
+  binary_search: '이분 탐색',
+  stack: '스택',
+  queue: '큐 / BFS',
+  greedy: '그리디',
+  dp: 'DP',
+  implementation: '구현 / 시뮬',
+};
+
+export function problemsByTopic(topic: string): Problem[] {
+  return problems.filter(p => p.topic === topic);
+}

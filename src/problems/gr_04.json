@@ -1,0 +1,40 @@
+{
+  "id": "gr_04",
+  "title": "잃어버린 괄호",
+  "stage": 2,
+  "level": 2,
+  "topic": "greedy",
+  "concept": "greedy",
+  "mode": "stdio",
+  "description": "'+'와 '-'와 양의 정수로 이루어진 식에 괄호를 적절히 쳐서 값을 최소로 만들 때의 결과를 구하라.",
+  "constraints": [
+    "식 길이 ≤ 50",
+    "각 수 0 이상"
+  ],
+  "ioDescription": {
+    "input": "한 줄에 식(예: 55-50+40).",
+    "output": "만들 수 있는 최솟값."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "55-50+40\n",
+      "output": "-35\n"
+    },
+    {
+      "input": "10+20+30+40\n",
+      "output": "100\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "00009-00009\n",
+      "output": "0\n"
+    }
+  ],
+  "hints": [
+    "첫 '-' 이후의 모든 항은 묶어서 빼면 최소가 된다.",
+    "'-'를 만난 뒤로는 더하기 그룹 전체를 음수로 처리."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){string s;cin>>s;vector<long long>nums;vector<char>ops;long long cur=0;bool has=false;for(char c:s){if(isdigit(c)){cur=cur*10+(c-'0');has=true;}else{nums.push_back(cur);cur=0;has=false;ops.push_back(c);}}nums.push_back(cur);long long ans=nums[0];bool minus=false;for(int i=0;i<(int)ops.size();i++){if(ops[i]=='-')minus=true;if(minus)ans-=nums[i+1];else ans+=nums[i+1];}cout<<ans<<\"\\n\";}\n"
+}

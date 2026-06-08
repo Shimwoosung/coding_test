@@ -1,0 +1,40 @@
+{
+  "id": "st_04",
+  "title": "오큰수",
+  "stage": 2,
+  "level": 2,
+  "topic": "stack",
+  "concept": "stack",
+  "mode": "stdio",
+  "description": "수열 A의 각 원소 A[i]에 대해, 오른쪽에 있으면서 A[i]보다 큰 수 중 가장 왼쪽 수(오큰수)를 구하라. 없으면 -1.",
+  "constraints": [
+    "1 ≤ N ≤ 1,000,000",
+    "1 ≤ A[i] ≤ 1,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 둘째 줄 수열.",
+    "output": "각 원소의 오큰수를 공백으로 한 줄에."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4\n3 5 2 7\n",
+      "output": "5 7 7 -1\n"
+    },
+    {
+      "input": "4\n9 5 4 8\n",
+      "output": "-1 8 8 -1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n1\n",
+      "output": "-1\n"
+    }
+  ],
+  "hints": [
+    "인덱스를 담는 단조 스택 사용.",
+    "현재 값이 스택 top 인덱스의 값보다 크면, 그 자리의 오큰수가 현재 값."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);vector<int>a(n),ans(n,-1);for(auto&x:a)scanf(\"%d\",&x);stack<int>st;for(int i=0;i<n;i++){while(!st.empty()&&a[st.top()]<a[i]){ans[st.top()]=a[i];st.pop();}st.push(i);}string out;for(int i=0;i<n;i++){out+=to_string(ans[i]);out+=' ';}out.pop_back();printf(\"%s\\n\",out.c_str());}\n"
+}

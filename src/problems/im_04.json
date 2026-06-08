@@ -1,0 +1,43 @@
+{
+  "id": "im_04",
+  "title": "더하기 사이클",
+  "stage": 0,
+  "level": 1,
+  "topic": "implementation",
+  "concept": "implementation",
+  "mode": "stdio",
+  "description": "0~99의 수 N에 대해, '각 자리 숫자의 합의 일의 자리'를 기존 수의 일의 자리 뒤에 붙여 새 수를 만든다. 이를 반복해 원래 수로 돌아올 때까지의 사이클 길이를 구하라.",
+  "constraints": [
+    "0 ≤ N ≤ 99"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N.",
+    "output": "사이클 길이."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "26\n",
+      "output": "4\n"
+    },
+    {
+      "input": "55\n",
+      "output": "3\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n",
+      "output": "60\n"
+    },
+    {
+      "input": "0\n",
+      "output": "1\n"
+    }
+  ],
+  "hints": [
+    "두 자리로 보고(십의자리 t, 일의자리 u), 새 수 = (u*10 + (t+u)%10).",
+    "원래 수로 돌아올 때까지 카운트."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;cin>>n;int cur=n,cnt=0;do{int t=cur/10,u=cur%10;cur=(u*10+(t+u)%10);cnt++;}while(cur!=n);cout<<cnt<<\"\\n\";}\n"
+}

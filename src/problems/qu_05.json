@@ -1,0 +1,40 @@
+{
+  "id": "qu_05",
+  "title": "숨바꼭질(BFS)",
+  "stage": 3,
+  "level": 2,
+  "topic": "queue",
+  "concept": "queue",
+  "mode": "stdio",
+  "description": "수빈이는 점 N에 있고 동생은 점 K에 있다. 1초에 X-1, X+1, 또는 2*X 로 이동할 수 있다(0~100,000 범위). 동생을 찾는 최소 시간을 구하라.",
+  "constraints": [
+    "0 ≤ N, K ≤ 100,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N K.",
+    "output": "최소 시간(초)."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5 17\n",
+      "output": "4\n"
+    },
+    {
+      "input": "0 0\n",
+      "output": "0\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "3 3\n",
+      "output": "0\n"
+    }
+  ],
+  "hints": [
+    "위치를 노드로 보는 BFS.",
+    "방문 배열 크기 100,001.",
+    "K에 처음 도달한 거리(초)가 답."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n,k;cin>>n>>k;const int MX=100001;vector<int>d(MX,-1);queue<int>q;q.push(n);d[n]=0;while(!q.empty()){int x=q.front();q.pop();if(x==k)break;for(int nx:{x-1,x+1,x*2}){if(nx>=0&&nx<MX&&d[nx]==-1){d[nx]=d[x]+1;q.push(nx);}}}cout<<d[k]<<\"\\n\";}\n"
+}

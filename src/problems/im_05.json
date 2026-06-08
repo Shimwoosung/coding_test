@@ -1,0 +1,34 @@
+{
+  "id": "im_05",
+  "title": "체스판 다시 칠하기",
+  "stage": 2,
+  "level": 2,
+  "topic": "implementation",
+  "concept": "implementation",
+  "mode": "stdio",
+  "description": "N×M 보드(B/W)에서 8×8 영역을 잘라 체스판으로 만들 때, 다시 칠해야 하는 최소 칸 수를 구하라.",
+  "constraints": [
+    "8 ≤ N, M ≤ 50"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M. 다음 N줄 'B'/'W' 문자열.",
+    "output": "다시 칠할 최소 칸 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "8 8\nWBWBWBWB\nBWBWBWBW\nWBWBWBWB\nBWBWBWBW\nWBWBWBWB\nBWBWBWBW\nWBWBWBWB\nBWBWBWBW\n",
+      "output": "0\n"
+    },
+    {
+      "input": "10 13\nBBBBBBBBWBWBW\nBBBBBBBBBWBWB\nBBBBBBBBWBWBW\nBBBBBBBBBWBWB\nBBBBBBBBWBWBW\nBBBBBBBBBWBWB\nBBBBBBBBWBWBW\nBBBBBBBBBWBWB\nWBWBWBWBWBWBW\nBWBWBWBWBWBWB\n",
+      "output": "9\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "가능한 모든 8×8 시작점을 브루트포스.",
+    "좌상단이 W인 경우/B인 경우 두 패턴과 비교해 최소."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n,m;cin>>n>>m;vector<string>g(n);for(auto&s:g)cin>>s;int best=1e9;for(int i=0;i+8<=n;i++)for(int j=0;j+8<=m;j++){int cw=0;for(int x=0;x<8;x++)for(int y=0;y<8;y++){char want=((x+y)%2==0)?'W':'B';if(g[i+x][j+y]!=want)cw++;}best=min(best,min(cw,64-cw));}cout<<best<<\"\\n\";}\n"
+}

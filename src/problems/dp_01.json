@@ -1,0 +1,39 @@
+{
+  "id": "dp_01",
+  "title": "1로 만들기",
+  "stage": 0,
+  "level": 2,
+  "topic": "dp",
+  "concept": "dp",
+  "mode": "stdio",
+  "description": "정수 N에 대해 (1)3으로 나누기 (2)2로 나누기 (3)1 빼기 연산을 사용해 1로 만들 때 필요한 연산 횟수의 최솟값을 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 1,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N.",
+    "output": "최소 연산 횟수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "10\n",
+      "output": "3\n"
+    },
+    {
+      "input": "1\n",
+      "output": "0\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "25\n",
+      "output": "5\n"
+    }
+  ],
+  "hints": [
+    "dp[i] = i를 1로 만드는 최소 횟수.",
+    "dp[i] = dp[i-1]+1, i%2==0이면 min(dp[i/2]+1), i%3==0이면 min(dp[i/3]+1)."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;cin>>n;vector<int>dp(n+1,0);for(int i=2;i<=n;i++){dp[i]=dp[i-1]+1;if(i%2==0)dp[i]=min(dp[i],dp[i/2]+1);if(i%3==0)dp[i]=min(dp[i],dp[i/3]+1);}cout<<dp[n]<<\"\\n\";}\n"
+}

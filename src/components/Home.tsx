@@ -1,4 +1,4 @@
-import { problems, stages } from '../data/problems';
+import { problems, topics } from '../data/problems';
 import { concepts } from '../data/concepts';
 import type { View } from './Sidebar';
 
@@ -27,8 +27,8 @@ export default function Home({ onNavigate, solvedIds }: Props) {
           <div>개념 페이지</div>
         </div>
         <div className="home-card">
-          <div className="big">{stages.length}</div>
-          <div>단계</div>
+          <div className="big">{topics.length}</div>
+          <div>토픽</div>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
-import { problems, stages } from '../data/problems';
-import { concepts } from '../data/concepts';
+import { problems, topics, TOPIC_LABELS, problemsByTopic } from '../data/problems';
+import { concepts, conceptsById } from '../data/concepts';
 import type { SyncState } from '../storage/progress';
 
 export type View =
@@ -15,15 +15,6 @@ interface Props {
   syncMessage: string;
   onOpenSettings: () => void;
 }
-
-const STAGE_LABELS: Record<number, string> = {
-  0: '0단계 · 입출력/기초',
-  1: '1단계 · 이분탐색',
-  2: '2단계 · 스택/큐',
-  3: '3단계 · 정렬/그리디',
-  4: '4단계 · DP',
-  5: '5단계 · 그래프/심화',
-};
 
 export default function Sidebar({ view, onNavigate, solvedIds, syncState, syncMessage, onOpenSettings }: Props) {
   const total = problems.length;
@@ -68,12 +59,20 @@ export default function Sidebar({ view, onNavigate, solvedIds, syncState, syncMe
 
         <div className="nav-section">
           <div className="nav-head">🧩 문제</div>
-          {stages.map(stage => {
-            const list = problems.filter(p => p.stage === stage);
+          {topics.map(topic => {
+            const list = problemsByTopic(topic);
             if (!list.length) return null;
+            const doneInTopic = list.filter(p => solvedIds.has(p.id)).length;
+            const hasConcept = !!conceptsById[topic];
             return (
-              <div key={stage} className="stage-group">
-                <div className="stage-label">{STAGE_LABELS[stage] || `${stage}단계`}</div>
+              <div key={topic} className="stage-group">
+                <div
+                  className={`stage-label ${hasConcept ? 'clickable' : ''}`}
+                  onClick={() => hasConcept && onNavigate({ kind: 'concept', id: topic })}
+                  title={hasConcept ? '개념 설명 보기' : undefined}
+                >
+                  {TOPIC_LABELS[topic] || topic} <span className="topic-count">{doneInTopic}/{list.length}</span>
+                </div>
                 {list.map(p => {
                   const solved = solvedIds.has(p.id);
                   const active = view.kind === 'problem' && view.id === p.id;

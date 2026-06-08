@@ -1,0 +1,41 @@
+{
+  "id": "dp_05",
+  "title": "가장 긴 증가하는 부분수열(LIS)",
+  "stage": 2,
+  "level": 2,
+  "topic": "dp",
+  "concept": "dp",
+  "mode": "stdio",
+  "description": "수열 A에서 부분수열을 골랐을 때 strictly 증가하는 가장 긴 부분수열의 길이를 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 1,000",
+    "1 ≤ A[i] ≤ 1,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 둘째 줄 수열.",
+    "output": "LIS의 길이."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "6\n10 20 10 30 20 50\n",
+      "output": "4\n"
+    },
+    {
+      "input": "1\n5\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "5\n5 4 3 2 1\n",
+      "output": "1\n"
+    }
+  ],
+  "hints": [
+    "dp[i] = i로 끝나는 LIS 길이.",
+    "dp[i] = max(dp[j]+1) for j<i and A[j]<A[i].",
+    "O(N log N) 이분 탐색 풀이도 있음."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;cin>>n;vector<int>a(n),dp(n,1);for(auto&x:a)cin>>x;int ans=0;for(int i=0;i<n;i++){for(int j=0;j<i;j++)if(a[j]<a[i])dp[i]=max(dp[i],dp[j]+1);ans=max(ans,dp[i]);}cout<<ans<<\"\\n\";}\n"
+}

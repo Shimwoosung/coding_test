@@ -1,0 +1,45 @@
+{
+  "id": "bs_03",
+  "title": "나무 자르기",
+  "stage": 1,
+  "level": 2,
+  "topic": "binary_search",
+  "concept": "binary_search",
+  "mode": "stdio",
+  "description": "높이 H의 절단기로 나무들을 자르면 H보다 큰 부분만 잘려 가져갈 수 있다. 적어도 M미터를 가져가기 위한 절단기 최대 높이 H를 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 1,000,000",
+    "1 ≤ M ≤ 2,000,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M. 둘째 줄 나무 N그루의 높이.",
+    "output": "가능한 최대 절단 높이 H."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4 7\n20 15 10 17\n",
+      "output": "15\n"
+    },
+    {
+      "input": "5 20\n4 42 40 26 46\n",
+      "output": "36\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1 1\n100\n",
+      "output": "99\n"
+    },
+    {
+      "input": "3 6\n5 5 5\n",
+      "output": "3\n"
+    }
+  ],
+  "hints": [
+    "높이 H에서 얻는 나무량 = sum(max(0, h_i - H)).",
+    "이 양이 M 이상인 최대 H를 이분 탐색.",
+    "합은 long long."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){long long N,M;cin>>N>>M;vector<long long>a(N);long long hi=0;for(auto&x:a){cin>>x;hi=max(hi,x);}long long lo=0,ans=0;while(lo<=hi){long long mid=(lo+hi)/2,s=0;for(auto x:a)if(x>mid)s+=x-mid;if(s>=M){ans=mid;lo=mid+1;}else hi=mid-1;}cout<<ans<<\"\\n\";}\n"
+}

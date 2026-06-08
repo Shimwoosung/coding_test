@@ -1,0 +1,40 @@
+{
+  "id": "gr_03",
+  "title": "ATM",
+  "stage": 1,
+  "level": 2,
+  "topic": "greedy",
+  "concept": "greedy",
+  "mode": "stdio",
+  "description": "ATM 앞에 N명이 있고 각자 인출 시간이 다르다. 한 줄로 세울 때 모든 사람의 대기시간 합의 최솟값을 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 1,000",
+    "1 ≤ 인출시간 ≤ 1,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 둘째 줄 각 사람의 인출 시간.",
+    "output": "대기시간 합의 최솟값."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5\n3 1 4 3 2\n",
+      "output": "32\n"
+    },
+    {
+      "input": "1\n10\n",
+      "output": "10\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "3\n1 2 3\n",
+      "output": "10\n"
+    }
+  ],
+  "hints": [
+    "짧은 사람부터 처리하는 것이 최적(정렬).",
+    "앞 사람들의 누적합이 각자의 대기시간."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;cin>>n;vector<int>a(n);for(auto&x:a)cin>>x;sort(a.begin(),a.end());long long sum=0,acc=0;for(int x:a){acc+=x;sum+=acc;}cout<<sum<<\"\\n\";}\n"
+}

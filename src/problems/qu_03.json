@@ -1,0 +1,36 @@
+{
+  "id": "qu_03",
+  "title": "프린터 큐",
+  "stage": 2,
+  "level": 2,
+  "topic": "queue",
+  "concept": "queue",
+  "mode": "stdio",
+  "description": "문서마다 중요도가 있다. 큐 맨 앞 문서보다 중요도 높은 문서가 뒤에 있으면 인쇄하지 않고 맨 뒤로 보낸다. 내가 찾는 문서(M번째)가 몇 번째로 인쇄되는지 구하라.",
+  "constraints": [
+    "1 ≤ T ≤ 100",
+    "1 ≤ N ≤ 100",
+    "중요도 1~9"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 T. 각 테스트: N M, 그리고 N개의 중요도. M은 궁금한 문서의 인덱스(0-based).",
+    "output": "각 테스트마다 해당 문서가 인쇄되는 순서."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\n1 0\n5\n4 2\n1 2 3 4\n6 0\n1 1 9 1 1 1\n",
+      "output": "1\n2\n5\n"
+    },
+    {
+      "input": "1\n1 0\n7\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "(중요도, 원래인덱스) 큐 + 중요도 정렬/최댓값 비교.",
+    "맨 앞보다 큰 게 있으면 뒤로 보내고, 아니면 인쇄(카운트)."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int t;cin>>t;while(t--){int n,m;cin>>n>>m;deque<pair<int,int>>q;multiset<int>pr;for(int i=0;i<n;i++){int p;cin>>p;q.push_back({p,i});pr.insert(p);}int cnt=0;while(true){auto f=q.front();q.pop_front();if(!pr.empty()&&*pr.rbegin()>f.first){q.push_back(f);}else{pr.erase(pr.find(f.first));cnt++;if(f.second==m){cout<<cnt<<\"\\n\";break;}}}}}\n"
+}
