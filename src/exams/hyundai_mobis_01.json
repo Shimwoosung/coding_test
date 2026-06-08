@@ -1,0 +1,20 @@
+{
+  "id": "hyundai_mobis_01",
+  "group": "현대",
+  "affiliate": "현대모비스",
+  "round": 1,
+  "title": "현대모비스 모의고사 1회",
+  "timeLimitMinutes": 120,
+  "description": "현대모비스 코딩테스트 대비 모의고사 1회. 주력 유형: implementation, dp, prefix_sum, sorting. 제한시간 120분, 총 9문제.",
+  "problemIds": [
+    "im_01",
+    "dp_01",
+    "ps_01",
+    "im_03",
+    "dp_03",
+    "ps_02",
+    "so_04",
+    "bm_04",
+    "bs_10"
+  ]
+}

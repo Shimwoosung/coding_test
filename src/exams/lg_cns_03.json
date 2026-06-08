@@ -1,0 +1,20 @@
+{
+  "id": "lg_cns_03",
+  "group": "LG",
+  "affiliate": "LG CNS",
+  "round": 3,
+  "title": "LG CNS 모의고사 3회",
+  "timeLimitMinutes": 150,
+  "description": "LG CNS 코딩테스트 대비 모의고사 3회. 주력 유형: hash, dsu, graph, shortest_path. 제한시간 150분, 총 9문제.",
+  "problemIds": [
+    "gp_02",
+    "sp_07",
+    "hs_04",
+    "hs_10",
+    "ds_04",
+    "gp_05",
+    "sp_03",
+    "sp_13",
+    "bm_04"
+  ]
+}

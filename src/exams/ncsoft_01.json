@@ -2,8 +2,19 @@
   "id": "ncsoft_01",
   "group": "NC",
   "affiliate": "엔씨소프트",
-  "title": "NC(엔씨소프트) 코딩테스트 모의 1회",
+  "round": 1,
+  "title": "엔씨소프트 모의고사 1회",
   "timeLimitMinutes": 150,
-  "description": "게임 서버/클라 직군 스타일. 그래프 탐색·DP·백트래킹 비중이 높음.",
-  "problemIds": ["gp_01", "gp_02", "dp_01", "dp_02", "bt_01", "tp_01", "hs_01", "sp_01"]
+  "description": "엔씨소프트 코딩테스트 대비 모의고사 1회. 주력 유형: graph, dp, backtracking, shortest_path. 제한시간 150분, 총 9문제.",
+  "problemIds": [
+    "gp_01",
+    "dp_01",
+    "bt_01",
+    "gp_03",
+    "dp_03",
+    "bt_03",
+    "sp_01",
+    "gp_13",
+    "bt_12"
+  ]
 }

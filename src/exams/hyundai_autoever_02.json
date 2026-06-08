@@ -1,0 +1,20 @@
+{
+  "id": "hyundai_autoever_02",
+  "group": "현대",
+  "affiliate": "현대오토에버",
+  "round": 2,
+  "title": "현대오토에버 모의고사 2회",
+  "timeLimitMinutes": 150,
+  "description": "현대오토에버 코딩테스트 대비 모의고사 2회. 주력 유형: implementation, dp, two_pointer, prefix_sum. 제한시간 150분, 총 9문제.",
+  "problemIds": [
+    "ps_01",
+    "im_02",
+    "dp_02",
+    "im_05",
+    "dp_04",
+    "tp_03",
+    "ps_03",
+    "bt_12",
+    "ds_12"
+  ]
+}

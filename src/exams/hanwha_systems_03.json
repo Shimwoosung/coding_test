@@ -1,0 +1,20 @@
+{
+  "id": "hanwha_systems_03",
+  "group": "한화",
+  "affiliate": "한화시스템",
+  "round": 3,
+  "title": "한화시스템 모의고사 3회",
+  "timeLimitMinutes": 180,
+  "description": "한화시스템 코딩테스트 대비 모의고사 3회. 주력 유형: bitmask, backtracking, shortest_path, graph. 제한시간 180분, 총 9문제.",
+  "problemIds": [
+    "sp_07",
+    "gp_02",
+    "bm_07",
+    "bm_05",
+    "bt_05",
+    "sp_03",
+    "gp_05",
+    "bm_12",
+    "bt_13"
+  ]
+}

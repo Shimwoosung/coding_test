@@ -1,0 +1,20 @@
+{
+  "id": "nhn_01",
+  "group": "NHN",
+  "affiliate": "NHN",
+  "round": 1,
+  "title": "NHN 모의고사 1회",
+  "timeLimitMinutes": 120,
+  "description": "NHN 코딩테스트 대비 모의고사 1회. 주력 유형: hash, stack, queue, implementation. 제한시간 120분, 총 9문제.",
+  "problemIds": [
+    "hs_01",
+    "st_01",
+    "qu_01",
+    "hs_03",
+    "st_03",
+    "qu_03",
+    "im_03",
+    "st_10",
+    "qu_12"
+  ]
+}

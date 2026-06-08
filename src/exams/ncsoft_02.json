@@ -1,0 +1,20 @@
+{
+  "id": "ncsoft_02",
+  "group": "NC",
+  "affiliate": "엔씨소프트",
+  "round": 2,
+  "title": "엔씨소프트 모의고사 2회",
+  "timeLimitMinutes": 150,
+  "description": "엔씨소프트 코딩테스트 대비 모의고사 2회. 주력 유형: graph, dp, backtracking, shortest_path. 제한시간 150분, 총 9문제.",
+  "problemIds": [
+    "sp_06",
+    "gp_02",
+    "dp_02",
+    "gp_04",
+    "dp_04",
+    "bt_04",
+    "sp_02",
+    "sp_12",
+    "bt_13"
+  ]
+}

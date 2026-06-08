@@ -1,0 +1,20 @@
+{
+  "id": "krafton_02",
+  "group": "크래프톤",
+  "affiliate": "크래프톤",
+  "round": 2,
+  "title": "크래프톤 모의고사 2회",
+  "timeLimitMinutes": 150,
+  "description": "크래프톤 코딩테스트 대비 모의고사 2회. 주력 유형: dp, graph, bitmask, backtracking, shortest_path. 제한시간 150분, 총 9문제.",
+  "problemIds": [
+    "bt_01",
+    "sp_06",
+    "dp_02",
+    "sp_01",
+    "dp_04",
+    "gp_04",
+    "bm_03",
+    "bt_12",
+    "sp_12"
+  ]
+}

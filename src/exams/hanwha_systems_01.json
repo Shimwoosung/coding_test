@@ -2,8 +2,19 @@
   "id": "hanwha_systems_01",
   "group": "한화",
   "affiliate": "한화시스템",
-  "title": "한화시스템 코딩테스트 모의 1회",
+  "round": 1,
+  "title": "한화시스템 모의고사 1회",
   "timeLimitMinutes": 180,
-  "description": "방산·ICT 직군 스타일. 비트마스크·백트래킹·최단경로 등 심화 문제 포함.",
-  "problemIds": ["bm_01", "bt_03", "sp_03", "ds_04", "tr_03", "gr_04", "qu_05", "im_04"]
+  "description": "한화시스템 코딩테스트 대비 모의고사 1회. 주력 유형: bitmask, backtracking, shortest_path, graph. 제한시간 180분, 총 9문제.",
+  "problemIds": [
+    "bm_01",
+    "bt_01",
+    "sp_06",
+    "bm_02",
+    "bt_03",
+    "sp_01",
+    "gp_03",
+    "bm_04",
+    "bt_12"
+  ]
 }

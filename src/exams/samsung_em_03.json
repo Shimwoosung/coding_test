@@ -1,0 +1,20 @@
+{
+  "id": "samsung_em_03",
+  "group": "삼성",
+  "affiliate": "삼성전기",
+  "round": 3,
+  "title": "삼성전기 모의고사 3회",
+  "timeLimitMinutes": 100,
+  "description": "삼성전기 코딩테스트 대비 모의고사 3회. 주력 유형: implementation, sorting, greedy, prefix_sum. 제한시간 100분, 총 9문제.",
+  "problemIds": [
+    "gr_02",
+    "ps_05",
+    "im_04",
+    "im_08",
+    "so_08",
+    "gr_07",
+    "ps_04",
+    "bt_12",
+    "ds_12"
+  ]
+}

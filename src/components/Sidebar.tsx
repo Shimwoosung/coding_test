@@ -1,6 +1,6 @@
 import { problems, topics, TOPIC_LABELS, problemsByTopic, tierOf, TIERS } from '../data/problems';
 import { concepts, conceptsById } from '../data/concepts';
-import { examsByGroup } from '../data/exams';
+import { examTree } from '../data/exams';
 import type { SyncState } from '../storage/progress';
 
 export type View =
@@ -25,7 +25,7 @@ export default function Sidebar({ view, onNavigate, solvedIds, syncState, syncMe
   const total = problems.length;
   const done = problems.filter(p => solvedIds.has(p.id)).length;
   const pct = total ? Math.round((done / total) * 100) : 0;
-  const groups = examsByGroup();
+  const groups = examTree();
 
   const syncDot: Record<SyncState, string> = { off: '○', syncing: '◐', synced: '●', error: '⚠' };
 
@@ -64,23 +64,29 @@ export default function Sidebar({ view, onNavigate, solvedIds, syncState, syncMe
           ))}
         </div>
 
-        {/* 모의고사 */}
+        {/* 모의고사: 그룹 → 계열사 → 회차 */}
         {groups.length > 0 && (
           <div className="nav-section">
             <div className="nav-head">📝 모의고사 (회사별)</div>
-            {groups.map(({ group, list }) => (
-              <div key={group} className="stage-group">
-                <div className="stage-label">{group}</div>
-                {list.map(e => (
-                  <button
-                    key={e.id}
-                    className={`nav-item exam ${view.kind === 'exam' && view.id === e.id ? 'active' : ''}`}
-                    onClick={() => onNavigate({ kind: 'exam', id: e.id })}
-                  >
-                    <span className="exam-ico">🏢</span>
-                    <span className="problem-title">{e.affiliate || e.title}</span>
-                    <span className="lv">{e.timeLimitMinutes}분</span>
-                  </button>
+            {groups.map(({ group, affiliates }) => (
+              <div key={group} className="exam-group">
+                <div className="exam-group-name">🏢 {group}</div>
+                {affiliates.map(({ affiliate, list }) => (
+                  <div key={affiliate} className="exam-aff">
+                    <span className="exam-aff-name" title={affiliate}>{affiliate}</span>
+                    <span className="exam-rounds">
+                      {list.map(e => (
+                        <button
+                          key={e.id}
+                          className={`round-chip ${view.kind === 'exam' && view.id === e.id ? 'active' : ''}`}
+                          title={`${e.title} · ${e.timeLimitMinutes}분`}
+                          onClick={() => onNavigate({ kind: 'exam', id: e.id })}
+                        >
+                          {e.round ?? '·'}
+                        </button>
+                      ))}
+                    </span>
+                  </div>
                 ))}
               </div>
             ))}

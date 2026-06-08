@@ -1,0 +1,20 @@
+{
+  "id": "hanwha_aerospace_02",
+  "group": "한화",
+  "affiliate": "한화에어로스페이스",
+  "round": 2,
+  "title": "한화에어로스페이스 모의고사 2회",
+  "timeLimitMinutes": 150,
+  "description": "한화에어로스페이스 코딩테스트 대비 모의고사 2회. 주력 유형: implementation, graph, shortest_path, dp. 제한시간 150분, 총 9문제.",
+  "problemIds": [
+    "dp_01",
+    "im_02",
+    "gp_02",
+    "im_05",
+    "gp_04",
+    "sp_02",
+    "dp_04",
+    "sp_13",
+    "bm_04"
+  ]
+}

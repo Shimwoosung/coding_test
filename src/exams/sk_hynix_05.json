@@ -1,0 +1,20 @@
+{
+  "id": "sk_hynix_05",
+  "group": "SK",
+  "affiliate": "SK하이닉스",
+  "round": 5,
+  "title": "SK하이닉스 모의고사 5회",
+  "timeLimitMinutes": 120,
+  "description": "SK하이닉스 코딩테스트 대비 모의고사 5회. 주력 유형: sorting, stack, queue, hash. 제한시간 120분, 총 9문제.",
+  "problemIds": [
+    "so_06",
+    "st_07",
+    "qu_07",
+    "st_09",
+    "qu_10",
+    "qu_11",
+    "bm_02",
+    "gr_09",
+    "sp_12"
+  ]
+}

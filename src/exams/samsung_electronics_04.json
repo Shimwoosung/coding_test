@@ -1,0 +1,20 @@
+{
+  "id": "samsung_electronics_04",
+  "group": "삼성",
+  "affiliate": "삼성전자",
+  "round": 4,
+  "title": "삼성전자 모의고사 4회",
+  "timeLimitMinutes": 120,
+  "description": "삼성전자 코딩테스트 대비 모의고사 4회. 주력 유형: implementation, dp, graph, sorting. 제한시간 120분, 총 9문제.",
+  "problemIds": [
+    "dp_06",
+    "gp_07",
+    "so_03",
+    "im_09",
+    "dp_08",
+    "gp_09",
+    "so_09",
+    "qu_12",
+    "sp_12"
+  ]
+}

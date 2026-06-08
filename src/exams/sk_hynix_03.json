@@ -1,0 +1,20 @@
+{
+  "id": "sk_hynix_03",
+  "group": "SK",
+  "affiliate": "SK하이닉스",
+  "round": 3,
+  "title": "SK하이닉스 모의고사 3회",
+  "timeLimitMinutes": 120,
+  "description": "SK하이닉스 코딩테스트 대비 모의고사 3회. 주력 유형: sorting, stack, queue, hash. 제한시간 120분, 총 9문제.",
+  "problemIds": [
+    "qu_02",
+    "hs_02",
+    "so_03",
+    "so_08",
+    "st_05",
+    "qu_05",
+    "hs_10",
+    "bs_10",
+    "bt_12"
+  ]
+}

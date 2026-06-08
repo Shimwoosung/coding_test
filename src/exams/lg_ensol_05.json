@@ -1,0 +1,20 @@
+{
+  "id": "lg_ensol_05",
+  "group": "LG",
+  "affiliate": "LG에너지솔루션",
+  "round": 5,
+  "title": "LG에너지솔루션 모의고사 5회",
+  "timeLimitMinutes": 120,
+  "description": "LG에너지솔루션 코딩테스트 대비 모의고사 5회. 주력 유형: implementation, dp, greedy, prefix_sum. 제한시간 120분, 총 9문제.",
+  "problemIds": [
+    "im_06",
+    "dp_07",
+    "gr_06",
+    "im_10",
+    "dp_09",
+    "ps_09",
+    "dp_10",
+    "sp_12",
+    "st_10"
+  ]
+}

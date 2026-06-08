@@ -1,0 +1,20 @@
+{
+  "id": "hyundai_rotem_02",
+  "group": "현대",
+  "affiliate": "현대로템",
+  "round": 2,
+  "title": "현대로템 모의고사 2회",
+  "timeLimitMinutes": 120,
+  "description": "현대로템 코딩테스트 대비 모의고사 2회. 주력 유형: implementation, graph, greedy, binary_search. 제한시간 120분, 총 9문제.",
+  "problemIds": [
+    "bs_01",
+    "im_02",
+    "gp_02",
+    "im_05",
+    "gp_04",
+    "gr_05",
+    "bs_05",
+    "bs_10",
+    "gr_10"
+  ]
+}

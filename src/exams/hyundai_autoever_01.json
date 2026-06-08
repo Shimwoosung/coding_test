@@ -2,8 +2,19 @@
   "id": "hyundai_autoever_01",
   "group": "현대",
   "affiliate": "현대오토에버",
-  "title": "현대오토에버 코딩테스트 모의 1회",
+  "round": 1,
+  "title": "현대오토에버 모의고사 1회",
   "timeLimitMinutes": 150,
-  "description": "현대차그룹 SW 직군 스타일. 구현·누적합·투포인터·DP 혼합.",
-  "problemIds": ["im_03", "im_05", "gr_02", "ps_02", "tp_02", "dp_04", "bs_04", "tr_01"]
+  "description": "현대오토에버 코딩테스트 대비 모의고사 1회. 주력 유형: implementation, dp, two_pointer, prefix_sum. 제한시간 150분, 총 9문제.",
+  "problemIds": [
+    "im_01",
+    "dp_01",
+    "tp_01",
+    "im_03",
+    "dp_03",
+    "tp_02",
+    "ps_02",
+    "bm_04",
+    "bs_10"
+  ]
 }

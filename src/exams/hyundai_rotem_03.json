@@ -1,0 +1,20 @@
+{
+  "id": "hyundai_rotem_03",
+  "group": "현대",
+  "affiliate": "현대로템",
+  "round": 3,
+  "title": "현대로템 모의고사 3회",
+  "timeLimitMinutes": 120,
+  "description": "현대로템 코딩테스트 대비 모의고사 3회. 주력 유형: implementation, graph, greedy, binary_search. 제한시간 120분, 총 9문제.",
+  "problemIds": [
+    "gr_02",
+    "bs_02",
+    "im_04",
+    "im_08",
+    "gp_05",
+    "gr_07",
+    "bs_08",
+    "bm_04",
+    "bt_12"
+  ]
+}

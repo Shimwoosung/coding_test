@@ -2,8 +2,19 @@
   "id": "lignex1_01",
   "group": "LIG넥스원",
   "affiliate": "LIG넥스원",
-  "title": "LIG넥스원 코딩테스트 모의 1회",
+  "round": 1,
+  "title": "LIG넥스원 모의고사 1회",
   "timeLimitMinutes": 120,
-  "description": "방위산업 SW 직군 스타일. 구현·시뮬레이션과 기본 탐색 위주. 정확한 입출력 처리가 관건.",
-  "problemIds": ["im_01", "im_02", "im_04", "bs_01", "bs_02", "so_01", "ps_01", "gr_01"]
+  "description": "LIG넥스원 코딩테스트 대비 모의고사 1회. 주력 유형: implementation, binary_search, sorting, greedy. 제한시간 120분, 총 9문제.",
+  "problemIds": [
+    "im_01",
+    "bs_01",
+    "so_01",
+    "im_03",
+    "bs_04",
+    "so_04",
+    "gr_04",
+    "bs_10",
+    "gr_09"
+  ]
 }

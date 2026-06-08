@@ -1,0 +1,20 @@
+{
+  "id": "samsung_sds_03",
+  "group": "삼성",
+  "affiliate": "삼성SDS",
+  "round": 3,
+  "title": "삼성SDS 모의고사 3회",
+  "timeLimitMinutes": 120,
+  "description": "삼성SDS 코딩테스트 대비 모의고사 3회. 주력 유형: graph, dp, hash, implementation. 제한시간 120분, 총 9문제.",
+  "problemIds": [
+    "hs_02",
+    "im_02",
+    "gp_07",
+    "gp_05",
+    "dp_05",
+    "hs_10",
+    "im_08",
+    "ds_12",
+    "gr_09"
+  ]
+}

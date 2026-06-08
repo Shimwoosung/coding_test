@@ -1,0 +1,20 @@
+{
+  "id": "ncsoft_03",
+  "group": "NC",
+  "affiliate": "엔씨소프트",
+  "round": 3,
+  "title": "엔씨소프트 모의고사 3회",
+  "timeLimitMinutes": 150,
+  "description": "엔씨소프트 코딩테스트 대비 모의고사 3회. 주력 유형: graph, dp, backtracking, shortest_path. 제한시간 150분, 총 9문제.",
+  "problemIds": [
+    "bt_02",
+    "sp_07",
+    "gp_07",
+    "gp_05",
+    "dp_05",
+    "bt_05",
+    "sp_03",
+    "sp_13",
+    "bm_04"
+  ]
+}

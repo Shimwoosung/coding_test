@@ -9,13 +9,23 @@ export const exams: Exam[] = Object.values(modules)
 
 export const examsById: Record<string, Exam> = Object.fromEntries(exams.map(e => [e.id, e]));
 
-// 그룹사 → 모의고사 목록
-export function examsByGroup(): { group: string; list: Exam[] }[] {
-  const groups: string[] = [];
-  const map: Record<string, Exam[]> = {};
+// 그룹사 → 계열사 → 회차 목록 (사이드바 트리)
+export interface ExamAffiliate { affiliate: string; list: Exam[]; }
+export interface ExamGroup { group: string; affiliates: ExamAffiliate[]; }
+
+export function examTree(): ExamGroup[] {
+  const groups: ExamGroup[] = [];
+  const gmap: Record<string, ExamGroup> = {};
+  const amap: Record<string, ExamAffiliate> = {};
   for (const e of exams) {
-    if (!map[e.group]) { map[e.group] = []; groups.push(e.group); }
-    map[e.group].push(e);
+    let g = gmap[e.group];
+    if (!g) { g = { group: e.group, affiliates: [] }; gmap[e.group] = g; groups.push(g); }
+    const aff = e.affiliate || e.group;
+    const akey = e.group + '||' + aff;
+    let a = amap[akey];
+    if (!a) { a = { affiliate: aff, list: [] }; amap[akey] = a; g.affiliates.push(a); }
+    a.list.push(e);
   }
-  return groups.map(g => ({ group: g, list: map[g] }));
+  for (const g of groups) for (const a of g.affiliates) a.list.sort((x, y) => (x.round || 0) - (y.round || 0));
+  return groups;
 }

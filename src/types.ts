@@ -58,6 +58,7 @@ export interface Exam {
   id: string;
   group: string;          // 그룹사 (예: 'LG', '현대', '한화', 'SK', 'NC', 'LIG넥스원')
   affiliate?: string;     // 계열사 (예: 'LG CNS', '현대오토에버')
+  round?: number;         // 회차 (1~5)
   title: string;
   timeLimitMinutes: number;
   description?: string;
