@@ -1,0 +1,43 @@
+{
+  "id": "im_09",
+  "title": "영화감독 숌",
+  "stage": 2,
+  "level": 2,
+  "topic": "implementation",
+  "concept": "implementation",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "'666'이 들어간 수를 작은 것부터 세었을 때 N번째 수를 구하라(예: 666, 1666, 2666, ..., 6660, 6661, ... 그리고 6666 등). 666부터 1씩 증가시키며 문자열에 '666'이 들어있는지 확인해 N개째를 찾는다.",
+  "constraints": [
+    "1 ≤ N ≤ 10,000"
+  ],
+  "ioDescription": {
+    "input": "정수 N.",
+    "output": "N번째로 '666'을 포함하는 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 666부터 증가시키며 '666' 포함 개수 세기\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "1\n",
+      "output": "666\n"
+    },
+    {
+      "input": "2\n",
+      "output": "1666\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "3\n",
+      "output": "2666\n"
+    },
+    {
+      "input": "100\n",
+      "output": "54666\n"
+    }
+  ],
+  "hints": [
+    "to_string(num).find(\"666\") != string::npos 로 포함 여부 확인."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);int cnt=0;long long num=665;while(cnt<n){num++;if(to_string(num).find(\"666\")!=string::npos)cnt++;}printf(\"%lld\\n\",num);}\n"
+}

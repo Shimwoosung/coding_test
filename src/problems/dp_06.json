@@ -1,0 +1,44 @@
+{
+  "id": "dp_06",
+  "title": "2×n 타일링",
+  "stage": 1,
+  "level": 2,
+  "topic": "dp",
+  "concept": "dp",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "2×n 직사각형을 2×1, 1×2 타일로 채우는 경우의 수를 10007로 나눈 나머지를 구하라. 마지막 칸을 세로 1개로 막으면 2×(n-1), 가로 2개로 막으면 2×(n-2) → dp[n]=dp[n-1]+dp[n-2].",
+  "constraints": [
+    "1 ≤ n ≤ 1,000"
+  ],
+  "ioDescription": {
+    "input": "정수 n.",
+    "output": "경우의 수 mod 10007."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // dp[n] = dp[n-1] + dp[n-2]\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "2\n",
+      "output": "2\n"
+    },
+    {
+      "input": "9\n",
+      "output": "55\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n",
+      "output": "1\n"
+    },
+    {
+      "input": "1000\n",
+      "output": "1115\n"
+    }
+  ],
+  "hints": [
+    "dp[1]=1, dp[2]=2.",
+    "매 단계 % 10007."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);vector<long long>dp(max(2,n)+1);dp[1]=1;if(n>=2)dp[2]=2;for(int i=3;i<=n;i++)dp[i]=(dp[i-1]+dp[i-2])%10007;printf(\"%lld\\n\",dp[n]%10007);}\n"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "hs_10",
+  "title": "전화번호 목록",
+  "stage": 3,
+  "level": 3,
+  "topic": "hash",
+  "concept": "hash",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "전화번호 목록이 주어진다. 어떤 번호가 다른 번호의 '접두어'인 경우가 하나라도 있으면 일관성이 없는 목록이다(NO), 아니면 YES. 문자열로 정렬하면 접두어 관계는 인접한 두 번호 사이에서만 생기므로, 정렬 후 이웃만 검사한다.",
+  "constraints": [
+    "1 ≤ N ≤ 100,000",
+    "번호 길이 ≤ 10, 숫자로만 구성"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 다음 N줄에 전화번호.",
+    "output": "일관성 있으면 YES, 없으면 NO."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 문자열 정렬 후 인접 접두어 검사\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\n911\n97625999\n91125426\n",
+      "output": "NO\n"
+    },
+    {
+      "input": "5\n113\n12340\n123440\n12345\n98346\n",
+      "output": "YES\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "2\n123\n123456\n",
+      "output": "NO\n"
+    },
+    {
+      "input": "2\n12\n34\n",
+      "output": "YES\n"
+    }
+  ],
+  "hints": [
+    "문자열로 정렬 → 접두어는 인접 쌍에서만 발생.",
+    "s[i]가 s[i-1]로 시작하면 NO."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);vector<string>v(n);char buf[20];for(int i=0;i<n;i++){scanf(\"%s\",buf);v[i]=buf;}sort(v.begin(),v.end());bool ok=true;for(int i=1;i<n&&ok;i++){const string&a=v[i-1],&b=v[i];if(b.size()>=a.size()&&b.compare(0,a.size(),a)==0)ok=false;}printf(\"%s\\n\",ok?\"YES\":\"NO\");}\n"
+}

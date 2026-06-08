@@ -1,0 +1,44 @@
+{
+  "id": "hs_07",
+  "title": "최빈값",
+  "stage": 1,
+  "level": 2,
+  "topic": "hash",
+  "concept": "hash",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "N개의 정수가 주어질 때 가장 많이 등장한 수를 출력하라. 여러 개라면 그 중 가장 작은 수를 출력한다. 맵(map)으로 등장 횟수를 센다.",
+  "constraints": [
+    "1 ≤ N ≤ 1,000,000",
+    "정수의 절댓값 ≤ 1,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 둘째 줄 N개의 정수.",
+    "output": "최빈값(동률이면 가장 작은 수)."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // map으로 빈도 세고 최대 빈도, 동률은 작은 값\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5\n1 2 2 3 3\n",
+      "output": "2\n"
+    },
+    {
+      "input": "4\n5 5 1 1\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n9\n",
+      "output": "9\n"
+    },
+    {
+      "input": "6\n3 3 3 2 2 2\n",
+      "output": "2\n"
+    }
+  ],
+  "hints": [
+    "map은 키 오름차순 → 같은 빈도면 먼저 본 작은 값이 답."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);map<long long,long long>c;for(int i=0;i<n;i++){long long x;scanf(\"%lld\",&x);c[x]++;}long long bestV=0,bestC=-1;for(auto&kv:c)if(kv.second>bestC){bestC=kv.second;bestV=kv.first;}printf(\"%lld\\n\",bestV);}\n"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "dp_07",
+  "title": "1, 2, 3 더하기",
+  "stage": 1,
+  "level": 2,
+  "topic": "dp",
+  "concept": "dp",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "정수 n을 1, 2, 3의 합으로 나타내는 방법의 수를 구하라(순서를 다르게 하면 다른 방법). 마지막에 더한 수가 1/2/3 중 무엇이냐로 나누면 dp[n]=dp[n-1]+dp[n-2]+dp[n-3].",
+  "constraints": [
+    "1 ≤ n ≤ 10",
+    "정답은 int 범위"
+  ],
+  "ioDescription": {
+    "input": "정수 n.",
+    "output": "n을 1,2,3의 합으로 나타내는 방법의 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // dp[n] = dp[n-1] + dp[n-2] + dp[n-3]\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4\n",
+      "output": "7\n"
+    },
+    {
+      "input": "7\n",
+      "output": "44\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n",
+      "output": "1\n"
+    },
+    {
+      "input": "10\n",
+      "output": "274\n"
+    }
+  ],
+  "hints": [
+    "dp[0]=1(빈 합), dp[1]=1, dp[2]=2."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);long long dp[12]={0};dp[0]=1;for(int i=1;i<=n;i++){dp[i]=dp[i-1]+(i>=2?dp[i-2]:0)+(i>=3?dp[i-3]:0);}printf(\"%lld\\n\",dp[n]);}\n"
+}

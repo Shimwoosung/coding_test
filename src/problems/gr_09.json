@@ -1,0 +1,45 @@
+{
+  "id": "gr_09",
+  "title": "강의실 배정",
+  "stage": 3,
+  "level": 3,
+  "topic": "greedy",
+  "concept": "greedy",
+  "mode": "stdio",
+  "difficulty": "심화",
+  "description": "N개의 강의의 시작/종료 시각이 주어진다. 모든 강의를 진행하는 데 필요한 최소 강의실 수를 구하라. 시작 시각 기준으로 정렬하고, 진행 중인 강의들의 '종료 시각'을 최소 힙에 담아, 새 강의가 시작될 때 끝난 강의가 있으면 그 방을 재사용한다. 동시에 진행되는 최대 강의 수가 답이다.",
+  "constraints": [
+    "1 ≤ N ≤ 200,000",
+    "0 ≤ 시작 < 종료 ≤ 1,000,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 다음 N줄에 시작 종료.",
+    "output": "필요한 최소 강의실 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 시작 정렬 + 종료 시각 최소 힙\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\n1 3\n2 4\n3 5\n",
+      "output": "2\n"
+    },
+    {
+      "input": "4\n1 2\n2 3\n3 4\n4 5\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n0 1000000000\n",
+      "output": "1\n"
+    },
+    {
+      "input": "3\n1 10\n2 10\n3 10\n",
+      "output": "3\n"
+    }
+  ],
+  "hints": [
+    "시작 시각으로 정렬.",
+    "힙의 최소 종료 ≤ 현재 시작이면 pop(방 재사용), 항상 push. 힙 크기의 최댓값이 답."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);vector<pair<long long,long long>>a(n);for(auto&p:a)scanf(\"%lld %lld\",&p.first,&p.second);sort(a.begin(),a.end());priority_queue<long long,vector<long long>,greater<long long>>pq;int best=0;for(auto&p:a){while(!pq.empty()&&pq.top()<=p.first)pq.pop();pq.push(p.second);best=max(best,(int)pq.size());}printf(\"%d\\n\",best);}\n"
+}

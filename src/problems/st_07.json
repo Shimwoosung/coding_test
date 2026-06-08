@@ -1,0 +1,40 @@
+{
+  "id": "st_07",
+  "title": "제로",
+  "stage": 1,
+  "level": 1,
+  "topic": "stack",
+  "concept": "stack",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "정수가 차례로 주어진다. 0이 나오면 가장 최근에 쓴 수를 지운다(스택 pop). 0이 아니면 그 수를 적는다(push). 마지막에 적혀 있는 모든 수의 합을 출력하라.",
+  "constraints": [
+    "1 ≤ K ≤ 100,000",
+    "0이 나올 때 스택은 비어있지 않음이 보장된다"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 K, 다음 K줄에 정수.",
+    "output": "최종 합."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 0이면 pop, 아니면 push\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4\n10\n3\n0\n5\n",
+      "output": "15\n"
+    },
+    {
+      "input": "3\n1\n2\n0\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "5\n100\n0\n200\n300\n0\n",
+      "output": "200\n"
+    }
+  ],
+  "hints": [
+    "스택에 push, 0이면 top을 합에서 빼고 pop."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int k;scanf(\"%d\",&k);stack<long long>st;long long sum=0;while(k--){long long x;scanf(\"%lld\",&x);if(x==0){sum-=st.top();st.pop();}else{st.push(x);sum+=x;}}printf(\"%lld\\n\",sum);}\n"
+}

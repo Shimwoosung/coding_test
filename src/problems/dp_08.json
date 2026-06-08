@@ -1,0 +1,45 @@
+{
+  "id": "dp_08",
+  "title": "정수 삼각형",
+  "stage": 2,
+  "level": 2,
+  "topic": "dp",
+  "concept": "dp",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "삼각형 모양으로 수가 주어진다. 맨 위에서 시작해 아래로 내려가며(바로 아래 또는 아래 오른쪽으로) 거치는 수의 합을 최대로 만들어라. dp[i][j] = a[i][j] + max(dp[i-1][j-1], dp[i-1][j]).",
+  "constraints": [
+    "1 ≤ 층 수 ≤ 500",
+    "0 ≤ 각 수 ≤ 9,999"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 층 수 n, 다음 n줄에 삼각형(i번째 줄에 i개).",
+    "output": "경로 합의 최댓값."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 위에서 아래로 dp\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\n1\n2 3\n4 5 6\n",
+      "output": "10\n"
+    },
+    {
+      "input": "1\n7\n",
+      "output": "7\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "5\n7\n3 8\n8 1 0\n2 7 4 4\n4 5 2 6 5\n",
+      "output": "30\n"
+    },
+    {
+      "input": "2\n1\n9 9\n",
+      "output": "10\n"
+    }
+  ],
+  "hints": [
+    "각 칸은 위 두 칸 중 큰 값에서 내려온다.",
+    "경계(맨 왼쪽/오른쪽) 처리에 주의."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);vector<vector<long long>>a(n);for(int i=0;i<n;i++){a[i].resize(i+1);for(int j=0;j<=i;j++)scanf(\"%lld\",&a[i][j]);}for(int i=1;i<n;i++)for(int j=0;j<=i;j++){long long up=(j<=i-1)?a[i-1][j]:LLONG_MIN;long long ul=(j-1>=0)?a[i-1][j-1]:LLONG_MIN;a[i][j]+=max(up,ul);}printf(\"%lld\\n\",*max_element(a[n-1].begin(),a[n-1].end()));}\n"
+}

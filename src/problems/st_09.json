@@ -1,0 +1,48 @@
+{
+  "id": "st_09",
+  "title": "균형 잡힌 괄호",
+  "stage": 2,
+  "level": 2,
+  "topic": "stack",
+  "concept": "stack",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "소괄호 (), 대괄호 [], 중괄호 {} 와 그 외 문자가 섞인 한 줄 문자열이 주어진다. 모든 괄호의 짝과 순서가 올바르면 yes, 아니면 no 를 출력하라. 여는 괄호는 스택에 쌓고, 닫는 괄호는 스택 맨 위와 짝이 맞는지 확인한다.",
+  "constraints": [
+    "1 ≤ 문자열 길이 ≤ 100,000"
+  ],
+  "ioDescription": {
+    "input": "괄호가 섞인 한 줄 문자열.",
+    "output": "균형이면 yes, 아니면 no."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 스택으로 괄호 짝 검사\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "([]){}\n",
+      "output": "yes\n"
+    },
+    {
+      "input": "([)]\n",
+      "output": "no\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "a(b[c]{d}e)f\n",
+      "output": "yes\n"
+    },
+    {
+      "input": "(((\n",
+      "output": "no\n"
+    },
+    {
+      "input": ")(\n",
+      "output": "no\n"
+    }
+  ],
+  "hints": [
+    "여는 괄호 push, 닫는 괄호는 짝이 맞는지 top 확인 후 pop.",
+    "끝에 스택이 비어 있어야 균형."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){string s;getline(cin,s);stack<char>st;bool ok=true;for(char c:s){if(c=='('||c=='['||c=='{')st.push(c);else if(c==')'||c==']'||c=='}'){char need=c==')'?'(':c==']'?'[':'{';if(st.empty()||st.top()!=need){ok=false;break;}st.pop();}}if(!st.empty())ok=false;printf(\"%s\\n\",ok?\"yes\":\"no\");}\n"
+}

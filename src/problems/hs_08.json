@@ -1,0 +1,45 @@
+{
+  "id": "hs_08",
+  "title": "애너그램 판별",
+  "stage": 1,
+  "level": 2,
+  "topic": "hash",
+  "concept": "hash",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "두 문자열이 주어진다. 한쪽의 글자들을 재배열하여 다른 쪽을 만들 수 있으면(=글자 구성이 같으면) yes, 아니면 no 를 출력하라. 각 글자의 개수를 세어 비교한다.",
+  "constraints": [
+    "1 ≤ 각 문자열 길이 ≤ 100,000",
+    "소문자 알파벳"
+  ],
+  "ioDescription": {
+    "input": "두 줄에 각각 문자열.",
+    "output": "애너그램이면 yes, 아니면 no."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 글자 개수 비교\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "listen\nsilent\n",
+      "output": "yes\n"
+    },
+    {
+      "input": "hello\nworld\n",
+      "output": "no\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "a\na\n",
+      "output": "yes\n"
+    },
+    {
+      "input": "ab\nabc\n",
+      "output": "no\n"
+    }
+  ],
+  "hints": [
+    "길이가 다르면 바로 no.",
+    "26칸 카운트 배열로 개수 비교 (또는 정렬 후 비교)."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){string a,b;cin>>a>>b;int ca[26]={0},cb[26]={0};for(char c:a)ca[c-'a']++;for(char c:b)cb[c-'a']++;bool ok=true;for(int i=0;i<26;i++)if(ca[i]!=cb[i])ok=false;printf(\"%s\\n\",ok?\"yes\":\"no\");}\n"
+}

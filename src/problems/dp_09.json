@@ -1,0 +1,44 @@
+{
+  "id": "dp_09",
+  "title": "LCS (최장 공통 부분 수열)",
+  "stage": 3,
+  "level": 3,
+  "topic": "dp",
+  "concept": "dp",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "두 문자열의 공통 부분 수열(연속이 아니어도 됨) 중 가장 긴 것의 길이를 구하라. dp[i][j] = 두 접두사 길이 i, j의 LCS. 끝 글자가 같으면 dp[i-1][j-1]+1, 다르면 max(dp[i-1][j], dp[i][j-1]).",
+  "constraints": [
+    "1 ≤ 각 문자열 길이 ≤ 1,000",
+    "대문자 알파벳"
+  ],
+  "ioDescription": {
+    "input": "두 줄에 각각 문자열.",
+    "output": "LCS의 길이."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 2차원 LCS dp\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "ACAYKP\nCAPCAK\n",
+      "output": "4\n"
+    },
+    {
+      "input": "ABC\nDEF\n",
+      "output": "0\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "A\nA\n",
+      "output": "1\n"
+    },
+    {
+      "input": "AAAA\nAA\n",
+      "output": "2\n"
+    }
+  ],
+  "hints": [
+    "글자가 같으면 대각선+1, 다르면 위/왼쪽 중 큰 값."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){string a,b;cin>>a>>b;int n=a.size(),m=b.size();vector<vector<int>>dp(n+1,vector<int>(m+1,0));for(int i=1;i<=n;i++)for(int j=1;j<=m;j++){if(a[i-1]==b[j-1])dp[i][j]=dp[i-1][j-1]+1;else dp[i][j]=max(dp[i-1][j],dp[i][j-1]);}printf(\"%d\\n\",dp[n][m]);}\n"
+}

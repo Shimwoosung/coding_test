@@ -1,0 +1,45 @@
+{
+  "id": "gr_07",
+  "title": "주유소",
+  "stage": 2,
+  "level": 2,
+  "topic": "greedy",
+  "concept": "greedy",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "일직선 위 N개의 도시를 1번부터 N번까지 차례로 이동한다. 인접 도시 사이 거리(N-1개)와 각 도시의 리터당 기름값(N개)이 주어진다. 1L로 1km 갈 때, N번 도시까지 가는 최소 비용을 구하라. 지금까지 본 가장 싼 기름값으로 다음 구간을 채우는 것이 최적이다.",
+  "constraints": [
+    "2 ≤ N ≤ 100,000",
+    "거리·기름값 ≤ 1,000,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 둘째 줄 거리 N-1개, 셋째 줄 기름값 N개.",
+    "output": "최소 비용."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 지금까지 본 최저가로 다음 구간 주유\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4\n2 3 1\n5 2 4 1\n",
+      "output": "18\n"
+    },
+    {
+      "input": "2\n10\n3 9\n",
+      "output": "30\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "3\n5 5\n1 100 100\n",
+      "output": "10\n"
+    },
+    {
+      "input": "5\n1 1 1 1\n5 4 3 2 1\n",
+      "output": "14\n"
+    }
+  ],
+  "hints": [
+    "minPrice 를 갱신하며 cost += minPrice × dist[i].",
+    "마지막 도시의 기름값은 쓸 일이 없다."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);vector<long long>d(n-1),p(n);for(auto&x:d)scanf(\"%lld\",&x);for(auto&x:p)scanf(\"%lld\",&x);long long cost=0,mn=p[0];for(int i=0;i<n-1;i++){mn=min(mn,p[i]);cost+=mn*d[i];}printf(\"%lld\\n\",cost);}\n"
+}

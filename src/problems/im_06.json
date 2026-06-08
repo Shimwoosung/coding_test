@@ -1,0 +1,39 @@
+{
+  "id": "im_06",
+  "title": "별 찍기",
+  "stage": 0,
+  "level": 1,
+  "topic": "implementation",
+  "concept": "implementation",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "N이 주어질 때, 첫 줄에 별 1개, 둘째 줄에 2개, ... N번째 줄에 N개의 별(*)을 왼쪽 정렬로 출력하라.",
+  "constraints": [
+    "1 ≤ N ≤ 100"
+  ],
+  "ioDescription": {
+    "input": "정수 N.",
+    "output": "i번째 줄에 별 i개."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // i개의 '*' 를 N줄\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\n",
+      "output": "*\n**\n***\n"
+    },
+    {
+      "input": "1\n",
+      "output": "*\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "5\n",
+      "output": "*\n**\n***\n****\n*****\n"
+    }
+  ],
+  "hints": [
+    "string(i, '*') 로 별 i개 문자열을 만들 수 있다."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);string out;for(int i=1;i<=n;i++){out+=string(i,'*');out+='\\n';}fputs(out.c_str(),stdout);}\n"
+}

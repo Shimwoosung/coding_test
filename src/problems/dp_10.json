@@ -1,0 +1,46 @@
+{
+  "id": "dp_10",
+  "title": "동전 (최소 개수)",
+  "stage": 3,
+  "level": 3,
+  "topic": "dp",
+  "concept": "dp",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "N가지 동전이 있고 각 동전은 무한히 쓸 수 있다. 가치의 합이 정확히 K가 되도록 할 때 필요한 동전 개수의 최솟값을 구하라. 만들 수 없으면 -1. dp[v] = v원을 만드는 최소 동전 수 = min(dp[v-coin]+1).",
+  "constraints": [
+    "1 ≤ N ≤ 100",
+    "1 ≤ K ≤ 10,000",
+    "1 ≤ 동전 가치 ≤ 10,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N K, 다음 N줄에 동전 가치.",
+    "output": "최소 동전 개수(불가능하면 -1)."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // dp[v] = min(dp[v-coin]+1)\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3 15\n1 5 12\n",
+      "output": "3\n"
+    },
+    {
+      "input": "2 7\n3 5\n",
+      "output": "-1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1 10\n3\n",
+      "output": "-1\n"
+    },
+    {
+      "input": "2 6\n2 4\n",
+      "output": "2\n"
+    }
+  ],
+  "hints": [
+    "dp 크기 K+1, dp[0]=0, 나머지는 무한대로 초기화.",
+    "각 동전마다 v=coin..K 로 갱신."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n,k;scanf(\"%d %d\",&n,&k);vector<int>coin(n);for(auto&c:coin)scanf(\"%d\",&c);const int INF=1e9;vector<int>dp(k+1,INF);dp[0]=0;for(int c:coin)for(int v=c;v<=k;v++)if(dp[v-c]+1<dp[v])dp[v]=dp[v-c]+1;printf(\"%d\\n\",dp[k]>=INF?-1:dp[k]);}\n"
+}

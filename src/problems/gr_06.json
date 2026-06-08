@@ -1,0 +1,44 @@
+{
+  "id": "gr_06",
+  "title": "보물",
+  "stage": 1,
+  "level": 2,
+  "topic": "greedy",
+  "concept": "greedy",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "길이 N인 두 배열 A, B가 있다. A의 순서만 자유롭게 바꿀 수 있을 때, S = Σ A[i]×B[i] 의 최솟값을 구하라. 큰 수와 작은 수를 짝지으면 곱의 합이 최소다(재배열 부등식): A는 오름차순, B는 내림차순으로 곱한다.",
+  "constraints": [
+    "1 ≤ N ≤ 50",
+    "0 ≤ 원소 ≤ 100"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 둘째 줄 A, 셋째 줄 B.",
+    "output": "S의 최솟값."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // A 오름차순, B 내림차순으로 곱의 합\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5\n1 1 1 6 0\n2 7 8 3 1\n",
+      "output": "18\n"
+    },
+    {
+      "input": "3\n1 2 3\n3 2 1\n",
+      "output": "10\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n5\n10\n",
+      "output": "50\n"
+    },
+    {
+      "input": "2\n0 100\n100 0\n",
+      "output": "0\n"
+    }
+  ],
+  "hints": [
+    "A 오름차순, B 내림차순 정렬 후 같은 위치끼리 곱해 합한다."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);vector<long long>a(n),b(n);for(auto&x:a)scanf(\"%lld\",&x);for(auto&x:b)scanf(\"%lld\",&x);sort(a.begin(),a.end());sort(b.rbegin(),b.rend());long long s=0;for(int i=0;i<n;i++)s+=a[i]*b[i];printf(\"%lld\\n\",s);}\n"
+}

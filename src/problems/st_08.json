@@ -1,0 +1,45 @@
+{
+  "id": "st_08",
+  "title": "후위 표기식 계산",
+  "stage": 2,
+  "level": 2,
+  "topic": "stack",
+  "concept": "stack",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "한 자리 숫자(0~9)와 연산자(+, -, *)로 이루어진 후위 표기식 문자열이 주어진다. 그 값을 계산해 출력하라. 피연산자는 스택에 쌓고, 연산자가 나오면 두 개를 꺼내 계산해 다시 넣는다.",
+  "constraints": [
+    "1 ≤ 식 길이 ≤ 100",
+    "올바른 후위 표기식이 보장된다"
+  ],
+  "ioDescription": {
+    "input": "후위 표기식 문자열.",
+    "output": "계산 결과."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 스택으로 후위 표기식 계산\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "12+3*\n",
+      "output": "9\n"
+    },
+    {
+      "input": "52-\n",
+      "output": "3\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "93-2*\n",
+      "output": "12\n"
+    },
+    {
+      "input": "7\n",
+      "output": "7\n"
+    }
+  ],
+  "hints": [
+    "숫자면 push, 연산자면 b=pop, a=pop, a op b 를 push.",
+    "뺄셈 순서(a-b)에 주의."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){string s;cin>>s;stack<long long>st;for(char c:s){if(isdigit((unsigned char)c))st.push(c-'0');else{long long b=st.top();st.pop();long long a=st.top();st.pop();st.push(c=='+'?a+b:c=='-'?a-b:a*b);}}printf(\"%lld\\n\",st.top());}\n"
+}

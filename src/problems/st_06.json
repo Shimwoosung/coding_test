@@ -1,0 +1,39 @@
+{
+  "id": "st_06",
+  "title": "스택 기본 연산",
+  "stage": 1,
+  "level": 1,
+  "topic": "stack",
+  "concept": "stack",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "정수를 저장하는 스택을 구현하라. 명령: push X(넣기), pop(빼고 출력), size, empty(1/0), top(맨 위 출력). pop/top에서 비어 있으면 -1.",
+  "constraints": [
+    "1 ≤ 명령 수 ≤ 100,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 다음 N줄에 명령.",
+    "output": "pop/size/empty/top 명령마다 결과를 한 줄에."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // std::stack 사용\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "6\npush 1\npush 2\ntop\nsize\npop\npop\n",
+      "output": "2\n2\n2\n1\n"
+    },
+    {
+      "input": "3\npop\ntop\nempty\n",
+      "output": "-1\n-1\n1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "5\npush 10\nempty\npop\nempty\npop\n",
+      "output": "0\n10\n1\n-1\n"
+    }
+  ],
+  "hints": [
+    "std::stack 의 push/top/pop/size/empty 그대로 사용."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);stack<int>st;string out;char c[10];while(n--){scanf(\"%s\",c);if(c[1]=='u'){int x;scanf(\"%d\",&x);st.push(x);}else if(c[0]=='p'){if(st.empty())out+=\"-1\\n\";else{out+=to_string(st.top())+\"\\n\";st.pop();}}else if(c[0]=='s'){out+=to_string((int)st.size())+\"\\n\";}else if(c[0]=='e'){out+=st.empty()?\"1\\n\":\"0\\n\";}else{out+=st.empty()?\"-1\\n\":to_string(st.top())+\"\\n\";}}fputs(out.c_str(),stdout);}\n"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "im_07",
+  "title": "OX 퀴즈",
+  "stage": 0,
+  "level": 1,
+  "topic": "implementation",
+  "concept": "implementation",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "O와 X로 이루어진 결과 문자열이 주어진다. O는 그 문제를 맞은 것으로, 점수는 '연속으로 맞은 개수'다. 즉 연속된 O가 1,2,3...개 이어지면 1,2,3...점을 더한다. X를 만나면 연속이 끊긴다. 총점을 출력하라.",
+  "constraints": [
+    "1 ≤ 문자열 길이 ≤ 80"
+  ],
+  "ioDescription": {
+    "input": "O/X 문자열.",
+    "output": "총점."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 연속 O 콤보 점수 합\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "OOXXOXXOOO\n",
+      "output": "10\n"
+    },
+    {
+      "input": "OOOOOOOOOO\n",
+      "output": "55\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "XXXXX\n",
+      "output": "0\n"
+    },
+    {
+      "input": "O\n",
+      "output": "1\n"
+    }
+  ],
+  "hints": [
+    "combo 변수를 두고 O면 combo++ 후 score+=combo, X면 combo=0."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){string s;cin>>s;int score=0,combo=0;for(char c:s){if(c=='O'){combo++;score+=combo;}else combo=0;}printf(\"%d\\n\",score);}\n"
+}

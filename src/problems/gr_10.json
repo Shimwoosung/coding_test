@@ -1,0 +1,45 @@
+{
+  "id": "gr_10",
+  "title": "센서",
+  "stage": 3,
+  "level": 3,
+  "topic": "greedy",
+  "concept": "greedy",
+  "mode": "stdio",
+  "difficulty": "심화",
+  "description": "한 직선 위 N개의 센서를 K개의 집중국으로 모두 커버한다. 각 집중국의 수신 가능 거리는 같고, 그 거리의 합(=각 그룹이 덮는 길이의 합)을 최소로 하고 싶다. 센서를 정렬해 인접 간격 N-1개를 구한 뒤, 가장 큰 간격 K-1개를 '끊으면' 나머지 간격 합이 최소가 된다.",
+  "constraints": [
+    "1 ≤ K ≤ N ≤ 100,000",
+    "센서 좌표의 절댓값 ≤ 1,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 둘째 줄 K, 셋째 줄 N개의 센서 좌표.",
+    "output": "수신 거리 합의 최솟값."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 정렬 후 간격 중 큰 K-1개 제거\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "6\n2\n1 6 9 3 6 7\n",
+      "output": "5\n"
+    },
+    {
+      "input": "4\n4\n1 2 3 4\n",
+      "output": "0\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "5\n1\n1 5 10 20 50\n",
+      "output": "49\n"
+    },
+    {
+      "input": "3\n2\n10 20 30\n",
+      "output": "10\n"
+    }
+  ],
+  "hints": [
+    "K ≥ N 이면 0.",
+    "간격 내림차순 정렬 후 앞 K-1개를 빼고 나머지 합."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);int k;scanf(\"%d\",&k);vector<long long>x(n);for(auto&v:x)scanf(\"%lld\",&v);sort(x.begin(),x.end());if(k>=n){puts(\"0\");return 0;}vector<long long>g;for(int i=1;i<n;i++)g.push_back(x[i]-x[i-1]);sort(g.rbegin(),g.rend());long long sum=0;for(size_t i=k-1;i<g.size();i++)sum+=g[i];printf(\"%lld\\n\",sum);}\n"
+}
