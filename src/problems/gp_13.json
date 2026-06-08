@@ -8,21 +8,43 @@
   "mode": "stdio",
   "difficulty": "심화",
   "description": "N x N 크기의 정사각형 지도가 주어진다. 1은 집이 있는 곳, 0은 집이 없는 곳이다. 상하좌우로 연결된 집들의 모임을 단지라 한다. 지도를 보고 단지의 개수와 각 단지에 속한 집의 수를 구하라. 각 집 칸에서 아직 방문하지 않았다면 DFS/BFS로 연결된 집의 수를 세어 단지 크기로 기록한다. 단지 크기를 오름차순으로 정렬해 출력한다.",
-  "constraints": ["1 ≤ N ≤ 25", "지도의 각 칸은 0 또는 1이다.", "연결은 상하좌우 4방향만 인정한다."],
+  "constraints": [
+    "1 ≤ N ≤ 25",
+    "지도의 각 칸은 0 또는 1이다.",
+    "연결은 상하좌우 4방향만 인정한다."
+  ],
   "ioDescription": {
     "input": "첫째 줄에 지도의 크기 N이 주어진다. 다음 N개의 줄에 각각 N개의 숫자(0 또는 1)가 공백 없이 붙어서 주어진다.",
     "output": "첫째 줄에 단지 수를 출력한다. 다음 줄부터 각 단지 안의 집의 수를 오름차순으로 정렬하여 한 줄에 하나씩 출력한다."
   },
   "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
   "examples": [
-    { "input": "7\n0110100\n0110101\n1110101\n0000111\n0100000\n0111110\n0111000\n", "output": "3\n7\n8\n9\n" },
-    { "input": "3\n101\n010\n101\n", "output": "5\n1\n1\n1\n1\n1\n" }
+    {
+      "input": "7\n0110100\n0110101\n1110101\n0000111\n0100000\n0111110\n0111000\n",
+      "output": "3\n7\n8\n9\n"
+    },
+    {
+      "input": "3\n101\n010\n101\n",
+      "output": "5\n1\n1\n1\n1\n1\n"
+    }
   ],
   "hiddenTests": [
-    { "input": "1\n0\n", "output": "0\n" },
-    { "input": "1\n1\n", "output": "1\n1\n" },
-    { "input": "3\n111\n111\n111\n", "output": "1\n9\n" }
+    {
+      "input": "1\n0\n",
+      "output": "0\n"
+    },
+    {
+      "input": "1\n1\n",
+      "output": "1\n1\n"
+    },
+    {
+      "input": "3\n111\n111\n111\n",
+      "output": "1\n9\n"
+    }
   ],
-  "hints": ["입력의 각 줄은 공백 없이 붙은 숫자열이므로 문자열로 읽어 한 글자씩 처리한다.", "방문하지 않은 집 칸에서 BFS/DFS를 시작해 연결된 집 수를 세고, 그 값을 단지 크기로 저장한 뒤 정렬하여 출력한다."],
+  "hints": [
+    "입력의 각 줄은 공백 없이 붙은 숫자열이므로 문자열로 읽어 한 글자씩 처리한다.",
+    "방문하지 않은 집 칸에서 BFS/DFS를 시작해 연결된 집 수를 세고, 그 값을 단지 크기로 저장한 뒤 정렬하여 출력한다."
+  ],
   "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint N;\nint g[30][30];\nbool vis[30][30];\nint dx[4] = {1,-1,0,0};\nint dy[4] = {0,0,1,-1};\n\nint bfs(int sy, int sx) {\n    queue<pair<int,int>> q;\n    q.push({sy, sx});\n    vis[sy][sx] = true;\n    int cnt = 0;\n    while (!q.empty()) {\n        auto [y, x] = q.front(); q.pop();\n        cnt++;\n        for (int d = 0; d < 4; d++) {\n            int ny = y + dy[d], nx = x + dx[d];\n            if (ny < 0 || ny >= N || nx < 0 || nx >= N) continue;\n            if (vis[ny][nx] || g[ny][nx] == 0) continue;\n            vis[ny][nx] = true;\n            q.push({ny, nx});\n        }\n    }\n    return cnt;\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    cin >> N;\n    for (int i = 0; i < N; i++) {\n        string s; cin >> s;\n        for (int j = 0; j < N; j++) g[i][j] = s[j] - '0';\n    }\n    vector<int> sizes;\n    for (int i = 0; i < N; i++)\n        for (int j = 0; j < N; j++)\n            if (g[i][j] == 1 && !vis[i][j]) sizes.push_back(bfs(i, j));\n    sort(sizes.begin(), sizes.end());\n    cout << sizes.size() << \"\\n\";\n    for (int s : sizes) cout << s << \"\\n\";\n    return 0;\n}\n"
 }

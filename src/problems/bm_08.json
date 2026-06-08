@@ -8,20 +8,39 @@
   "mode": "stdio",
   "difficulty": "기초",
   "description": "원소가 0부터 19까지인 집합을 비트마스크 하나(정수)로 관리한다. 처음 집합은 공집합이다. M개의 연산을 처리하라. add x: 원소 x를 추가(mask |= (1<<x)). remove x: 원소 x를 제거(mask &= ~(1<<x)). check x: 원소 x가 있으면 1, 없으면 0 출력((mask>>x)&1). size: 현재 원소 개수 출력(popcount). 각 add/remove는 출력이 없고, check와 size만 출력한다.",
-  "constraints": ["1 ≤ M ≤ 100000", "0 ≤ x ≤ 19", "연산은 add, remove, check, size 중 하나"],
+  "constraints": [
+    "1 ≤ M ≤ 100000",
+    "0 ≤ x ≤ 19",
+    "연산은 add, remove, check, size 중 하나"
+  ],
   "ioDescription": {
     "input": "첫 줄에 연산의 개수 M. 다음 M개의 줄에 각각 연산이 주어진다. add/remove/check는 뒤에 정수 x가 함께 주어지고, size는 단독으로 주어진다.",
     "output": "check 연산마다 0 또는 1을, size 연산마다 현재 원소 개수를 한 줄에 하나씩 출력한다."
   },
   "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
   "examples": [
-    { "input": "6\nadd 3\nadd 5\ncheck 3\ncheck 4\nsize\nremove 3\n", "output": "1\n0\n2\n" },
-    { "input": "4\nadd 0\nadd 0\nsize\ncheck 0\n", "output": "1\n1\n" }
+    {
+      "input": "6\nadd 3\nadd 5\ncheck 3\ncheck 4\nsize\nremove 3\n",
+      "output": "1\n0\n2\n"
+    },
+    {
+      "input": "4\nadd 0\nadd 0\nsize\ncheck 0\n",
+      "output": "1\n1\n"
+    }
   ],
   "hiddenTests": [
-    { "input": "7\nadd 1\nadd 2\nadd 3\nremove 2\nsize\ncheck 2\ncheck 3\n", "output": "2\n0\n1\n" },
-    { "input": "3\nsize\ncheck 19\nadd 19\n", "output": "0\n0\n" },
-    { "input": "5\nadd 10\nadd 11\nadd 12\nremove 11\nsize\n", "output": "2\n" }
+    {
+      "input": "7\nadd 1\nadd 2\nadd 3\nremove 2\nsize\ncheck 2\ncheck 3\n",
+      "output": "2\n0\n1\n"
+    },
+    {
+      "input": "3\nsize\ncheck 19\nadd 19\n",
+      "output": "0\n0\n"
+    },
+    {
+      "input": "5\nadd 10\nadd 11\nadd 12\nremove 11\nsize\n",
+      "output": "2\n"
+    }
   ],
   "hints": [
     "집합을 int mask 하나로 표현한다. add는 OR, remove는 AND NOT, check는 비트 추출이다.",

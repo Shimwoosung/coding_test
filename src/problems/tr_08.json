@@ -8,21 +8,43 @@
   "mode": "stdio",
   "difficulty": "기초",
   "description": "정점이 N개인 이진트리가 주어진다. 정점 번호는 1번부터 N번까지이며 1번이 루트이다. 각 정점에 대해 왼쪽 자식과 오른쪽 자식의 번호가 주어지며, 자식이 없으면 -1로 표시된다. 이 이진트리의 높이를 구해 출력하라. 높이는 루트에서 가장 먼 리프까지의 간선 수이다(정점이 하나뿐이면 높이는 0). DFS로 각 정점의 높이를 재귀적으로 계산한다.",
-  "constraints": ["1 ≤ N ≤ 100000", "정점 번호는 1 이상 N 이하", "입력으로 주어지는 그래프는 항상 1번을 루트로 하는 이진트리이다"],
+  "constraints": [
+    "1 ≤ N ≤ 100000",
+    "정점 번호는 1 이상 N 이하",
+    "입력으로 주어지는 그래프는 항상 1번을 루트로 하는 이진트리이다"
+  ],
   "ioDescription": {
     "input": "첫째 줄에 정점의 개수 N이 주어진다. 다음 N개의 줄에 각각 정점 번호 x, 그 왼쪽 자식 번호, 오른쪽 자식 번호가 공백으로 구분되어 주어진다. 자식이 없으면 -1이다.",
     "output": "이진트리의 높이를 한 줄에 출력한다."
   },
   "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
   "examples": [
-    { "input": "5\n1 2 3\n2 4 5\n3 -1 -1\n4 -1 -1\n5 -1 -1\n", "output": "2\n" },
-    { "input": "1\n1 -1 -1\n", "output": "0\n" }
+    {
+      "input": "5\n1 2 3\n2 4 5\n3 -1 -1\n4 -1 -1\n5 -1 -1\n",
+      "output": "2\n"
+    },
+    {
+      "input": "1\n1 -1 -1\n",
+      "output": "0\n"
+    }
   ],
   "hiddenTests": [
-    { "input": "3\n1 2 -1\n2 3 -1\n3 -1 -1\n", "output": "2\n" },
-    { "input": "4\n1 2 3\n2 -1 -1\n3 4 -1\n4 -1 -1\n", "output": "2\n" },
-    { "input": "7\n1 2 3\n2 4 5\n3 6 7\n4 -1 -1\n5 -1 -1\n6 -1 -1\n7 -1 -1\n", "output": "2\n" }
+    {
+      "input": "3\n1 2 -1\n2 3 -1\n3 -1 -1\n",
+      "output": "2\n"
+    },
+    {
+      "input": "4\n1 2 3\n2 -1 -1\n3 4 -1\n4 -1 -1\n",
+      "output": "2\n"
+    },
+    {
+      "input": "7\n1 2 3\n2 4 5\n3 6 7\n4 -1 -1\n5 -1 -1\n6 -1 -1\n7 -1 -1\n",
+      "output": "2\n"
+    }
   ],
-  "hints": ["왼쪽/오른쪽 자식 배열에 각 정점의 자식을 저장한다.", "정점의 높이 = 1 + max(왼쪽 자식 높이, 오른쪽 자식 높이), 자식이 없으면 0."],
+  "hints": [
+    "왼쪽/오른쪽 자식 배열에 각 정점의 자식을 저장한다.",
+    "정점의 높이 = 1 + max(왼쪽 자식 높이, 오른쪽 자식 높이), 자식이 없으면 0."
+  ],
   "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint L[100005], R[100005];\n\nint heightOf(int x) {\n    if (x == -1) return -1;\n    return 1 + max(heightOf(L[x]), heightOf(R[x]));\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n; cin >> n;\n    for (int i = 1; i <= n; i++) { L[i] = -1; R[i] = -1; }\n    for (int i = 0; i < n; i++) {\n        int x, l, r; cin >> x >> l >> r;\n        L[x] = l; R[x] = r;\n    }\n    cout << heightOf(1) << \"\\n\";\n    return 0;\n}\n"
 }

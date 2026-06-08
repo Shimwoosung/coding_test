@@ -8,7 +8,9 @@
   "mode": "stdio",
   "difficulty": "기초",
   "description": "1번부터 N번까지 N명의 사람이 원을 이루며 앉아 있다. 양의 정수 K가 주어질 때, 순서대로 K번째 사람을 제거한다. 한 사람이 제거되면 남은 사람들로 이루어진 원을 따라 이 과정을 반복한다. 이 과정에서 제거되는 순서를 요세푸스 순열이라 한다. 큐를 이용해 K-1명을 뒤로 보내고 K번째 사람을 제거하는 방식으로 구현할 수 있다.",
-  "constraints": ["1 ≤ K ≤ N ≤ 5000"],
+  "constraints": [
+    "1 ≤ K ≤ N ≤ 5000"
+  ],
   "ioDescription": {
     "input": "첫째 줄에 N과 K가 공백으로 구분되어 주어진다.",
     "output": "요세푸스 순열을 < > 형식으로 한 줄에 출력한다. 각 번호는 ', '로 구분한다."
@@ -38,6 +40,9 @@
       "output": "<1, 2, 3, 4, 5, 6>\n"
     }
   ],
-  "hints": ["큐에 1부터 N까지 넣고, K-1번 front를 pop해서 다시 push한 뒤 K번째를 제거하면 된다.", "출력 형식의 쉼표와 꺾쇠 괄호에 주의하라."],
+  "hints": [
+    "큐에 1부터 N까지 넣고, K-1번 front를 pop해서 다시 push한 뒤 K번째를 제거하면 된다.",
+    "출력 형식의 쉼표와 꺾쇠 괄호에 주의하라."
+  ],
   "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int N, K;\n    cin >> N >> K;\n    queue<int> q;\n    for (int i = 1; i <= N; i++) q.push(i);\n    vector<int> res;\n    while (!q.empty()) {\n        for (int i = 0; i < K - 1; i++) {\n            q.push(q.front());\n            q.pop();\n        }\n        res.push_back(q.front());\n        q.pop();\n    }\n    cout << \"<\";\n    for (size_t i = 0; i < res.size(); i++) {\n        cout << res[i];\n        if (i + 1 < res.size()) cout << \", \";\n    }\n    cout << \">\\n\";\n    return 0;\n}\n"
 }

@@ -8,21 +8,44 @@
   "mode": "stdio",
   "difficulty": "심화",
   "description": "가중치가 있는 트리가 주어진다. 정점은 N개이고 번호는 1번부터 N번까지이다. 트리의 지름이란 트리에 존재하는 모든 경로 중 가장 긴 경로(간선 가중치의 합이 최대인 경로)의 길이를 말한다. 이 트리의 지름을 구해 출력하라. 임의의 정점에서 BFS/DFS로 가장 먼 정점 A를 찾고, A에서 다시 가장 먼 정점까지의 거리를 구하면 그것이 지름이다(두 번의 탐색).",
-  "constraints": ["1 ≤ N ≤ 100000", "간선의 개수는 N-1개이다", "간선 가중치 w는 1 이상 10000 이하의 정수", "입력으로 주어지는 그래프는 항상 트리이다"],
+  "constraints": [
+    "1 ≤ N ≤ 100000",
+    "간선의 개수는 N-1개이다",
+    "간선 가중치 w는 1 이상 10000 이하의 정수",
+    "입력으로 주어지는 그래프는 항상 트리이다"
+  ],
   "ioDescription": {
     "input": "첫째 줄에 정점의 개수 N이 주어진다. 다음 N-1개의 줄에 각각 간선을 이루는 두 정점 u, v와 가중치 w가 공백으로 구분되어 주어진다.",
     "output": "트리의 지름(가장 긴 경로의 가중치 합)을 한 줄에 출력한다."
   },
   "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
   "examples": [
-    { "input": "5\n1 2 2\n1 3 3\n2 4 5\n2 5 1\n", "output": "10\n" },
-    { "input": "2\n1 2 7\n", "output": "7\n" }
+    {
+      "input": "5\n1 2 2\n1 3 3\n2 4 5\n2 5 1\n",
+      "output": "10\n"
+    },
+    {
+      "input": "2\n1 2 7\n",
+      "output": "7\n"
+    }
   ],
   "hiddenTests": [
-    { "input": "1\n", "output": "0\n" },
-    { "input": "4\n1 2 1\n2 3 1\n3 4 1\n", "output": "3\n" },
-    { "input": "6\n1 2 3\n1 3 2\n3 4 4\n3 5 1\n5 6 10\n", "output": "16\n" }
+    {
+      "input": "1\n",
+      "output": "0\n"
+    },
+    {
+      "input": "4\n1 2 1\n2 3 1\n3 4 1\n",
+      "output": "3\n"
+    },
+    {
+      "input": "6\n1 2 3\n1 3 2\n3 4 4\n3 5 1\n5 6 10\n",
+      "output": "16\n"
+    }
   ],
-  "hints": ["인접 리스트(정점, 가중치)로 트리를 저장한다.", "1번에서 BFS로 가장 먼 정점 A를 찾고, A에서 다시 BFS하여 얻은 최대 거리가 지름이다."],
+  "hints": [
+    "인접 리스트(정점, 가중치)로 트리를 저장한다.",
+    "1번에서 BFS로 가장 먼 정점 A를 찾고, A에서 다시 BFS하여 얻은 최대 거리가 지름이다."
+  ],
   "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint n;\nvector<vector<pair<int,int>>> adj;\n\npair<long long,int> bfsFar(int start) {\n    vector<long long> dist(n + 1, -1);\n    queue<int> q;\n    q.push(start);\n    dist[start] = 0;\n    int far = start;\n    long long best = 0;\n    while (!q.empty()) {\n        int cur = q.front(); q.pop();\n        for (auto& e : adj[cur]) {\n            int nxt = e.first, w = e.second;\n            if (dist[nxt] == -1) {\n                dist[nxt] = dist[cur] + w;\n                if (dist[nxt] > best) { best = dist[nxt]; far = nxt; }\n                q.push(nxt);\n            }\n        }\n    }\n    return {best, far};\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    cin >> n;\n    adj.assign(n + 1, {});\n    for (int i = 0; i < n - 1; i++) {\n        int u, v, w; cin >> u >> v >> w;\n        adj[u].push_back({v, w});\n        adj[v].push_back({u, w});\n    }\n    if (n <= 1) { cout << 0 << \"\\n\"; return 0; }\n    auto a = bfsFar(1);\n    auto b = bfsFar(a.second);\n    cout << b.first << \"\\n\";\n    return 0;\n}\n"
 }

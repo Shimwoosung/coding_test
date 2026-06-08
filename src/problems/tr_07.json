@@ -8,21 +8,43 @@
   "mode": "stdio",
   "difficulty": "기초",
   "description": "정점이 N개인 트리가 주어진다. 정점 번호는 1번부터 N번까지이며 1번이 루트이다. 루트의 깊이는 0이고, 자식의 깊이는 부모의 깊이보다 1 크다. 트리의 간선 정보가 주어질 때, 1번부터 N번까지 각 정점의 깊이를 구해 출력하라. 루트에서 BFS 또는 DFS로 탐색하며 깊이를 계산하면 된다.",
-  "constraints": ["1 ≤ N ≤ 100000", "간선의 개수는 N-1개이다", "입력으로 주어지는 그래프는 항상 트리이다"],
+  "constraints": [
+    "1 ≤ N ≤ 100000",
+    "간선의 개수는 N-1개이다",
+    "입력으로 주어지는 그래프는 항상 트리이다"
+  ],
   "ioDescription": {
     "input": "첫째 줄에 정점의 개수 N이 주어진다. 다음 N-1개의 줄에 각각 간선을 이루는 두 정점 u, v가 공백으로 구분되어 주어진다.",
     "output": "첫째 줄부터 N개의 줄에 걸쳐 i번째 줄에 i번 정점의 깊이를 출력한다."
   },
   "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
   "examples": [
-    { "input": "5\n1 2\n1 3\n2 4\n2 5\n", "output": "0\n1\n1\n2\n2\n" },
-    { "input": "1\n", "output": "0\n" }
+    {
+      "input": "5\n1 2\n1 3\n2 4\n2 5\n",
+      "output": "0\n1\n1\n2\n2\n"
+    },
+    {
+      "input": "1\n",
+      "output": "0\n"
+    }
   ],
   "hiddenTests": [
-    { "input": "3\n1 2\n2 3\n", "output": "0\n1\n2\n" },
-    { "input": "4\n1 2\n1 3\n1 4\n", "output": "0\n1\n1\n1\n" },
-    { "input": "6\n1 2\n2 3\n3 4\n1 5\n5 6\n", "output": "0\n1\n2\n3\n1\n2\n" }
+    {
+      "input": "3\n1 2\n2 3\n",
+      "output": "0\n1\n2\n"
+    },
+    {
+      "input": "4\n1 2\n1 3\n1 4\n",
+      "output": "0\n1\n1\n1\n"
+    },
+    {
+      "input": "6\n1 2\n2 3\n3 4\n1 5\n5 6\n",
+      "output": "0\n1\n2\n3\n1\n2\n"
+    }
   ],
-  "hints": ["인접 리스트로 트리를 저장한다.", "루트 1번에서 BFS로 각 정점의 깊이를 계산한다."],
+  "hints": [
+    "인접 리스트로 트리를 저장한다.",
+    "루트 1번에서 BFS로 각 정점의 깊이를 계산한다."
+  ],
   "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n; cin >> n;\n    vector<vector<int>> adj(n + 1);\n    for (int i = 0; i < n - 1; i++) {\n        int u, v; cin >> u >> v;\n        adj[u].push_back(v);\n        adj[v].push_back(u);\n    }\n    vector<int> depth(n + 1, -1);\n    queue<int> q;\n    q.push(1);\n    depth[1] = 0;\n    while (!q.empty()) {\n        int cur = q.front(); q.pop();\n        for (int nxt : adj[cur]) {\n            if (depth[nxt] == -1) {\n                depth[nxt] = depth[cur] + 1;\n                q.push(nxt);\n            }\n        }\n    }\n    for (int i = 1; i <= n; i++) cout << depth[i] << \"\\n\";\n    return 0;\n}\n"
 }

@@ -8,21 +8,43 @@
   "mode": "stdio",
   "difficulty": "중간",
   "description": "N명의 사람과 그들 사이의 친구 관계(간선)가 주어진다. 1번 사람으로부터 각 사람까지의 최소 친구 관계 거리(몇 단계를 거쳐야 하는지)를 구해 출력하라. 가중치가 없는 그래프이므로 BFS를 사용하면 시작점에서 각 정점까지의 최단 거리를 구할 수 있다. 도달할 수 없는 사람의 거리는 -1로 출력한다.",
-  "constraints": ["1 ≤ N ≤ 100,000", "0 ≤ M ≤ 200,000", "친구 관계는 양방향이다."],
+  "constraints": [
+    "1 ≤ N ≤ 100,000",
+    "0 ≤ M ≤ 200,000",
+    "친구 관계는 양방향이다."
+  ],
   "ioDescription": {
     "input": "첫째 줄에 사람 수 N과 친구 관계 수 M이 주어진다. 다음 M개의 줄에 친구 관계 a, b (a번과 b번이 친구)가 주어진다.",
     "output": "1번 사람으로부터 1번, 2번, ..., N번 사람까지의 최단 거리를 공백으로 구분하여 한 줄에 출력한다. 1번 자신의 거리는 0이고, 도달 불가능하면 -1이다."
   },
   "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
   "examples": [
-    { "input": "5 4\n1 2\n1 3\n2 4\n3 5\n", "output": "0 1 1 2 2\n" },
-    { "input": "6 4\n1 2\n2 3\n4 5\n5 6\n", "output": "0 1 2 -1 -1 -1\n" }
+    {
+      "input": "5 4\n1 2\n1 3\n2 4\n3 5\n",
+      "output": "0 1 1 2 2\n"
+    },
+    {
+      "input": "6 4\n1 2\n2 3\n4 5\n5 6\n",
+      "output": "0 1 2 -1 -1 -1\n"
+    }
   ],
   "hiddenTests": [
-    { "input": "1 0\n", "output": "0\n" },
-    { "input": "4 3\n1 2\n2 3\n3 4\n", "output": "0 1 2 3\n" },
-    { "input": "5 5\n1 2\n1 3\n2 3\n3 4\n4 5\n", "output": "0 1 1 2 3\n" }
+    {
+      "input": "1 0\n",
+      "output": "0\n"
+    },
+    {
+      "input": "4 3\n1 2\n2 3\n3 4\n",
+      "output": "0 1 2 3\n"
+    },
+    {
+      "input": "5 5\n1 2\n1 3\n2 3\n3 4\n4 5\n",
+      "output": "0 1 1 2 3\n"
+    }
   ],
-  "hints": ["가중치 없는 그래프의 최단 거리는 BFS로 구한다.", "거리 배열을 -1로 초기화하고, 처음 방문할 때 부모 거리 + 1을 기록한다."],
+  "hints": [
+    "가중치 없는 그래프의 최단 거리는 BFS로 구한다.",
+    "거리 배열을 -1로 초기화하고, 처음 방문할 때 부모 거리 + 1을 기록한다."
+  ],
   "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int N, M; cin >> N >> M;\n    vector<vector<int>> adj(N + 1);\n    for (int i = 0; i < M; i++) {\n        int a, b; cin >> a >> b;\n        adj[a].push_back(b);\n        adj[b].push_back(a);\n    }\n    vector<int> dist(N + 1, -1);\n    queue<int> q;\n    q.push(1); dist[1] = 0;\n    while (!q.empty()) {\n        int cur = q.front(); q.pop();\n        for (int nx : adj[cur]) {\n            if (dist[nx] == -1) { dist[nx] = dist[cur] + 1; q.push(nx); }\n        }\n    }\n    for (int i = 1; i <= N; i++) {\n        cout << dist[i];\n        if (i < N) cout << ' ';\n    }\n    cout << \"\\n\";\n    return 0;\n}\n"
 }

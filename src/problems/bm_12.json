@@ -8,20 +8,40 @@
   "mode": "stdio",
   "difficulty": "심화",
   "description": "도시가 N개 있고, 도시 i에서 도시 j로 가는 비용이 행렬 W[i][j]로 주어진다. 한 도시에서 출발해 모든 도시를 정확히 한 번씩 방문하고 다시 출발 도시로 돌아오는 최소 비용 순회를 구하라. 비트마스크 DP를 사용한다. dp[mask][i] = 출발지(0번 도시)에서 시작해 mask에 포함된 도시들을 방문했고 현재 도시가 i일 때의 최소 비용. W[i][j]가 0이면 i에서 j로 가는 길이 없음을 의미하며, 그 경로는 사용할 수 없다. 항상 순회가 가능한 입력만 주어진다.",
-  "constraints": ["2 ≤ N ≤ 16", "0 ≤ W[i][j] ≤ 1000000", "W[i][i] = 0", "W[i][j] = 0 은 길이 없음을 의미"],
+  "constraints": [
+    "2 ≤ N ≤ 16",
+    "0 ≤ W[i][j] ≤ 1000000",
+    "W[i][i] = 0",
+    "W[i][j] = 0 은 길이 없음을 의미"
+  ],
   "ioDescription": {
     "input": "첫 줄에 도시의 수 N. 이어서 N개의 줄에 각 줄마다 N개의 정수로 이루어진 비용 행렬 W가 주어진다.",
     "output": "최소 순회 비용을 한 줄에 출력한다."
   },
   "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
   "examples": [
-    { "input": "4\n0 10 15 20\n5 0 9 10\n6 13 0 12\n8 8 9 0\n", "output": "35\n" },
-    { "input": "2\n0 5\n5 0\n", "output": "10\n" }
+    {
+      "input": "4\n0 10 15 20\n5 0 9 10\n6 13 0 12\n8 8 9 0\n",
+      "output": "35\n"
+    },
+    {
+      "input": "2\n0 5\n5 0\n",
+      "output": "10\n"
+    }
   ],
   "hiddenTests": [
-    { "input": "3\n0 1 2\n1 0 1\n2 1 0\n", "output": "4\n" },
-    { "input": "4\n0 1 0 1\n1 0 1 0\n0 1 0 1\n1 0 1 0\n", "output": "4\n" },
-    { "input": "4\n0 10 15 20\n10 0 35 25\n15 35 0 30\n20 25 30 0\n", "output": "80\n" }
+    {
+      "input": "3\n0 1 2\n1 0 1\n2 1 0\n",
+      "output": "4\n"
+    },
+    {
+      "input": "4\n0 1 0 1\n1 0 1 0\n0 1 0 1\n1 0 1 0\n",
+      "output": "4\n"
+    },
+    {
+      "input": "4\n0 10 15 20\n10 0 35 25\n15 35 0 30\n20 25 30 0\n",
+      "output": "80\n"
+    }
   ],
   "hints": [
     "dp[mask][i]를 INF로 초기화하고 dp[1][0]=0에서 시작한다(0번 도시에서 출발).",

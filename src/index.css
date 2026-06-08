@@ -251,7 +251,7 @@ a { color: var(--accent); }
 .solution-modal-foot { margin: 0; padding: 10px 20px; color: var(--text-dim); font-size: 12px; border-top: 1px solid var(--border); }
 
 /* ===== 타이머 위젯 ===== */
-.timer-widget { position: fixed; top: 14px; right: 18px; z-index: 60; }
+.timer-widget { position: fixed; bottom: 16px; right: 18px; z-index: 60; }
 .timer-face { display: flex; align-items: center; gap: 8px; background: var(--bg-2); border: 1px solid var(--border); color: var(--text); border-radius: 20px; padding: 7px 14px; font-family: var(--mono); font-size: 15px; box-shadow: 0 4px 16px rgba(0,0,0,.3); }
 .timer-face:hover { border-color: var(--accent); }
 .timer-widget.low .timer-face { border-color: var(--yellow); color: var(--yellow); }
@@ -259,7 +259,7 @@ a { color: var(--accent); }
 @keyframes pulse { 50% { opacity: .55; } }
 .t-ico { font-size: 14px; }
 .t-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 1.2s infinite; }
-.timer-panel { margin-top: 8px; background: var(--bg-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; width: 240px; box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+.timer-panel { position: absolute; right: 0; bottom: calc(100% + 8px); background: var(--bg-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; width: 240px; box-shadow: 0 8px 24px rgba(0,0,0,.4); }
 .t-presets { display: flex; gap: 6px; margin-bottom: 8px; }
 .t-presets button { flex: 1; padding: 7px 0; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-3); color: var(--text); font-size: 12px; }
 .t-presets button:hover { border-color: var(--accent); }

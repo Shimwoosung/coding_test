@@ -8,20 +8,40 @@
   "mode": "stdio",
   "difficulty": "중간",
   "description": "N개의 물건이 있고 각 물건은 무게 w와 가치 v를 가진다. 무게의 합이 용량 C를 넘지 않도록 물건의 부분집합을 고를 때, 가치 합의 최댓값을 구하라. N이 작으므로 0부터 2^N - 1까지 모든 부분집합을 비트마스크로 순회하며, 무게 합이 C 이하인 경우의 가치 합 중 최댓값을 구한다. 아무것도 고르지 않을 수도 있다(이 경우 가치 0).",
-  "constraints": ["1 ≤ N ≤ 20", "0 ≤ C ≤ 1000000", "1 ≤ w ≤ 100000", "1 ≤ v ≤ 100000"],
+  "constraints": [
+    "1 ≤ N ≤ 20",
+    "0 ≤ C ≤ 1000000",
+    "1 ≤ w ≤ 100000",
+    "1 ≤ v ≤ 100000"
+  ],
   "ioDescription": {
     "input": "첫 줄에 N과 C가 공백으로 구분되어 주어진다. 이어서 N개의 줄에 각 물건의 무게 w와 가치 v가 공백으로 구분되어 주어진다.",
     "output": "무게 합이 C를 넘지 않는 부분집합의 가치 합 최댓값을 한 줄에 출력한다."
   },
   "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
   "examples": [
-    { "input": "3 10\n5 10\n4 40\n6 30\n", "output": "70\n" },
-    { "input": "2 3\n5 100\n4 100\n", "output": "0\n" }
+    {
+      "input": "3 10\n5 10\n4 40\n6 30\n",
+      "output": "70\n"
+    },
+    {
+      "input": "2 3\n5 100\n4 100\n",
+      "output": "0\n"
+    }
   ],
   "hiddenTests": [
-    { "input": "1 5\n5 50\n", "output": "50\n" },
-    { "input": "4 7\n1 1\n3 4\n4 5\n5 7\n", "output": "9\n" },
-    { "input": "3 0\n1 10\n2 20\n3 30\n", "output": "0\n" }
+    {
+      "input": "1 5\n5 50\n",
+      "output": "50\n"
+    },
+    {
+      "input": "4 7\n1 1\n3 4\n4 5\n5 7\n",
+      "output": "9\n"
+    },
+    {
+      "input": "3 0\n1 10\n2 20\n3 30\n",
+      "output": "0\n"
+    }
   ],
   "hints": [
     "for(int mask=0; mask<(1<<n); mask++) 로 모든 부분집합을 순회하며 무게/가치 합을 계산한다.",

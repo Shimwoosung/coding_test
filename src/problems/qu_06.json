@@ -8,7 +8,11 @@
   "mode": "stdio",
   "difficulty": "기초",
   "description": "정수를 저장하는 큐를 구현하고, 주어진 명령을 처리하는 프로그램을 작성하라. 명령은 push X(정수 X를 큐에 넣기), pop(앞의 원소를 빼고 그 값을 출력, 비어 있으면 -1 출력), front(앞의 원소를 출력, 비어 있으면 -1 출력), size(큐에 들어있는 원소 개수 출력)의 네 종류다. C++ STL의 std::queue를 사용하면 쉽게 구현할 수 있다.",
-  "constraints": ["1 ≤ Q ≤ 100000", "push 되는 정수 X는 1 ≤ X ≤ 1000000000", "각 명령은 한 줄에 하나씩 주어진다"],
+  "constraints": [
+    "1 ≤ Q ≤ 100000",
+    "push 되는 정수 X는 1 ≤ X ≤ 1000000000",
+    "각 명령은 한 줄에 하나씩 주어진다"
+  ],
   "ioDescription": {
     "input": "첫 줄에 명령의 개수 Q가 주어진다. 이후 Q개의 줄에 각각 하나의 명령이 주어진다.",
     "output": "pop, front, size 명령에 대해 결과를 한 줄에 하나씩 출력한다."
@@ -38,6 +42,9 @@
       "output": "-1\n999\n"
     }
   ],
-  "hints": ["std::queue<int> 자료구조를 사용하면 push/pop/front/size를 그대로 쓸 수 있다.", "비어 있는지 검사할 때 q.empty()를 먼저 확인하고 -1을 출력한다."],
+  "hints": [
+    "std::queue<int> 자료구조를 사용하면 push/pop/front/size를 그대로 쓸 수 있다.",
+    "비어 있는지 검사할 때 q.empty()를 먼저 확인하고 -1을 출력한다."
+  ],
   "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int Q;\n    cin >> Q;\n    queue<long long> q;\n    string cmd;\n    while (Q--) {\n        cin >> cmd;\n        if (cmd == \"push\") {\n            long long x; cin >> x;\n            q.push(x);\n        } else if (cmd == \"pop\") {\n            if (q.empty()) cout << -1 << \"\\n\";\n            else { cout << q.front() << \"\\n\"; q.pop(); }\n        } else if (cmd == \"front\") {\n            if (q.empty()) cout << -1 << \"\\n\";\n            else cout << q.front() << \"\\n\";\n        } else if (cmd == \"size\") {\n            cout << q.size() << \"\\n\";\n        }\n    }\n    return 0;\n}\n"
 }

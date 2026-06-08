@@ -8,7 +8,10 @@
   "mode": "stdio",
   "difficulty": "기초",
   "description": "정수를 저장하는 덱(deque)을 구현하라. 명령은 push_front X, push_back X, pop_front, pop_back, front, back, size 일곱 종류다. pop_front, pop_back, front, back은 해당 값을 출력하되 덱이 비어 있으면 -1을 출력한다. pop 계열 명령은 값을 출력한 뒤 실제로 제거한다. std::deque를 사용하면 양쪽 끝 연산을 모두 지원한다.",
-  "constraints": ["1 ≤ Q ≤ 100000", "push 되는 정수 X는 1 ≤ X ≤ 1000000000"],
+  "constraints": [
+    "1 ≤ Q ≤ 100000",
+    "push 되는 정수 X는 1 ≤ X ≤ 1000000000"
+  ],
   "ioDescription": {
     "input": "첫 줄에 명령 개수 Q가 주어진다. 이후 Q개의 줄에 각각 하나의 명령이 주어진다.",
     "output": "pop_front, pop_back, front, back, size 명령의 결과를 한 줄에 하나씩 출력한다."
@@ -38,6 +41,9 @@
       "output": "7\n8\n-1\n"
     }
   ],
-  "hints": ["std::deque<int>의 push_front/push_back/pop_front/pop_back/front/back/size를 사용한다.", "pop과 front/back 모두 비어 있을 때 -1을 출력하는 처리를 빠뜨리지 마라."],
+  "hints": [
+    "std::deque<int>의 push_front/push_back/pop_front/pop_back/front/back/size를 사용한다.",
+    "pop과 front/back 모두 비어 있을 때 -1을 출력하는 처리를 빠뜨리지 마라."
+  ],
   "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int Q;\n    cin >> Q;\n    deque<long long> dq;\n    string cmd;\n    while (Q--) {\n        cin >> cmd;\n        if (cmd == \"push_front\") { long long x; cin >> x; dq.push_front(x); }\n        else if (cmd == \"push_back\") { long long x; cin >> x; dq.push_back(x); }\n        else if (cmd == \"pop_front\") {\n            if (dq.empty()) cout << -1 << \"\\n\";\n            else { cout << dq.front() << \"\\n\"; dq.pop_front(); }\n        } else if (cmd == \"pop_back\") {\n            if (dq.empty()) cout << -1 << \"\\n\";\n            else { cout << dq.back() << \"\\n\"; dq.pop_back(); }\n        } else if (cmd == \"front\") {\n            if (dq.empty()) cout << -1 << \"\\n\";\n            else cout << dq.front() << \"\\n\";\n        } else if (cmd == \"back\") {\n            if (dq.empty()) cout << -1 << \"\\n\";\n            else cout << dq.back() << \"\\n\";\n        } else if (cmd == \"size\") {\n            cout << dq.size() << \"\\n\";\n        }\n    }\n    return 0;\n}\n"
 }

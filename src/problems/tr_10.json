@@ -8,21 +8,43 @@
   "mode": "stdio",
   "difficulty": "중간",
   "description": "루트 없는 트리가 주어진다. 정점은 N개이고 번호는 1번부터 N번까지이다. 이 트리를 1번을 루트로 정했을 때, 2번부터 N번까지 각 정점의 부모를 구해 출력하라. 1번에서 BFS 또는 DFS로 탐색하면서, 어떤 정점을 처음 방문할 때 그 정점으로 들어온 직전 정점이 부모이다.",
-  "constraints": ["2 ≤ N ≤ 100000", "간선의 개수는 N-1개이다", "입력으로 주어지는 그래프는 항상 트리이다"],
+  "constraints": [
+    "2 ≤ N ≤ 100000",
+    "간선의 개수는 N-1개이다",
+    "입력으로 주어지는 그래프는 항상 트리이다"
+  ],
   "ioDescription": {
     "input": "첫째 줄에 정점의 개수 N이 주어진다. 다음 N-1개의 줄에 각각 트리 위의 두 정점 u, v가 공백으로 구분되어 주어진다(둘 사이에 간선이 있다).",
     "output": "첫째 줄부터 N-1개의 줄에 걸쳐 2번 정점부터 N번 정점까지 순서대로 각 정점의 부모 번호를 한 줄에 하나씩 출력한다."
   },
   "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
   "examples": [
-    { "input": "7\n1 6\n6 3\n3 5\n4 1\n2 4\n4 7\n", "output": "4\n6\n1\n3\n1\n4\n" },
-    { "input": "3\n1 2\n1 3\n", "output": "1\n1\n" }
+    {
+      "input": "7\n1 6\n6 3\n3 5\n4 1\n2 4\n4 7\n",
+      "output": "4\n6\n1\n3\n1\n4\n"
+    },
+    {
+      "input": "3\n1 2\n1 3\n",
+      "output": "1\n1\n"
+    }
   ],
   "hiddenTests": [
-    { "input": "2\n1 2\n", "output": "1\n" },
-    { "input": "4\n2 1\n3 2\n4 3\n", "output": "1\n2\n3\n" },
-    { "input": "5\n1 2\n1 3\n2 4\n2 5\n", "output": "1\n1\n2\n2\n" }
+    {
+      "input": "2\n1 2\n",
+      "output": "1\n"
+    },
+    {
+      "input": "4\n2 1\n3 2\n4 3\n",
+      "output": "1\n2\n3\n"
+    },
+    {
+      "input": "5\n1 2\n1 3\n2 4\n2 5\n",
+      "output": "1\n1\n2\n2\n"
+    }
   ],
-  "hints": ["인접 리스트로 트리를 저장하고 1번에서 BFS를 한다.", "정점 nxt를 cur에서 처음 방문하면 parent[nxt] = cur로 기록한다."],
+  "hints": [
+    "인접 리스트로 트리를 저장하고 1번에서 BFS를 한다.",
+    "정점 nxt를 cur에서 처음 방문하면 parent[nxt] = cur로 기록한다."
+  ],
   "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n; cin >> n;\n    vector<vector<int>> adj(n + 1);\n    for (int i = 0; i < n - 1; i++) {\n        int u, v; cin >> u >> v;\n        adj[u].push_back(v);\n        adj[v].push_back(u);\n    }\n    vector<int> parent(n + 1, 0);\n    vector<bool> visited(n + 1, false);\n    queue<int> q;\n    q.push(1);\n    visited[1] = true;\n    while (!q.empty()) {\n        int cur = q.front(); q.pop();\n        for (int nxt : adj[cur]) {\n            if (!visited[nxt]) {\n                visited[nxt] = true;\n                parent[nxt] = cur;\n                q.push(nxt);\n            }\n        }\n    }\n    for (int i = 2; i <= n; i++) cout << parent[i] << \"\\n\";\n    return 0;\n}\n"
 }

@@ -8,21 +8,45 @@
   "mode": "stdio",
   "difficulty": "심화",
   "description": "정점이 N개인 트리가 주어진다. 정점 번호는 1번부터 N번까지이며 1번이 루트이다. 각 간선마다 가중치가 있다. 이후 M개의 질의가 주어지며, 각 질의는 두 정점 a, b 사이의 트리 경로상 거리(가중치 합)를 묻는다. 루트로부터의 거리 dist[v]와 최소 공통 조상(LCA)을 이용하면 a와 b 사이 거리는 dist[a] + dist[b] - 2 * dist[lca(a,b)]이다. 희소 테이블(binary lifting)로 LCA를 구한다.",
-  "constraints": ["2 ≤ N ≤ 100000", "1 ≤ M ≤ 100000", "간선 가중치 w는 1 이상 10000 이하의 정수", "1 ≤ a, b ≤ N, a ≠ b", "입력으로 주어지는 그래프는 항상 1번을 루트로 하는 트리이다"],
+  "constraints": [
+    "2 ≤ N ≤ 100000",
+    "1 ≤ M ≤ 100000",
+    "간선 가중치 w는 1 이상 10000 이하의 정수",
+    "1 ≤ a, b ≤ N, a ≠ b",
+    "입력으로 주어지는 그래프는 항상 1번을 루트로 하는 트리이다"
+  ],
   "ioDescription": {
     "input": "첫째 줄에 정점의 개수 N이 주어진다. 다음 N-1개의 줄에 각각 간선을 이루는 두 정점 u, v와 가중치 w가 주어진다. 그 다음 줄에 질의 개수 M이 주어지고, 이어 M개의 줄에 각각 두 정점 a, b가 주어진다.",
     "output": "각 질의에 대해 두 정점 a, b 사이의 거리를 한 줄에 하나씩 출력한다."
   },
   "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
   "examples": [
-    { "input": "5\n1 2 2\n1 3 3\n2 4 5\n2 5 1\n3\n4 5\n4 3\n5 3\n", "output": "6\n10\n6\n" },
-    { "input": "2\n1 2 7\n1\n1 2\n", "output": "7\n" }
+    {
+      "input": "5\n1 2 2\n1 3 3\n2 4 5\n2 5 1\n3\n4 5\n4 3\n5 3\n",
+      "output": "6\n10\n6\n"
+    },
+    {
+      "input": "2\n1 2 7\n1\n1 2\n",
+      "output": "7\n"
+    }
   ],
   "hiddenTests": [
-    { "input": "3\n1 2 4\n2 3 6\n2\n1 3\n3 1\n", "output": "10\n10\n" },
-    { "input": "6\n1 2 3\n1 3 2\n3 4 4\n3 5 1\n5 6 10\n3\n4 6\n2 6\n4 5\n", "output": "15\n16\n5\n" },
-    { "input": "4\n1 2 1\n1 3 1\n1 4 1\n3\n2 3\n2 4\n3 4\n", "output": "2\n2\n2\n" }
+    {
+      "input": "3\n1 2 4\n2 3 6\n2\n1 3\n3 1\n",
+      "output": "10\n10\n"
+    },
+    {
+      "input": "6\n1 2 3\n1 3 2\n3 4 4\n3 5 1\n5 6 10\n3\n4 6\n2 6\n4 5\n",
+      "output": "15\n16\n5\n"
+    },
+    {
+      "input": "4\n1 2 1\n1 3 1\n1 4 1\n3\n2 3\n2 4\n3 4\n",
+      "output": "2\n2\n2\n"
+    }
   ],
-  "hints": ["DFS/BFS로 각 정점의 깊이 depth[v]와 루트로부터 거리 dist[v], 부모 up[0][v]를 구한다.", "binary lifting으로 LCA를 구하고, 거리는 dist[a]+dist[b]-2*dist[lca]."],
+  "hints": [
+    "DFS/BFS로 각 정점의 깊이 depth[v]와 루트로부터 거리 dist[v], 부모 up[0][v]를 구한다.",
+    "binary lifting으로 LCA를 구하고, 거리는 dist[a]+dist[b]-2*dist[lca]."
+  ],
   "solution": "#include <bits/stdc++.h>\nusing namespace std;\n\nint n, m, LOG;\nvector<vector<pair<int,int>>> adj;\nvector<vector<int>> up;\nvector<int> depthArr;\nvector<long long> distArr;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    cin >> n;\n    adj.assign(n + 1, {});\n    for (int i = 0; i < n - 1; i++) {\n        int u, v, w; cin >> u >> v >> w;\n        adj[u].push_back({v, w});\n        adj[v].push_back({u, w});\n    }\n    LOG = 1;\n    while ((1 << LOG) < n) LOG++;\n    LOG++;\n    up.assign(LOG, vector<int>(n + 1, 0));\n    depthArr.assign(n + 1, 0);\n    distArr.assign(n + 1, 0);\n    vector<bool> visited(n + 1, false);\n    queue<int> q;\n    q.push(1);\n    visited[1] = true;\n    up[0][1] = 0;\n    depthArr[1] = 0;\n    distArr[1] = 0;\n    while (!q.empty()) {\n        int cur = q.front(); q.pop();\n        for (auto& e : adj[cur]) {\n            int nxt = e.first, w = e.second;\n            if (!visited[nxt]) {\n                visited[nxt] = true;\n                up[0][nxt] = cur;\n                depthArr[nxt] = depthArr[cur] + 1;\n                distArr[nxt] = distArr[cur] + w;\n                q.push(nxt);\n            }\n        }\n    }\n    for (int k = 1; k < LOG; k++)\n        for (int v = 1; v <= n; v++)\n            up[k][v] = up[k-1][up[k-1][v]];\n    cin >> m;\n    while (m--) {\n        int a, b; cin >> a >> b;\n        int ra = a, rb = b;\n        if (depthArr[ra] < depthArr[rb]) swap(ra, rb);\n        int diff = depthArr[ra] - depthArr[rb];\n        for (int k = 0; k < LOG; k++)\n            if (diff & (1 << k)) ra = up[k][ra];\n        int lca;\n        if (ra == rb) {\n            lca = ra;\n        } else {\n            for (int k = LOG - 1; k >= 0; k--) {\n                if (up[k][ra] != up[k][rb]) {\n                    ra = up[k][ra];\n                    rb = up[k][rb];\n                }\n            }\n            lca = up[0][ra];\n        }\n        long long ans = distArr[a] + distArr[b] - 2LL * distArr[lca];\n        cout << ans << \"\\n\";\n    }\n    return 0;\n}\n"
 }
