@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Problem, RunOutcome, StdioExample, FunctionExample } from '../types';
 import { problemsById } from '../data/problems';
 import { conceptsById } from '../data/concepts';
@@ -24,6 +24,33 @@ export default function ProblemPage({ id, onNavigate }: Props) {
   const [toolStatus, setToolStatus] = useState('');
   const [showSolution, setShowSolution] = useState(false);
   const [solved, setSolvedState] = useState(() => isSolved(id));
+
+  // 패널 크기(드래그로 조절, localStorage에 기억)
+  const workRef = useRef<HTMLDivElement>(null);
+  const [descWidth, setDescWidth] = useState(() => clampNum(localStorage.getItem('cpp-desc-w'), 360, 220, 760));
+  const [resultHeight, setResultHeight] = useState(() => clampNum(localStorage.getItem('cpp-result-h'), 220, 90, 700));
+  useEffect(() => { localStorage.setItem('cpp-desc-w', String(descWidth)); }, [descWidth]);
+  useEffect(() => { localStorage.setItem('cpp-result-h', String(resultHeight)); }, [resultHeight]);
+
+  function startVDrag(e: React.MouseEvent) {
+    e.preventDefault();
+    const startX = e.clientX, startW = descWidth;
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    const move = (ev: MouseEvent) => setDescWidth(Math.max(220, Math.min(760, startW + (ev.clientX - startX))));
+    const up = () => { window.removeEventListener('mousemove', move); window.removeEventListener('mouseup', up); document.body.style.cursor = ''; document.body.style.userSelect = ''; };
+    window.addEventListener('mousemove', move); window.addEventListener('mouseup', up);
+  }
+  function startHDrag(e: React.MouseEvent) {
+    e.preventDefault();
+    const startY = e.clientY, startH = resultHeight;
+    const maxH = (workRef.current?.clientHeight ?? 800) - 170;
+    document.body.style.cursor = 'row-resize';
+    document.body.style.userSelect = 'none';
+    const move = (ev: MouseEvent) => setResultHeight(Math.max(90, Math.min(Math.max(140, maxH), startH + (startY - ev.clientY))));
+    const up = () => { window.removeEventListener('mousemove', move); window.removeEventListener('mouseup', up); document.body.style.cursor = ''; document.body.style.userSelect = ''; };
+    window.addEventListener('mousemove', move); window.addEventListener('mouseup', up);
+  }
 
   useEffect(() => onRunnerStatus((_s, m) => setToolStatus(m)), []);
 
@@ -76,7 +103,7 @@ export default function ProblemPage({ id, onNavigate }: Props) {
   const concept = conceptsById[problem.concept];
 
   return (
-    <div className="problem-layout">
+    <div className="problem-layout" style={{ gridTemplateColumns: `${descWidth}px 6px minmax(0, 1fr)` }}>
       {/* 좌: 문제 설명 */}
       <div className="pane desc-pane">
         <div className="prob-header">
@@ -140,10 +167,14 @@ export default function ProblemPage({ id, onNavigate }: Props) {
         )}
       </div>
 
-      {/* 중앙: 에디터 */}
-      <div className="pane editor-pane">
+      {/* 좌우 너비 조절 핸들 */}
+      <div className="vsplit" onMouseDown={startVDrag} title="좌우 너비 조절" />
+
+      {/* 우측 작업영역: 에디터(위) + 결과 터미널(아래) */}
+      <div className="work-pane" ref={workRef}>
         <div className="editor-toolbar">
           <span className="file-name">solution.cpp</span>
+          <span className="zoom-hint">Ctrl + 휠 = 글씨 크기</span>
           <div className="spacer" />
           <button onClick={resetCode} className="ghost">초기화</button>
           <button onClick={handleRun} disabled={running} className="run">▶ 실행</button>
@@ -152,14 +183,21 @@ export default function ProblemPage({ id, onNavigate }: Props) {
         <div className="editor-host">
           <CodeEditor value={code} onChange={updateCode} />
         </div>
-      </div>
-
-      {/* 우: 결과 */}
-      <div className="pane result-pane">
-        <ResultPanel running={running} outcome={outcome} mode={mode} toolStatus={toolStatus} />
+        {/* 높이 조절 핸들 */}
+        <div className="hsplit" onMouseDown={startHDrag} title="에디터 / 결과 높이 조절">
+          <span className="grip" />
+        </div>
+        <div className="result-host" style={{ height: resultHeight }}>
+          <ResultPanel running={running} outcome={outcome} mode={mode} toolStatus={toolStatus} />
+        </div>
       </div>
     </div>
   );
+}
+
+function clampNum(v: string | null, d: number, min: number, max: number): number {
+  const n = v ? parseInt(v, 10) : NaN;
+  return Number.isFinite(n) ? Math.max(min, Math.min(max, n)) : d;
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {

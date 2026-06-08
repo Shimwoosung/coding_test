@@ -14,7 +14,7 @@ export default function CodeEditor({ value, onChange }: Props) {
       value={value}
       onChange={(v) => onChange(v ?? '')}
       options={{
-        fontSize: 14,
+        fontSize: 15,
         minimap: { enabled: false },
         scrollBeyondLastLine: false,
         tabSize: 4,
@@ -22,6 +22,8 @@ export default function CodeEditor({ value, onChange }: Props) {
         fontFamily: 'Consolas, "Courier New", monospace',
         renderWhitespace: 'selection',
         smoothScrolling: true,
+        mouseWheelZoom: true, // Ctrl + 마우스휠로 글씨 크기 확대/축소
+        scrollbar: { vertical: 'auto', horizontal: 'auto' },
       }}
     />
   );
