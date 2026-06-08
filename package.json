@@ -10,6 +10,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --host",
+    "deploy:pages": "vite build && node scripts/deploy-pages.mjs",
     "electron:dev": "vite build && electron .",
     "dist:win": "vite build && electron-packager . CppCodingTrainer --platform=win32 --arch=x64 --out=release --overwrite --asar --ignore \"(node_modules|src|vendor|release|public|\\.git|\\.github)\""
   },
