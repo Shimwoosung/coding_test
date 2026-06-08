@@ -1,0 +1,44 @@
+{
+  "id": "so_07",
+  "title": "소트인사이드",
+  "stage": 1,
+  "level": 2,
+  "topic": "sorting",
+  "concept": "sorting",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "정수 N이 주어진다. N의 각 자리 숫자를 내림차순으로 재배열하여 만들 수 있는 가장 큰 수를 출력하라.",
+  "constraints": [
+    "1 ≤ N ≤ 10^18"
+  ],
+  "ioDescription": {
+    "input": "정수 N.",
+    "output": "자리 숫자를 내림차순으로 정렬한 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 문자열로 받아 내림차순 정렬\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "2143\n",
+      "output": "4321\n"
+    },
+    {
+      "input": "999\n",
+      "output": "999\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n",
+      "output": "1\n"
+    },
+    {
+      "input": "1020304\n",
+      "output": "4321000\n"
+    }
+  ],
+  "hints": [
+    "수를 문자열로 받아 char 단위 내림차순 정렬.",
+    "sort(s.rbegin(), s.rend())."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){string s;cin>>s;sort(s.rbegin(),s.rend());cout<<s<<\"\\n\";}\n"
+}

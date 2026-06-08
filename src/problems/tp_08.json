@@ -1,0 +1,45 @@
+{
+  "id": "tp_08",
+  "title": "두 용액",
+  "stage": 2,
+  "level": 2,
+  "topic": "two_pointer",
+  "concept": "two_pointer",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "서로 다른 N개의 정수(산성/알칼리 특성값)가 주어진다. 두 개를 골라 합이 0에 가장 가까운 쌍을 찾아, 그 두 값을 오름차순으로 출력하라. 정렬 후 양 끝 포인터를 좁혀가며 O(N).",
+  "constraints": [
+    "2 ≤ N ≤ 100,000",
+    "값의 절댓값 ≤ 1,000,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 둘째 줄 N개의 정수.",
+    "output": "합이 0에 가장 가까운 두 값(오름차순, 공백 구분)."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 정렬 후 양 끝 포인터\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5\n-2 4 -99 -1 98\n",
+      "output": "-99 98\n"
+    },
+    {
+      "input": "4\n-100 -2 -1 103\n",
+      "output": "-100 103\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "2\n-5 5\n",
+      "output": "-5 5\n"
+    },
+    {
+      "input": "3\n-10 -8 1\n",
+      "output": "-8 1\n"
+    }
+  ],
+  "hints": [
+    "정렬 후 l=0, r=N-1. 합의 절댓값이 최소면 갱신.",
+    "합<0이면 l++, 아니면 r--."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);vector<long long>a(n);for(auto&x:a)scanf(\"%lld\",&x);sort(a.begin(),a.end());int l=0,r=n-1;long long best=LLONG_MAX,pa=a[0],pb=a[1];while(l<r){long long s=a[l]+a[r];if(llabs(s)<best){best=llabs(s);pa=a[l];pb=a[r];}if(s<0)l++;else r--;}printf(\"%lld %lld\\n\",pa,pb);}\n"
+}

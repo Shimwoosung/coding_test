@@ -1,0 +1,45 @@
+{
+  "id": "bs_07",
+  "title": "x 이하의 개수",
+  "stage": 1,
+  "level": 2,
+  "topic": "binary_search",
+  "concept": "binary_search",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "N개의 정수가 주어진다. Q개의 질의 x마다, N개 중 x 이하인 원소의 개수를 출력하라. 정렬 후 upper_bound 로 경계를 찾으면 각 질의 O(log N).",
+  "constraints": [
+    "1 ≤ N, Q ≤ 100,000",
+    "정수의 절댓값 ≤ 1,000,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 둘째 줄 N개의 정수, 셋째 줄 Q, 넷째 줄 Q개의 정수 x.",
+    "output": "각 x 이하인 원소의 개수를 한 줄에 하나씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 정렬 후 upper_bound\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "6\n1 3 3 5 7 9\n3\n3 8 0\n",
+      "output": "3\n5\n0\n"
+    },
+    {
+      "input": "4\n10 20 30 40\n2\n25 40\n",
+      "output": "2\n4\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "5\n-3 -1 0 2 4\n3\n-4 0 100\n",
+      "output": "0\n3\n5\n"
+    },
+    {
+      "input": "1\n5\n2\n5 4\n",
+      "output": "1\n0\n"
+    }
+  ],
+  "hints": [
+    "정렬 후 upper_bound(a.begin(), a.end(), x) - a.begin().",
+    "x 미만이 아니라 '이하'임에 주의 → upper_bound."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);vector<long long>a(n);for(auto&x:a)scanf(\"%lld\",&x);sort(a.begin(),a.end());int q;scanf(\"%d\",&q);string out;while(q--){long long x;scanf(\"%lld\",&x);out+=to_string((long long)(upper_bound(a.begin(),a.end(),x)-a.begin()));out+='\\n';}fputs(out.c_str(),stdout);}\n"
+}

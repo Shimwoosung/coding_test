@@ -1,0 +1,45 @@
+{
+  "id": "tp_07",
+  "title": "두 정렬 배열 병합",
+  "stage": 1,
+  "level": 2,
+  "topic": "two_pointer",
+  "concept": "two_pointer",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "오름차순으로 정렬된 두 배열 A(크기 N), B(크기 M)가 주어진다. 둘을 합쳐 정렬한 결과를 출력하라. 두 포인터로 작은 쪽을 골라가며 O(N+M)에 병합한다(다시 정렬하지 말 것).",
+  "constraints": [
+    "1 ≤ N, M ≤ 1,000,000",
+    "원소의 절댓값 ≤ 1,000,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M, 둘째 줄 A(오름차순), 셋째 줄 B(오름차순).",
+    "output": "병합 정렬 결과를 공백으로 구분해 한 줄에."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 두 포인터로 병합\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3 3\n1 3 5\n2 4 6\n",
+      "output": "1 2 3 4 5 6\n"
+    },
+    {
+      "input": "2 3\n1 10\n2 3 4\n",
+      "output": "1 2 3 4 10\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1 1\n5\n5\n",
+      "output": "5 5\n"
+    },
+    {
+      "input": "3 2\n-3 0 7\n-1 9\n",
+      "output": "-3 -1 0 7 9\n"
+    }
+  ],
+  "hints": [
+    "i, j 포인터로 A[i], B[j] 중 작은 것을 먼저.",
+    "한쪽이 끝나면 나머지를 그대로 출력."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n,m;scanf(\"%d %d\",&n,&m);vector<long long>a(n),b(m);for(auto&x:a)scanf(\"%lld\",&x);for(auto&x:b)scanf(\"%lld\",&x);int i=0,j=0;string out;while(i<n||j<m){if(j>=m||(i<n&&a[i]<=b[j]))out+=to_string(a[i++]);else out+=to_string(b[j++]);out+=' ';}if(!out.empty())out.back()='\\n';fputs(out.c_str(),stdout);}\n"
+}

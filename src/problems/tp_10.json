@@ -1,0 +1,46 @@
+{
+  "id": "tp_10",
+  "title": "합이 정확히 M인 최단 구간",
+  "stage": 2,
+  "level": 3,
+  "topic": "two_pointer",
+  "concept": "two_pointer",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "N개의 양의 정수 수열에서 연속 부분 수열의 합이 정확히 M이 되는 가장 짧은 구간의 길이를 구하라. 없으면 0. 모든 원소가 양수이므로 투 포인터로 O(N).",
+  "constraints": [
+    "1 ≤ N ≤ 1,000,000",
+    "1 ≤ 각 원소 ≤ 10,000",
+    "1 ≤ M ≤ 100,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M, 둘째 줄 N개의 양의 정수.",
+    "output": "합이 정확히 M인 최단 구간의 길이(없으면 0)."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 투 포인터\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5 5\n1 2 3 2 1\n",
+      "output": "2\n"
+    },
+    {
+      "input": "4 7\n1 2 3 1\n",
+      "output": "4\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "3 100\n1 2 3\n",
+      "output": "0\n"
+    },
+    {
+      "input": "5 9\n9 1 1 1 9\n",
+      "output": "1\n"
+    }
+  ],
+  "hints": [
+    "r을 늘려 sum>M이면 줄인다. sum==M일 때 길이 갱신.",
+    "양수이므로 각 r에 대해 합이 M인 l은 최대 하나."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){long long n,m;scanf(\"%lld %lld\",&n,&m);vector<long long>a(n);for(auto&x:a)scanf(\"%lld\",&x);long long sum=0,best=LLONG_MAX;int l=0;for(int r=0;r<n;r++){sum+=a[r];while(sum>m){sum-=a[l++];}if(sum==m)best=min(best,(long long)(r-l+1));}printf(\"%lld\\n\",best==LLONG_MAX?0:best);}\n"
+}

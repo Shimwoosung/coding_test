@@ -1,0 +1,49 @@
+{
+  "id": "tp_06",
+  "title": "회문 판별",
+  "stage": 1,
+  "level": 1,
+  "topic": "two_pointer",
+  "concept": "two_pointer",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "문자열 S가 앞에서 읽으나 뒤에서 읽으나 같은 회문이면 1, 아니면 0을 출력하라. 양 끝에서 안쪽으로 좁혀오는 투 포인터로 O(N).",
+  "constraints": [
+    "1 ≤ |S| ≤ 100,000",
+    "S는 소문자 알파벳"
+  ],
+  "ioDescription": {
+    "input": "문자열 S.",
+    "output": "회문이면 1, 아니면 0."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 양 끝 포인터로 비교\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "level\n",
+      "output": "1\n"
+    },
+    {
+      "input": "hello\n",
+      "output": "0\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "a\n",
+      "output": "1\n"
+    },
+    {
+      "input": "abba\n",
+      "output": "1\n"
+    },
+    {
+      "input": "abca\n",
+      "output": "0\n"
+    }
+  ],
+  "hints": [
+    "l=0, r=N-1 에서 s[l]!=s[r]이면 회문 아님.",
+    "l<r 동안 반복."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){string s;cin>>s;int l=0,r=(int)s.size()-1,ok=1;while(l<r){if(s[l]!=s[r]){ok=0;break;}l++;r--;}printf(\"%d\\n\",ok);}\n"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "so_09",
+  "title": "K번째 수 (정렬)",
+  "stage": 2,
+  "level": 2,
+  "topic": "sorting",
+  "concept": "sorting",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "N개의 수가 주어질 때, 오름차순 정렬했을 때 K번째에 오는 수를 출력하라. 부분 정렬(nth_element)로 평균 O(N)에 구할 수 있다.",
+  "constraints": [
+    "1 ≤ K ≤ N ≤ 5,000,000",
+    "수의 절댓값 ≤ 2,000,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N K, 둘째 줄 N개의 수.",
+    "output": "K번째 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // nth_element 또는 sort\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5 2\n4 1 2 3 5\n",
+      "output": "2\n"
+    },
+    {
+      "input": "3 3\n10 30 20\n",
+      "output": "30\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1 1\n7\n",
+      "output": "7\n"
+    },
+    {
+      "input": "6 4\n6 5 4 3 2 1\n",
+      "output": "4\n"
+    }
+  ],
+  "hints": [
+    "nth_element(a.begin(), a.begin()+(K-1), a.end()) 후 a[K-1].",
+    "K번째는 1-indexed."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n,k;scanf(\"%d %d\",&n,&k);vector<long long>a(n);for(auto&x:a)scanf(\"%lld\",&x);nth_element(a.begin(),a.begin()+(k-1),a.end());printf(\"%lld\\n\",a[k-1]);}\n"
+}

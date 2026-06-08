@@ -1,0 +1,45 @@
+{
+  "id": "bs_08",
+  "title": "공유기 설치",
+  "stage": 3,
+  "level": 3,
+  "topic": "binary_search",
+  "concept": "binary_search",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "수직선 위 N개의 집 좌표가 주어진다. C개의 공유기를 집에 설치할 때, 가장 인접한 두 공유기 사이 거리의 최댓값을 구하라. '거리 D 이상으로 C개를 놓을 수 있는가?'는 단조적이므로 D를 이분 탐색(매개변수 탐색)한다.",
+  "constraints": [
+    "2 ≤ C ≤ N ≤ 200,000",
+    "0 ≤ 좌표 ≤ 1,000,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N C, 다음 N줄에 집 좌표.",
+    "output": "가장 인접한 두 공유기 사이 거리의 최댓값."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 거리 D를 이분 탐색 (매개변수 탐색)\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5 3\n1\n2\n8\n4\n9\n",
+      "output": "3\n"
+    },
+    {
+      "input": "3 2\n1\n5\n9\n",
+      "output": "8\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "2 2\n0\n1000000000\n",
+      "output": "1000000000\n"
+    },
+    {
+      "input": "6 3\n1\n2\n4\n8\n9\n15\n",
+      "output": "7\n"
+    }
+  ],
+  "hints": [
+    "좌표 정렬 후, 거리 mid로 그리디하게 놓아 개수를 센다.",
+    "개수 ≥ C 이면 mid를 늘릴 수 있다 → lo=mid+1, 정답 갱신."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n,c;scanf(\"%d %d\",&n,&c);vector<long long>x(n);for(auto&v:x)scanf(\"%lld\",&v);sort(x.begin(),x.end());long long lo=1,hi=x[n-1]-x[0],ans=0;while(lo<=hi){long long mid=(lo+hi)/2;int cnt=1;long long last=x[0];for(int i=1;i<n;i++)if(x[i]-last>=mid){cnt++;last=x[i];}if(cnt>=c){ans=mid;lo=mid+1;}else hi=mid-1;}printf(\"%lld\\n\",ans);}\n"
+}

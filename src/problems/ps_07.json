@@ -1,0 +1,45 @@
+{
+  "id": "ps_07",
+  "title": "누적 합 출력",
+  "stage": 1,
+  "level": 1,
+  "topic": "prefix_sum",
+  "concept": "prefix_sum",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "N개의 수가 주어질 때, 1번째부터 i번째까지의 합(i=1..N)을 차례로 출력하라. 누적 합의 기본기를 익히는 문제.",
+  "constraints": [
+    "1 ≤ N ≤ 100,000",
+    "정수의 절댓값 ≤ 100,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 둘째 줄 N개의 수.",
+    "output": "각 누적 합을 공백으로 구분해 한 줄에."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 누적하며 출력\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5\n1 2 3 4 5\n",
+      "output": "1 3 6 10 15\n"
+    },
+    {
+      "input": "3\n-1 2 -3\n",
+      "output": "-1 1 -2\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n7\n",
+      "output": "7\n"
+    },
+    {
+      "input": "4\n0 0 5 0\n",
+      "output": "0 0 5 5\n"
+    }
+  ],
+  "hints": [
+    "s += a[i] 를 누적하며 매번 출력.",
+    "출력은 공백으로 구분."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);long long s=0;string out;for(int i=0;i<n;i++){long long x;scanf(\"%lld\",&x);s+=x;out+=to_string(s);out+=' ';}if(!out.empty())out.back()='\\n';fputs(out.c_str(),stdout);}\n"
+}

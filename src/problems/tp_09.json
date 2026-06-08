@@ -1,0 +1,46 @@
+{
+  "id": "tp_09",
+  "title": "합 M 이하 최장 구간",
+  "stage": 2,
+  "level": 2,
+  "topic": "two_pointer",
+  "concept": "two_pointer",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "N개의 양의 정수 수열이 있다. 연속 부분 수열의 합이 M 이하가 되는 가장 긴 구간의 길이를 구하라. 오른쪽 포인터로 늘리고 합이 M을 넘으면 왼쪽 포인터로 줄이는 슬라이딩 윈도우(투 포인터) O(N).",
+  "constraints": [
+    "1 ≤ N ≤ 1,000,000",
+    "1 ≤ 각 원소 ≤ 1,000",
+    "1 ≤ M ≤ 1,000,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M, 둘째 줄 N개의 양의 정수.",
+    "output": "합이 M 이하인 가장 긴 연속 구간의 길이."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 슬라이딩 윈도우\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5 10\n1 2 3 4 5\n",
+      "output": "4\n"
+    },
+    {
+      "input": "4 3\n5 1 1 5\n",
+      "output": "2\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1 1000\n7\n",
+      "output": "1\n"
+    },
+    {
+      "input": "6 6\n1 1 1 1 1 1\n",
+      "output": "6\n"
+    }
+  ],
+  "hints": [
+    "r을 늘리며 sum += a[r]. sum>M이면 sum -= a[l++].",
+    "매 단계 (r-l+1)로 최대 길이 갱신."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){long long n,m;scanf(\"%lld %lld\",&n,&m);vector<long long>a(n);for(auto&x:a)scanf(\"%lld\",&x);long long sum=0,best=0;int l=0;for(int r=0;r<n;r++){sum+=a[r];while(sum>m){sum-=a[l++];}best=max(best,(long long)(r-l+1));}printf(\"%lld\\n\",best);}\n"
+}

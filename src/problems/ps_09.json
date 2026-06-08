@@ -1,0 +1,45 @@
+{
+  "id": "ps_09",
+  "title": "최대 구간 합",
+  "stage": 2,
+  "level": 2,
+  "topic": "prefix_sum",
+  "concept": "prefix_sum",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "N개의 정수 수열에서 연속한 부분 수열의 합 중 최댓값을 구하라(최소 1개 이상 선택). 누적 합 관점에서 '현재까지의 합 - 지금까지 본 최소 누적 합'이 최대가 되는 지점을 찾는다(카데인 알고리즘).",
+  "constraints": [
+    "1 ≤ N ≤ 100,000",
+    "정수의 절댓값 ≤ 1,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 둘째 줄 N개의 정수.",
+    "output": "연속 부분 수열 합의 최댓값."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // cur = max(x, cur + x); best = max(best, cur);\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "10\n10 -4 3 1 5 6 -35 12 21 -1\n",
+      "output": "33\n"
+    },
+    {
+      "input": "3\n-1 -2 -3\n",
+      "output": "-1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n-5\n",
+      "output": "-5\n"
+    },
+    {
+      "input": "5\n2 2 2 2 2\n",
+      "output": "10\n"
+    }
+  ],
+  "hints": [
+    "음수만 있어도 최소 1개는 골라야 한다.",
+    "cur = max(x, cur+x), best = max(best, cur)."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);long long best=LLONG_MIN,cur=0;for(int i=0;i<n;i++){long long x;scanf(\"%lld\",&x);cur=max(x,cur+x);best=max(best,cur);}printf(\"%lld\\n\",best);}\n"
+}

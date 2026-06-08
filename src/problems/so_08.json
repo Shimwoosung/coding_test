@@ -1,0 +1,45 @@
+{
+  "id": "so_08",
+  "title": "국영수",
+  "stage": 2,
+  "level": 2,
+  "topic": "sorting",
+  "concept": "sorting",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "학생 N명의 이름과 국어/영어/수학 점수가 주어진다. 다음 우선순위로 정렬해 이름만 출력하라: ① 국어 내림차순 ② 국어 같으면 영어 오름차순 ③ 둘 다 같으면 수학 내림차순 ④ 셋 다 같으면 이름 사전순 오름차순.",
+  "constraints": [
+    "1 ≤ N ≤ 100,000",
+    "점수 0~100, 이름 길이 ≤ 10(알파벳)"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 다음 N줄에 '이름 국어 영어 수학'.",
+    "output": "정렬된 학생들의 이름을 한 줄에 하나씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 다중 키 비교 함수로 정렬\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\nJunkyu 50 60 100\nSangkeun 80 60 50\nSunyoung 80 70 100\n",
+      "output": "Sangkeun\nSunyoung\nJunkyu\n"
+    },
+    {
+      "input": "2\nabc 90 90 90\nabd 90 90 90\n",
+      "output": "abc\nabd\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "4\na 100 50 50\nb 100 50 60\nc 100 40 99\nd 90 99 99\n",
+      "output": "c\nb\na\nd\n"
+    },
+    {
+      "input": "1\nsolo 0 0 0\n",
+      "output": "solo\n"
+    }
+  ],
+  "hints": [
+    "구조체 + 비교 함수(람다)로 다중 키 정렬.",
+    "각 키의 오름/내림 방향에 주의."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nstruct S{string n;int k,e,m;};\nint main(){int n;scanf(\"%d\",&n);vector<S>v(n);for(auto&s:v){char b[16];scanf(\"%s %d %d %d\",b,&s.k,&s.e,&s.m);s.n=b;}sort(v.begin(),v.end(),[](const S&a,const S&b){if(a.k!=b.k)return a.k>b.k;if(a.e!=b.e)return a.e<b.e;if(a.m!=b.m)return a.m>b.m;return a.n<b.n;});string out;for(auto&s:v){out+=s.n;out+='\\n';}fputs(out.c_str(),stdout);}\n"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "ps_06",
+  "title": "구간 합 (다중 질의)",
+  "stage": 1,
+  "level": 2,
+  "topic": "prefix_sum",
+  "concept": "prefix_sum",
+  "mode": "stdio",
+  "difficulty": "기초",
+  "description": "N개의 수와 M개의 질의가 주어진다. 각 질의 i j 에 대해 i번째부터 j번째까지의 합을 출력하라. 누적 합 배열 P를 만들면 각 질의는 P[j]-P[i-1] 로 O(1).",
+  "constraints": [
+    "1 ≤ N, M ≤ 100,000",
+    "0 ≤ 각 수 ≤ 1,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M, 둘째 줄 N개의 수, 다음 M줄에 i j.",
+    "output": "각 질의의 구간 합을 한 줄에 하나씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 누적 합 P[i]=P[i-1]+a[i]\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5 3\n5 4 3 2 1\n1 3\n2 4\n5 5\n",
+      "output": "12\n9\n1\n"
+    },
+    {
+      "input": "3 1\n1 2 3\n1 3\n",
+      "output": "6\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1 1\n1000\n1 1\n",
+      "output": "1000\n"
+    },
+    {
+      "input": "4 2\n0 0 0 0\n1 4\n2 3\n",
+      "output": "0\n0\n"
+    }
+  ],
+  "hints": [
+    "P[0]=0, P[i]=P[i-1]+a[i].",
+    "구간 [i,j] 합 = P[j]-P[i-1]."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n,m;scanf(\"%d %d\",&n,&m);vector<long long>p(n+1,0);for(int i=1;i<=n;i++){long long x;scanf(\"%lld\",&x);p[i]=p[i-1]+x;}string out;while(m--){int i,j;scanf(\"%d %d\",&i,&j);out+=to_string(p[j]-p[i-1]);out+='\\n';}fputs(out.c_str(),stdout);}\n"
+}

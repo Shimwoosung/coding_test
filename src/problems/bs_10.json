@@ -1,0 +1,45 @@
+{
+  "id": "bs_10",
+  "title": "K번째 수",
+  "stage": 4,
+  "level": 4,
+  "topic": "binary_search",
+  "concept": "binary_search",
+  "mode": "stdio",
+  "difficulty": "심화",
+  "description": "N×N 배열 A에서 A[i][j] = i×j 이다(1-indexed). 이 N² 개의 수를 오름차순 정렬했을 때 K번째 수를 구하라. 직접 정렬은 N²이라 불가능 — '값 x 이하인 원소가 몇 개인가'가 단조 증가하므로 값을 이분 탐색한다. x 이하 개수 = Σ min(x/i, N).",
+  "constraints": [
+    "1 ≤ N ≤ 100,000",
+    "1 ≤ K ≤ min(N², 1,000,000,000)"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 둘째 줄 K.",
+    "output": "K번째 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 값 x를 이분 탐색, x 이하 개수 = sum(min(x/i, N))\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\n7\n",
+      "output": "6\n"
+    },
+    {
+      "input": "4\n4\n",
+      "output": "3\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n1\n",
+      "output": "1\n"
+    },
+    {
+      "input": "10\n50\n",
+      "output": "24\n"
+    }
+  ],
+  "hints": [
+    "답 후보 값 x를 [1, K] 범위에서 이분 탐색.",
+    "x 이하 개수가 K 이상이 되는 가장 작은 x가 답."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){long long n,k;scanf(\"%lld %lld\",&n,&k);long long lo=1,hi=k,ans=1;while(lo<=hi){long long mid=(lo+hi)/2,cnt=0;for(long long i=1;i<=n;i++)cnt+=min(mid/i,n);if(cnt>=k){ans=mid;hi=mid-1;}else lo=mid+1;}printf(\"%lld\\n\",ans);}\n"
+}

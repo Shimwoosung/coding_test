@@ -1,0 +1,45 @@
+{
+  "id": "so_10",
+  "title": "안테나",
+  "stage": 2,
+  "level": 2,
+  "topic": "sorting",
+  "concept": "sorting",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "일직선 위 N개의 집 좌표가 주어진다. 안테나를 한 곳(정수 좌표)에 세워 모든 집까지 거리의 합을 최소로 하려 한다. 그 위치를 출력하라(여러 곳이면 가장 작은 좌표). 거리 합을 최소화하는 점은 '중앙값'이다.",
+  "constraints": [
+    "1 ≤ N ≤ 200,000",
+    "1 ≤ 좌표 ≤ 100,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 둘째 줄 N개의 좌표.",
+    "output": "거리 합을 최소로 하는 안테나 위치."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 정렬 후 중앙값\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4\n5 1 7 9\n",
+      "output": "5\n"
+    },
+    {
+      "input": "3\n1 5 3\n",
+      "output": "3\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n100\n",
+      "output": "100\n"
+    },
+    {
+      "input": "6\n1 2 3 4 5 6\n",
+      "output": "3\n"
+    }
+  ],
+  "hints": [
+    "거리 합 최소 = 중앙값.",
+    "여러 곳이면 가장 작은 좌표 → 정렬 후 a[(N-1)/2]."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n;scanf(\"%d\",&n);vector<int>a(n);for(auto&x:a)scanf(\"%d\",&x);sort(a.begin(),a.end());printf(\"%d\\n\",a[(n-1)/2]);}\n"
+}

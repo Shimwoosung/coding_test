@@ -1,0 +1,46 @@
+{
+  "id": "ps_10",
+  "title": "2차원 구간 합",
+  "stage": 2,
+  "level": 3,
+  "topic": "prefix_sum",
+  "concept": "prefix_sum",
+  "mode": "stdio",
+  "difficulty": "중간",
+  "description": "N×N 격자와 M개의 질의가 주어진다. 각 질의 (x1,y1,x2,y2) 는 왼쪽 위 (x1,y1)부터 오른쪽 아래 (x2,y2)까지 직사각형 영역의 합을 묻는다. 2차원 누적 합으로 각 질의 O(1).",
+  "constraints": [
+    "1 ≤ N ≤ 1,024",
+    "1 ≤ M ≤ 100,000",
+    "1 ≤ x1 ≤ x2 ≤ N, 1 ≤ y1 ≤ y2 ≤ N"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M, 다음 N줄에 격자(각 줄 N개), 다음 M줄에 x1 y1 x2 y2.",
+    "output": "각 질의의 직사각형 합을 한 줄에 하나씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 2D 누적 합: P[i][j]=a+P[i-1][j]+P[i][j-1]-P[i-1][j-1]\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "2 2\n1 2\n3 4\n1 1 2 2\n1 1 1 2\n",
+      "output": "10\n3\n"
+    },
+    {
+      "input": "3 1\n1 1 1\n1 1 1\n1 1 1\n2 2 3 3\n",
+      "output": "4\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1 1\n5\n1 1 1 1\n",
+      "output": "5\n"
+    },
+    {
+      "input": "3 2\n1 2 3\n4 5 6\n7 8 9\n1 1 3 3\n2 1 3 2\n",
+      "output": "45\n24\n"
+    }
+  ],
+  "hints": [
+    "P[i][j] = a[i][j] + P[i-1][j] + P[i][j-1] - P[i-1][j-1].",
+    "영역 합 = P[x2][y2]-P[x1-1][y2]-P[x2][y1-1]+P[x1-1][y1-1]."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;\nint main(){int n,m;scanf(\"%d %d\",&n,&m);vector<vector<long long>>p(n+1,vector<long long>(n+1,0));for(int i=1;i<=n;i++)for(int j=1;j<=n;j++){long long x;scanf(\"%lld\",&x);p[i][j]=x+p[i-1][j]+p[i][j-1]-p[i-1][j-1];}string out;while(m--){int x1,y1,x2,y2;scanf(\"%d %d %d %d\",&x1,&y1,&x2,&y2);out+=to_string(p[x2][y2]-p[x1-1][y2]-p[x2][y1-1]+p[x1-1][y1-1]);out+='\\n';}fputs(out.c_str(),stdout);}\n"
+}
