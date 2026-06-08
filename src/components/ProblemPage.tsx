@@ -27,6 +27,8 @@ export default function ProblemPage({ id, onNavigate }: Props) {
   const [showSolutionModal, setShowSolutionModal] = useState(false);
   const [solved, setSolvedState] = useState(() => isSolved(id));
 
+  // Monaco 에디터 인스턴스(초기화 후 포커스 복구용)
+  const editorRef = useRef<any>(null);
   // 패널 크기(드래그로 조절, localStorage에 기억)
   const workRef = useRef<HTMLDivElement>(null);
   const [descWidth, setDescWidth] = useState(() => clampNum(localStorage.getItem('cpp-desc-w'), 360, 220, 760));
@@ -99,6 +101,8 @@ export default function ProblemPage({ id, onNavigate }: Props) {
   function resetCode() {
     if (confirm('작성한 코드를 보일러플레이트로 되돌릴까요?')) {
       updateCode(problem!.boilerplate);
+      // confirm 으로 포커스가 버튼에 남아 키보드 입력이 안 되는 문제 → 에디터에 다시 포커스
+      setTimeout(() => editorRef.current?.focus(), 0);
     }
   }
 
@@ -181,7 +185,7 @@ export default function ProblemPage({ id, onNavigate }: Props) {
           <button onClick={handleSubmit} disabled={running} className="submit">✔ 제출</button>
         </div>
         <div className="editor-host">
-          <CodeEditor value={code} onChange={updateCode} />
+          <CodeEditor value={code} onChange={updateCode} onMount={(ed) => { editorRef.current = ed; }} />
         </div>
         {/* 높이 조절 핸들 */}
         <div className="hsplit" onMouseDown={startHDrag} title="에디터 / 결과 높이 조절">

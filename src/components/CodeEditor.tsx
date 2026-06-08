@@ -1,17 +1,19 @@
-import Editor from '@monaco-editor/react';
+import Editor, { type OnMount } from '@monaco-editor/react';
 
 interface Props {
   value: string;
   onChange: (v: string) => void;
+  onMount?: OnMount;
 }
 
-export default function CodeEditor({ value, onChange }: Props) {
+export default function CodeEditor({ value, onChange, onMount }: Props) {
   return (
     <Editor
       height="100%"
       defaultLanguage="cpp"
       theme="vs-dark"
       value={value}
+      onMount={onMount}
       onChange={(v) => onChange(v ?? '')}
       options={{
         fontSize: 15,
