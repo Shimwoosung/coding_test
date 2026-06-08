@@ -4,10 +4,14 @@
   "version": "1.0.0",
   "type": "module",
   "description": "브라우저에서 C++를 직접 컴파일/실행하며 코딩테스트를 연습하는 학습 도구 (WASM clang/libc++ 기반, 백엔드 없음)",
+  "author": "Shimwoosung",
+  "main": "electron/main.cjs",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview --host"
+    "preview": "vite preview --host",
+    "electron:dev": "vite build && electron .",
+    "dist:win": "vite build && electron-packager . CppCodingTrainer --platform=win32 --arch=x64 --out=release --overwrite --asar --ignore \"(node_modules|src|vendor|release|public|\\.git|\\.github)\""
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
@@ -18,9 +22,11 @@
     "remark-gfm": "^4.0.0"
   },
   "devDependencies": {
+    "@electron/packager": "^18.4.4",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.2.1",
     "typescript": "^5.6.3",
     "vite": "^6.0.5"
   }

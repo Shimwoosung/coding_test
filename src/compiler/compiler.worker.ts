@@ -18,11 +18,21 @@ function stripAnsi(s: string): string {
   return s.replace(/\x1b\[[0-9;]*m/g, '');
 }
 
+// compileStreaming 이 거부되는 환경(일부 프로토콜/MIME)을 대비해 arrayBuffer 컴파일로 폴백.
+async function compileWasm(url: string): Promise<WebAssembly.Module> {
+  try {
+    return await WebAssembly.compileStreaming(fetch(url));
+  } catch {
+    const buf = await (await fetch(url)).arrayBuffer();
+    return await WebAssembly.compile(buf);
+  }
+}
+
 function initApi(base: string): Promise<void> {
   if (initPromise) return initPromise;
   api = new API({
     readBuffer: (f: string) => fetch(base + f).then(r => r.arrayBuffer()),
-    compileStreaming: (f: string) => WebAssembly.compileStreaming(fetch(base + f)),
+    compileStreaming: (f: string) => compileWasm(base + f),
     hostWrite,
     hostLog,
     clang: 'clang.wasm',
