@@ -12,7 +12,17 @@ export const problemsById: Record<string, Problem> = Object.fromEntries(
 );
 
 // 토픽(개념) 단위로 묶어 보여준다. stage 는 토픽 내부 난이도(0~5)로 사용.
-const TOPIC_ORDER = ['binary_search', 'stack', 'queue', 'greedy', 'dp', 'implementation'];
+// 학습 순서(기초 → 자료구조 → 전략 → 그래프)로 정렬.
+const TOPIC_ORDER = [
+  // 기초
+  'implementation', 'sorting', 'binary_search', 'two_pointer', 'prefix_sum',
+  // 자료구조
+  'stack', 'queue', 'hash',
+  // 전략
+  'greedy', 'dp', 'backtracking', 'bitmask',
+  // 그래프
+  'graph', 'shortest_path', 'dsu', 'tree',
+];
 
 export const topics: string[] = [
   ...TOPIC_ORDER.filter(t => problems.some(p => p.topic === t)),
@@ -20,12 +30,22 @@ export const topics: string[] = [
 ];
 
 export const TOPIC_LABELS: Record<string, string> = {
+  implementation: '구현 / 시뮬',
+  sorting: '정렬',
   binary_search: '이분 탐색',
+  two_pointer: '투 포인터',
+  prefix_sum: '누적 합',
   stack: '스택',
   queue: '큐 / BFS',
+  hash: '해시',
   greedy: '그리디',
   dp: 'DP',
-  implementation: '구현 / 시뮬',
+  backtracking: '백트래킹',
+  bitmask: '비트마스크',
+  graph: '그래프',
+  shortest_path: '최단 경로',
+  dsu: '분리집합 (DSU)',
+  tree: '트리',
 };
 
 export function problemsByTopic(topic: string): Problem[] {

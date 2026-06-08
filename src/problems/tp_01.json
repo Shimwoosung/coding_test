@@ -1,0 +1,36 @@
+{
+  "id": "tp_01",
+  "title": "두 수의 합",
+  "stage": 1,
+  "level": 2,
+  "topic": "two_pointer",
+  "concept": "two_pointer",
+  "mode": "stdio",
+  "description": "서로 다른 두 원소를 골라 합이 X가 되는 (순서 무관) 쌍의 개수를 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 100,000",
+    "1 ≤ 값 ≤ 1,000,000",
+    "1 ≤ X ≤ 2,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 둘째 줄 수열. 셋째 줄 X.",
+    "output": "쌍의 개수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "9\n5 12 7 10 9 1 2 3 11\n10\n",
+      "output": "2\n"
+    },
+    {
+      "input": "2\n1 9\n10\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "정렬 후 lo=0, hi=N-1 양끝 포인터.",
+    "합이 X보다 작으면 lo++, 크면 hi--, 같으면 카운트 후 둘 다 이동."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n;cin>>n;vector<int>a(n);for(auto&x:a)cin>>x;int X;cin>>X;sort(a.begin(),a.end());int lo=0,hi=n-1;long long c=0;while(lo<hi){int s=a[lo]+a[hi];if(s==X){c++;lo++;hi--;}else if(s<X)lo++;else hi--;}cout<<c<<\"\\n\";}\n"
+}

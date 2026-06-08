@@ -1,0 +1,35 @@
+{
+  "id": "hs_03",
+  "title": "듣보잡",
+  "stage": 2,
+  "level": 2,
+  "topic": "hash",
+  "concept": "hash",
+  "mode": "stdio",
+  "description": "듣도 못한 사람 명단과 보도 못한 사람 명단의 교집합(둘 다에 있는 사람) 수와 이름을 사전순으로 출력하라.",
+  "constraints": [
+    "1 ≤ N, M ≤ 500,000",
+    "이름 길이 ≤ 20"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M. 다음 N줄 명단1. 다음 M줄 명단2.",
+    "output": "첫 줄 교집합 수, 이후 이름을 사전순으로 한 줄씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3 4\nohhenrie\ncharlie\nbaesangwook\nbaesangwook\nohhenrie\nclarus\nstephanie\n",
+      "output": "2\nbaesangwook\nohhenrie\n"
+    },
+    {
+      "input": "1 1\na\nb\n",
+      "output": "0\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "한쪽을 set에 넣고 다른 쪽을 조회.",
+    "결과를 정렬(또는 set<string>)해 출력."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n,m;cin>>n>>m;unordered_set<string>a;a.reserve(n*2);for(int i=0;i<n;i++){string s;cin>>s;a.insert(s);}vector<string>res;for(int i=0;i<m;i++){string s;cin>>s;if(a.count(s))res.push_back(s);}sort(res.begin(),res.end());cout<<res.size()<<\"\\n\";string o;for(auto&s:res)o+=s+\"\\n\";cout<<o;}\n"
+}

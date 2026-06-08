@@ -1,0 +1,35 @@
+{
+  "id": "ds_03",
+  "title": "여행 가자",
+  "stage": 2,
+  "level": 3,
+  "topic": "dsu",
+  "concept": "dsu",
+  "mode": "stdio",
+  "description": "N개의 도시와 연결 정보가 주어진다. 여행 계획에 있는 도시들이 모두 같은 연결 집합에 속하면 YES, 아니면 NO.",
+  "constraints": [
+    "1 ≤ N ≤ 200",
+    "여행 도시 수 ≤ 1,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 둘째 줄 M(여행 도시 수). 다음 N줄 N×N 연결행렬. 마지막 줄 여행 계획.",
+    "output": "YES 또는 NO."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3 3\n0 1 0\n1 0 1\n0 1 0\n1 2 3\n",
+      "output": "YES\n"
+    },
+    {
+      "input": "3 2\n0 0 0\n0 0 0\n0 0 0\n1 3\n",
+      "output": "NO\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "연결행렬 1인 곳을 union.",
+    "여행 계획 도시들의 루트가 모두 같은지 확인."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;vector<int>p;\nint f(int x){return p[x]==x?x:p[x]=f(p[x]);}\nint main(){int n,m;cin>>n>>m;p.resize(n+1);for(int i=1;i<=n;i++)p[i]=i;for(int i=1;i<=n;i++)for(int j=1;j<=n;j++){int x;cin>>x;if(x)p[f(i)]=f(j);}vector<int>plan(m);for(auto&x:plan)cin>>x;bool ok=true;for(int i=1;i<m;i++)if(f(plan[i])!=f(plan[0])){ok=false;break;}cout<<(ok?\"YES\":\"NO\")<<\"\\n\";}\n"
+}

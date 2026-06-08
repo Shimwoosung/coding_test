@@ -1,0 +1,35 @@
+{
+  "id": "ps_03",
+  "title": "나머지 합",
+  "stage": 2,
+  "level": 3,
+  "topic": "prefix_sum",
+  "concept": "prefix_sum",
+  "mode": "stdio",
+  "description": "연속 부분 수열의 합이 M의 배수가 되는 구간의 개수를 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 1,000,000",
+    "2 ≤ M ≤ 1,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M. 둘째 줄 수열.",
+    "output": "합이 M의 배수인 구간 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5 3\n1 2 3 1 2\n",
+      "output": "7\n"
+    },
+    {
+      "input": "3 2\n2 4 6\n",
+      "output": "6\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "누적합을 M으로 나눈 나머지가 같은 두 지점 사이 구간합은 M의 배수.",
+    "나머지별 개수를 세서 nC2 합. pre[0]도 포함."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){long long n,m;scanf(\"%lld %lld\",&n,&m);vector<long long>cnt(m,0);long long pre=0,ans=0;cnt[0]=1;for(int i=0;i<n;i++){long long x;scanf(\"%lld\",&x);pre=(pre+x)%m;ans+=cnt[pre];cnt[pre]++;}printf(\"%lld\\n\",ans);}\n"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "ps_02",
+  "title": "2차원 구간 합",
+  "stage": 2,
+  "level": 2,
+  "topic": "prefix_sum",
+  "concept": "prefix_sum",
+  "mode": "stdio",
+  "description": "N×N 표와 Q개의 질의(x1 y1 x2 y2)가 주어진다. 각 직사각형 영역의 합을 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 1,024",
+    "1 ≤ Q ≤ 100,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N Q. 다음 N줄 표. 다음 Q줄 x1 y1 x2 y2.",
+    "output": "각 질의의 영역 합을 한 줄씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4 3\n1 2 3 4\n2 3 4 5\n3 4 5 6\n4 5 6 7\n2 2 3 4\n3 4 3 4\n1 1 4 4\n",
+      "output": "27\n6\n64\n"
+    },
+    {
+      "input": "2 1\n1 1\n1 1\n1 1 2 2\n",
+      "output": "4\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "2D 누적합 S[i][j].",
+    "영역합 = S[x2][y2]-S[x1-1][y2]-S[x2][y1-1]+S[x1-1][y1-1]."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n,q;scanf(\"%d %d\",&n,&q);vector<vector<long long>>S(n+1,vector<long long>(n+1,0));for(int i=1;i<=n;i++)for(int j=1;j<=n;j++){long long x;scanf(\"%lld\",&x);S[i][j]=x+S[i-1][j]+S[i][j-1]-S[i-1][j-1];}string o;while(q--){int a,b,c,d;scanf(\"%d %d %d %d\",&a,&b,&c,&d);o+=to_string(S[c][d]-S[a-1][d]-S[c][b-1]+S[a-1][b-1])+\"\\n\";}printf(\"%s\",o.c_str());}\n"
+}

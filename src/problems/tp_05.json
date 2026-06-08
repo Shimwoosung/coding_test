@@ -1,0 +1,39 @@
+{
+  "id": "tp_05",
+  "title": "연속된 자연수의 합",
+  "stage": 1,
+  "level": 2,
+  "topic": "two_pointer",
+  "concept": "two_pointer",
+  "mode": "stdio",
+  "description": "N을 연속된 자연수의 합으로 나타내는 방법의 수를 구하라(N 자기 자신 = 길이 1도 포함).",
+  "constraints": [
+    "1 ≤ N ≤ 10,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N.",
+    "output": "방법의 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "15\n",
+      "output": "4\n"
+    },
+    {
+      "input": "1\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "100\n",
+      "output": "3\n"
+    }
+  ],
+  "hints": [
+    "1..N 위에서 투포인터로 구간합을 N에 맞춤.",
+    "합 < N이면 hi++, > N이면 lo++, == N이면 카운트 후 lo++."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){long long N;cin>>N;long long lo=1,hi=1,sum=1,cnt=0;while(lo<=N){if(sum==N){cnt++;sum-=lo++;}else if(sum<N){hi++;sum+=hi;}else{sum-=lo++;}}cout<<cnt<<\"\\n\";}\n"
+}

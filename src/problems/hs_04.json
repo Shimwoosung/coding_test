@@ -1,0 +1,35 @@
+{
+  "id": "hs_04",
+  "title": "출석 체크",
+  "stage": 1,
+  "level": 2,
+  "topic": "hash",
+  "concept": "hash",
+  "mode": "stdio",
+  "description": "사람들이 회사에 들어오고(enter) 나간다(leave). 마지막에 회사에 남아 있는 사람을 사전 역순으로 출력하라.",
+  "constraints": [
+    "1 ≤ N ≤ 1,000,000",
+    "이름 길이 ≤ 5"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 다음 N줄 이름 enter/leave.",
+    "output": "남아 있는 사람을 사전 역순으로 한 줄씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4\nLee enter\nLee leave\nLee enter\nKim enter\n",
+      "output": "Lee\nKim\n"
+    },
+    {
+      "input": "2\na enter\nb enter\n",
+      "output": "b\na\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "map<string,int> 혹은 set으로 enter 시 추가, leave 시 제거.",
+    "마지막에 역순 정렬해 출력."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n;cin>>n;set<string>st;for(int i=0;i<n;i++){string name,op;cin>>name>>op;if(op==\"enter\")st.insert(name);else st.erase(name);}string o;for(auto it=st.rbegin();it!=st.rend();++it)o+=*it+\"\\n\";cout<<o;}\n"
+}

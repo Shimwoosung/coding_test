@@ -1,0 +1,35 @@
+{
+  "id": "ps_01",
+  "title": "구간 합 구하기",
+  "stage": 1,
+  "level": 2,
+  "topic": "prefix_sum",
+  "concept": "prefix_sum",
+  "mode": "stdio",
+  "description": "수 N개와 Q개의 질의가 주어진다. 각 질의 i j에 대해 i번째부터 j번째까지의 합을 구하라.",
+  "constraints": [
+    "1 ≤ N, Q ≤ 100,000",
+    "|값| ≤ 1,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N Q. 둘째 줄 수열. 다음 Q줄 i j.",
+    "output": "각 질의의 구간 합을 한 줄씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5 3\n5 4 3 2 1\n1 3\n2 4\n5 5\n",
+      "output": "12\n9\n1\n"
+    },
+    {
+      "input": "3 1\n1 2 3\n1 3\n",
+      "output": "6\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "누적합 pre[i]=a[1..i] 합.",
+    "구간합(i,j)=pre[j]-pre[i-1]."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n,q;scanf(\"%d %d\",&n,&q);vector<long long>pre(n+1,0);for(int i=1;i<=n;i++){long long x;scanf(\"%lld\",&x);pre[i]=pre[i-1]+x;}string o;while(q--){int i,j;scanf(\"%d %d\",&i,&j);o+=to_string(pre[j]-pre[i-1])+\"\\n\";}printf(\"%s\",o.c_str());}\n"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "so_04",
+  "title": "단어 정렬",
+  "stage": 2,
+  "level": 2,
+  "topic": "sorting",
+  "concept": "sorting",
+  "mode": "stdio",
+  "description": "단어들을 (1)길이 오름차순 (2)길이가 같으면 사전순으로 정렬하라. 중복은 한 번만 출력한다.",
+  "constraints": [
+    "1 ≤ N ≤ 20,000",
+    "단어 길이 ≤ 50"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 다음 N줄 단어.",
+    "output": "조건대로 정렬된 단어를 한 줄씩(중복 제거)."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "13\nbut\ni\nwont\nhesitate\nno\nmore\nno\nmore\nit\ncannot\nwait\nim\nyours\n",
+      "output": "i\nim\nit\nno\nbut\nmore\nwait\nwont\nyours\ncannot\nhesitate\n"
+    },
+    {
+      "input": "3\nz\na\na\n",
+      "output": "a\nz\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "set으로 중복 제거 후 정렬, 또는 정렬+unique.",
+    "비교: 길이 먼저, 그다음 사전순."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n;cin>>n;vector<string>v(n);for(auto&s:v)cin>>s;sort(v.begin(),v.end());sort(v.begin(),v.end(),[](const string&a,const string&b){if(a.size()!=b.size())return a.size()<b.size();return a<b;});v.erase(unique(v.begin(),v.end()),v.end());string o;for(auto&s:v)o+=s+\"\\n\";cout<<o;}\n"
+}

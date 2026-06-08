@@ -1,0 +1,36 @@
+{
+  "id": "gp_04",
+  "title": "이분 그래프",
+  "stage": 2,
+  "level": 2,
+  "topic": "graph",
+  "concept": "graph",
+  "mode": "stdio",
+  "description": "그래프의 정점을 두 색으로 칠해 인접한 정점끼리 다른 색이 되게 할 수 있으면 이분 그래프다. 각 그래프가 이분 그래프인지 YES/NO로 판별하라.",
+  "constraints": [
+    "1 ≤ K ≤ 5",
+    "1 ≤ V ≤ 20,000",
+    "1 ≤ E ≤ 200,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 K(테스트 수). 각 테스트: V E, 이후 E줄 간선.",
+    "output": "각 테스트마다 YES 또는 NO."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "2\n3 2\n1 3\n2 3\n4 4\n1 2\n2 3\n3 4\n4 2\n",
+      "output": "YES\nNO\n"
+    },
+    {
+      "input": "1\n2 1\n1 2\n",
+      "output": "YES\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "BFS/DFS로 색을 번갈아 칠하기.",
+    "인접 정점이 같은 색이면 이분 그래프 아님."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int k;cin>>k;while(k--){int v,e;cin>>v>>e;vector<vector<int>>g(v+1);for(int i=0;i<e;i++){int a,b;cin>>a>>b;g[a].push_back(b);g[b].push_back(a);}vector<int>col(v+1,0);bool ok=true;for(int s=1;s<=v&&ok;s++){if(col[s])continue;queue<int>q;q.push(s);col[s]=1;while(!q.empty()&&ok){int u=q.front();q.pop();for(int w:g[u]){if(!col[w]){col[w]=-col[u];q.push(w);}else if(col[w]==col[u]){ok=false;break;}}}}cout<<(ok?\"YES\":\"NO\")<<\"\\n\";}}\n"
+}

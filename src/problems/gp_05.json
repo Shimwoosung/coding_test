@@ -1,0 +1,35 @@
+{
+  "id": "gp_05",
+  "title": "유기농 배추",
+  "stage": 2,
+  "level": 2,
+  "topic": "graph",
+  "concept": "graph",
+  "mode": "stdio",
+  "description": "배추밭(M×N)에 배추가 있는 칸이 표시된다. 상하좌우로 인접한 배추는 한 마리 지렁이가 보호한다. 필요한 지렁이의 최소 수(=연결 덩어리 수)를 구하라.",
+  "constraints": [
+    "1 ≤ M, N ≤ 50",
+    "배추 수 K"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 T. 각 테스트: M N K, 이후 K줄 배추 좌표 X Y.",
+    "output": "각 테스트마다 지렁이 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "1\n10 8 17\n0 0\n1 0\n1 1\n4 2\n4 3\n4 5\n2 4\n3 4\n7 4\n8 4\n9 4\n7 5\n8 5\n9 5\n7 6\n8 6\n9 6\n",
+      "output": "5\n"
+    },
+    {
+      "input": "1\n1 1 1\n0 0\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "배추 좌표로 격자 채우고 연결 요소 개수 세기.",
+    "격자 BFS/DFS."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int t;cin>>t;while(t--){int m,n,k;cin>>m>>n>>k;vector<vector<int>>g(m,vector<int>(n,0));for(int i=0;i<k;i++){int x,y;cin>>x>>y;g[x][y]=1;}int cnt=0,dx[]={0,0,1,-1},dy[]={1,-1,0,0};for(int i=0;i<m;i++)for(int j=0;j<n;j++)if(g[i][j]==1){cnt++;queue<pair<int,int>>q;q.push({i,j});g[i][j]=0;while(!q.empty()){auto[x,y]=q.front();q.pop();for(int d=0;d<4;d++){int nx=x+dx[d],ny=y+dy[d];if(nx>=0&&ny>=0&&nx<m&&ny<n&&g[nx][ny]==1){g[nx][ny]=0;q.push({nx,ny});}}}}cout<<cnt<<\"\\n\";}}\n"
+}

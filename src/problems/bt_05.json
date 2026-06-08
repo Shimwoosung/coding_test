@@ -1,0 +1,30 @@
+{
+  "id": "bt_05",
+  "title": "암호 만들기",
+  "stage": 2,
+  "level": 3,
+  "topic": "backtracking",
+  "concept": "backtracking",
+  "mode": "stdio",
+  "description": "주어진 알파벳들 중 L개를 골라 암호를 만든다. 암호는 최소 1개의 모음(a,e,i,o,u)과 최소 2개의 자음으로 이루어지고, 사전순(오름차순) 배열이어야 한다. 가능한 모든 암호를 사전순으로 출력하라.",
+  "constraints": [
+    "1 ≤ L ≤ C ≤ 15"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 L C. 둘째 줄 C개의 서로 다른 소문자(공백 구분).",
+    "output": "가능한 암호를 사전순으로 한 줄씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4 6\na t c i s w\n",
+      "output": "acis\nacit\naciw\nacst\nacsw\nactw\naist\naisw\naitw\nastw\ncist\ncisw\ncitw\nistw\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "문자들을 먼저 정렬 후 조합(start 인덱스) 백트래킹.",
+    "길이 L 되면 모음≥1, 자음≥2 확인."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int L,C;vector<char>ch;string o;\nbool vow(char c){return c=='a'||c=='e'||c=='i'||c=='o'||c=='u';}\nvoid bt(int start,string cur){if((int)cur.size()==L){int v=0,co=0;for(char c:cur)vow(c)?v++:co++;if(v>=1&&co>=2)o+=cur+\"\\n\";return;}for(int i=start;i<C;i++)bt(i+1,cur+ch[i]);}\nint main(){cin>>L>>C;ch.resize(C);for(auto&c:ch)cin>>c;sort(ch.begin(),ch.end());bt(0,\"\");cout<<o;}\n"
+}

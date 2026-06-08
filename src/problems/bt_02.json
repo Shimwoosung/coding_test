@@ -1,0 +1,34 @@
+{
+  "id": "bt_02",
+  "title": "N과 M (2)",
+  "stage": 1,
+  "level": 2,
+  "topic": "backtracking",
+  "concept": "backtracking",
+  "mode": "stdio",
+  "description": "1~N에서 중복 없이 M개를 고른 오름차순 조합을 모두 사전순으로 출력하라.",
+  "constraints": [
+    "1 ≤ M ≤ N ≤ 8"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M.",
+    "output": "각 조합을 공백 구분으로 한 줄씩(사전순)."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4 2\n",
+      "output": "1 2\n1 3\n1 4\n2 3\n2 4\n3 4\n"
+    },
+    {
+      "input": "3 3\n",
+      "output": "1 2 3\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "시작 인덱스를 넘겨 항상 증가하는 수만 선택.",
+    "조합이므로 used 대신 start 사용."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int n,m;vector<int>cur;string o;\nvoid bt(int start){if((int)cur.size()==m){for(int i=0;i<m;i++){o+=to_string(cur[i]);o+=(i+1<m?' ':'\\n');}return;}for(int i=start;i<=n;i++){cur.push_back(i);bt(i+1);cur.pop_back();}}\nint main(){cin>>n>>m;bt(1);cout<<o;}\n"
+}

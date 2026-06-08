@@ -1,0 +1,35 @@
+{
+  "id": "bm_05",
+  "title": "부분집합 합의 가짓수",
+  "stage": 2,
+  "level": 2,
+  "topic": "bitmask",
+  "concept": "bitmask",
+  "mode": "stdio",
+  "description": "N개의 양의 정수로 만들 수 있는 서로 다른(공집합 제외) 부분집합 합의 개수를 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 20",
+    "1 ≤ 값 ≤ 100,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 둘째 줄 수열.",
+    "output": "서로 다른 부분집합 합의 개수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\n1 2 3\n",
+      "output": "6\n"
+    },
+    {
+      "input": "2\n5 5\n",
+      "output": "2\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "2^N 부분집합을 비트마스크로 순회하며 합을 set에 넣기.",
+    "공집합(합 0)은 제외."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n;cin>>n;vector<long long>a(n);for(auto&x:a)cin>>x;set<long long>s;for(int m=1;m<(1<<n);m++){long long sum=0;for(int i=0;i<n;i++)if(m&(1<<i))sum+=a[i];s.insert(sum);}cout<<s.size()<<\"\\n\";}\n"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "bm_03",
+  "title": "스타트와 링크",
+  "stage": 2,
+  "level": 3,
+  "topic": "bitmask",
+  "concept": "bitmask",
+  "mode": "stdio",
+  "description": "N명(짝수)을 N/2씩 두 팀으로 나눈다. 각 팀의 능력치 합(쌍의 시너지 합)의 차이를 최소화하라.",
+  "constraints": [
+    "4 ≤ N ≤ 20(짝수)",
+    "능력치 ≤ 100"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 다음 N줄 N×N 시너지 행렬 S[i][j].",
+    "output": "두 팀 능력치 차의 최솟값."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4\n0 1 2 3\n4 0 5 6\n7 1 0 2\n3 4 5 0\n",
+      "output": "0\n"
+    },
+    {
+      "input": "6\n0 1 2 3 4 5\n1 0 2 3 4 5\n1 2 0 3 4 5\n1 2 3 0 4 5\n1 2 3 4 0 5\n1 2 3 4 5 0\n",
+      "output": "2\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "N비트 중 N/2개를 켜는 모든 조합을 비트마스크로.",
+    "팀 능력치 = 같은 팀 i,j 쌍의 S[i][j]+S[j][i] 합."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n;cin>>n;vector<vector<int>>s(n,vector<int>(n));for(auto&r:s)for(auto&x:r)cin>>x;int best=INT_MAX;for(int m=0;m<(1<<n);m++){if(__builtin_popcount(m)!=n/2)continue;int A=0,B=0;for(int i=0;i<n;i++)for(int j=0;j<n;j++){if(i==j)continue;bool ai=(m>>i)&1,aj=(m>>j)&1;if(ai&&aj)A+=s[i][j];else if(!ai&&!aj)B+=s[i][j];}best=min(best,abs(A-B));}cout<<best<<\"\\n\";}\n"
+}

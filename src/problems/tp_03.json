@@ -1,0 +1,36 @@
+{
+  "id": "tp_03",
+  "title": "수들의 합",
+  "stage": 2,
+  "level": 2,
+  "topic": "two_pointer",
+  "concept": "two_pointer",
+  "mode": "stdio",
+  "description": "연속된 부분 수열의 합이 정확히 M이 되는 경우의 수를 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 10,000",
+    "1 ≤ M ≤ 300,000,000",
+    "1 ≤ 값 ≤ 30,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M. 둘째 줄 수열.",
+    "output": "경우의 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "4 2\n1 1 1 1\n",
+      "output": "3\n"
+    },
+    {
+      "input": "10 5\n1 2 3 4 2 5 3 1 1 2\n",
+      "output": "3\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "투포인터로 합을 M에 맞춤.",
+    "합 < M이면 hi 확장, 합 ≥ M이면 lo 축소. 같으면 카운트."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){long long n,M;cin>>n>>M;vector<long long>a(n);for(auto&x:a)cin>>x;long long lo=0,sum=0,cnt=0;for(long long hi=0;hi<n;hi++){sum+=a[hi];while(sum>M)sum-=a[lo++];if(sum==M)cnt++;}cout<<cnt<<\"\\n\";}\n"
+}

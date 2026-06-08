@@ -1,0 +1,35 @@
+{
+  "id": "bm_02",
+  "title": "부분수열의 합",
+  "stage": 2,
+  "level": 2,
+  "topic": "bitmask",
+  "concept": "bitmask",
+  "mode": "stdio",
+  "description": "N개의 정수에서 공집합이 아닌 부분수열을 골라 그 합이 S가 되는 경우의 수를 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 20",
+    "|S| ≤ 1,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N S. 둘째 줄 수열.",
+    "output": "합이 S인 부분수열의 개수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5 0\n-7 -3 -2 5 8\n",
+      "output": "1\n"
+    },
+    {
+      "input": "3 3\n1 2 3\n",
+      "output": "2\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "N ≤ 20이면 2^N 부분집합 전수 조사(비트마스크).",
+    "비트가 켜진 인덱스의 값을 더해 S와 비교."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n;long long S;cin>>n>>S;vector<long long>a(n);for(auto&x:a)cin>>x;long long cnt=0;for(int m=1;m<(1<<n);m++){long long s=0;for(int i=0;i<n;i++)if(m&(1<<i))s+=a[i];if(s==S)cnt++;}cout<<cnt<<\"\\n\";}\n"
+}

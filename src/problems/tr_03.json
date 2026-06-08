@@ -1,0 +1,34 @@
+{
+  "id": "tr_03",
+  "title": "트리의 지름",
+  "stage": 3,
+  "level": 3,
+  "topic": "tree",
+  "concept": "tree",
+  "mode": "stdio",
+  "description": "가중치 트리에서 두 노드 사이 거리의 최댓값(트리의 지름)을 구하라.",
+  "constraints": [
+    "1 ≤ V ≤ 100,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 V. 다음 V줄: 노드번호와 (연결노드 가중치)들이 이어지고 -1로 끝남.",
+    "output": "트리의 지름."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5\n1 3 2 -1\n2 4 4 -1\n3 1 2 4 3 -1\n4 2 4 3 3 5 6 -1\n5 4 6 -1\n",
+      "output": "11\n"
+    },
+    {
+      "input": "2\n1 2 5 -1\n2 1 5 -1\n",
+      "output": "5\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "임의 노드에서 가장 먼 노드 A를 BFS/DFS로 찾고, A에서 가장 먼 거리가 지름.",
+    "2회 탐색이면 충분."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;vector<vector<pair<int,long long>>>g;\npair<long long,int> far(int s,int n){vector<long long>d(n+1,-1);queue<int>q;q.push(s);d[s]=0;long long mx=0;int idx=s;while(!q.empty()){int u=q.front();q.pop();for(auto[v,w]:g[u])if(d[v]<0){d[v]=d[u]+w;if(d[v]>mx){mx=d[v];idx=v;}q.push(v);}}return{mx,idx};}\nint main(){int n;scanf(\"%d\",&n);g.assign(n+1,{});for(int i=0;i<n;i++){int u;scanf(\"%d\",&u);int v;while(scanf(\"%d\",&v)&&v!=-1){long long w;scanf(\"%lld\",&w);g[u].push_back({v,w});}}auto a=far(1,n);auto b=far(a.second,n);printf(\"%lld\\n\",b.first);}\n"
+}

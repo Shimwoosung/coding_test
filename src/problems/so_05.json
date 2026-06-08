@@ -1,0 +1,35 @@
+{
+  "id": "so_05",
+  "title": "좌표 압축",
+  "stage": 2,
+  "level": 2,
+  "topic": "sorting",
+  "concept": "sorting",
+  "mode": "stdio",
+  "description": "배열의 각 원소 X에 대해, X보다 작은 서로 다른 값의 개수를 출력하라(좌표 압축).",
+  "constraints": [
+    "1 ≤ N ≤ 1,000,000",
+    "|X| ≤ 10^9"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 둘째 줄 N개 정수.",
+    "output": "압축된 값들을 공백으로 한 줄에."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5\n2 4 -10 4 -9\n",
+      "output": "2 3 0 3 1\n"
+    },
+    {
+      "input": "6\n1000 999 1000 999 1000 999\n",
+      "output": "1 0 1 0 1 0\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "정렬 후 중복 제거한 배열에서 lower_bound로 순위(인덱스) 찾기.",
+    "그 인덱스가 곧 '나보다 작은 서로 다른 값의 개수'."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n;scanf(\"%d\",&n);vector<int>a(n);for(auto&x:a)scanf(\"%d\",&x);vector<int>s=a;sort(s.begin(),s.end());s.erase(unique(s.begin(),s.end()),s.end());string o;for(int x:a){int r=lower_bound(s.begin(),s.end(),x)-s.begin();o+=to_string(r)+\" \";}o.pop_back();printf(\"%s\\n\",o.c_str());}\n"
+}

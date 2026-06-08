@@ -1,0 +1,35 @@
+{
+  "id": "so_03",
+  "title": "나이순 정렬",
+  "stage": 1,
+  "level": 2,
+  "topic": "sorting",
+  "concept": "sorting",
+  "mode": "stdio",
+  "description": "회원의 나이와 이름이 주어진다. 나이 오름차순으로 정렬하되, 나이가 같으면 가입한(입력) 순서를 유지해 출력하라.",
+  "constraints": [
+    "1 ≤ N ≤ 100,000",
+    "1 ≤ 나이 ≤ 200"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 다음 N줄 나이 이름.",
+    "output": "정렬된 나이 이름 한 줄씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3\n21 Junkyu\n21 Dohyun\n20 Sunyoung\n",
+      "output": "20 Sunyoung\n21 Junkyu\n21 Dohyun\n"
+    },
+    {
+      "input": "2\n30 a\n30 b\n",
+      "output": "30 a\n30 b\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "stable_sort로 동일 나이의 입력 순서 보존.",
+    "또는 (나이, 입력인덱스)로 정렬."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n;cin>>n;vector<pair<int,string>>v(n);for(auto&p:v)cin>>p.first>>p.second;stable_sort(v.begin(),v.end(),[](auto&a,auto&b){return a.first<b.first;});string o;for(auto&p:v)o+=to_string(p.first)+\" \"+p.second+\"\\n\";cout<<o;}\n"
+}

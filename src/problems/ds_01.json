@@ -1,0 +1,35 @@
+{
+  "id": "ds_01",
+  "title": "집합의 표현",
+  "stage": 1,
+  "level": 3,
+  "topic": "dsu",
+  "concept": "dsu",
+  "mode": "stdio",
+  "description": "0~n의 합집합 연산(0 a b)과 같은 집합 여부 질의(1 a b)를 처리하라. 질의는 YES/NO로 답한다.",
+  "constraints": [
+    "1 ≤ n ≤ 1,000,000",
+    "1 ≤ m ≤ 100,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 n m. 다음 m줄 연산.",
+    "output": "질의(1)마다 YES 또는 NO."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "7 8\n0 1 3\n1 1 7\n0 7 6\n1 7 1\n0 3 7\n0 4 2\n0 1 1\n1 1 1\n",
+      "output": "NO\nNO\nYES\n"
+    },
+    {
+      "input": "2 1\n1 0 1\n",
+      "output": "NO\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "Union-Find: find(경로 압축) + union(랭크/사이즈).",
+    "같은 루트면 YES."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int p[1000001];\nint f(int x){return p[x]==x?x:p[x]=f(p[x]);}\nint main(){int n,m;scanf(\"%d %d\",&n,&m);for(int i=0;i<=n;i++)p[i]=i;string o;while(m--){int c,a,b;scanf(\"%d %d %d\",&c,&a,&b);if(c==0){p[f(a)]=f(b);}else{o+=(f(a)==f(b)?\"YES\":\"NO\");o+='\\n';}}printf(\"%s\",o.c_str());}\n"
+}

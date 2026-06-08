@@ -1,0 +1,35 @@
+{
+  "id": "ps_05",
+  "title": "최대 K연속합",
+  "stage": 1,
+  "level": 2,
+  "topic": "prefix_sum",
+  "concept": "prefix_sum",
+  "mode": "stdio",
+  "description": "N개의 온도 중 연속한 K일의 합이 최대가 되는 값을 구하라.",
+  "constraints": [
+    "1 ≤ K ≤ N ≤ 100,000",
+    "|온도| ≤ 100"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N K. 둘째 줄 N개 온도.",
+    "output": "연속 K일 합의 최댓값."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "10 2\n3 -2 -4 -9 0 3 7 13 8 -3\n",
+      "output": "21\n"
+    },
+    {
+      "input": "5 5\n1 2 3 4 5\n",
+      "output": "15\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "누적합 또는 슬라이딩 윈도우.",
+    "윈도우를 한 칸 옮길 때 들어오는 값 더하고 나가는 값 뺀다."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n,k;cin>>n>>k;vector<int>a(n);for(auto&x:a)cin>>x;long long s=0;for(int i=0;i<k;i++)s+=a[i];long long best=s;for(int i=k;i<n;i++){s+=a[i]-a[i-k];best=max(best,s);}cout<<best<<\"\\n\";}\n"
+}

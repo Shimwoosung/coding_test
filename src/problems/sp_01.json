@@ -1,0 +1,36 @@
+{
+  "id": "sp_01",
+  "title": "다익스트라 기본",
+  "stage": 2,
+  "level": 3,
+  "topic": "shortest_path",
+  "concept": "shortest_path",
+  "mode": "stdio",
+  "description": "정점 V, 간선 E, 시작 정점 K가 주어진 방향 그래프에서 K로부터 각 정점까지 최단 거리를 구하라. 도달 불가는 INF로 출력.",
+  "constraints": [
+    "1 ≤ V ≤ 20,000",
+    "1 ≤ E ≤ 300,000",
+    "가중치 ≥ 0"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 V E. 둘째 줄 K. 다음 E줄 u v w.",
+    "output": "정점 1..V의 최단 거리를 한 줄씩(불가는 INF)."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5 6\n1\n5 1 1\n1 2 2\n1 3 3\n2 3 4\n2 4 5\n3 4 6\n",
+      "output": "0\n2\n3\n7\nINF\n"
+    },
+    {
+      "input": "2 1\n1\n1 2 10\n",
+      "output": "0\n10\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "우선순위 큐(최소 힙) 다익스트라.",
+    "dist 초기값 무한, 더 짧은 거리로 갱신 시에만 push."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int v,e;scanf(\"%d %d\",&v,&e);int k;scanf(\"%d\",&k);vector<vector<pair<int,int>>>g(v+1);for(int i=0;i<e;i++){int a,b,c;scanf(\"%d %d %d\",&a,&b,&c);g[a].push_back({b,c});}vector<long long>d(v+1,LLONG_MAX);priority_queue<pair<long long,int>,vector<pair<long long,int>>,greater<>>pq;d[k]=0;pq.push({0,k});while(!pq.empty()){auto[dist,u]=pq.top();pq.pop();if(dist>d[u])continue;for(auto[nx,w]:g[u])if(d[u]+w<d[nx]){d[nx]=d[u]+w;pq.push({d[nx],nx});}}string o;for(int i=1;i<=v;i++)o+=(d[i]==LLONG_MAX?\"INF\":to_string(d[i]))+\"\\n\";printf(\"%s\",o.c_str());}\n"
+}

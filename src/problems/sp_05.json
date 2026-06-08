@@ -1,0 +1,34 @@
+{
+  "id": "sp_05",
+  "title": "알고스팟(벽 부수기 BFS)",
+  "stage": 3,
+  "level": 3,
+  "topic": "shortest_path",
+  "concept": "shortest_path",
+  "mode": "stdio",
+  "description": "M×N 미로에서 0은 빈 방, 1은 벽이다. 벽을 부수며 (0,0)에서 (N-1,M-1)까지 갈 때, 부숴야 하는 벽의 최소 개수를 구하라.",
+  "constraints": [
+    "1 ≤ M, N ≤ 100"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 M N. 다음 N줄 0/1 문자열.",
+    "output": "최소로 부숴야 하는 벽의 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3 3\n011\n111\n110\n",
+      "output": "3\n"
+    },
+    {
+      "input": "2 2\n00\n00\n",
+      "output": "0\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "빈 칸 이동 비용 0, 벽 이동 비용 1 → 0-1 BFS(deque).",
+    "0이면 push_front, 1이면 push_back."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int m,n;cin>>m>>n;vector<string>g(n);for(auto&s:g)cin>>s;vector<vector<int>>d(n,vector<int>(m,1e9));deque<pair<int,int>>dq;d[0][0]=0;dq.push_front({0,0});int dx[]={0,0,1,-1},dy[]={1,-1,0,0};while(!dq.empty()){auto[x,y]=dq.front();dq.pop_front();for(int k=0;k<4;k++){int nx=x+dx[k],ny=y+dy[k];if(nx<0||ny<0||nx>=n||ny>=m)continue;int w=g[nx][ny]-'0';if(d[x][y]+w<d[nx][ny]){d[nx][ny]=d[x][y]+w;if(w)dq.push_back({nx,ny});else dq.push_front({nx,ny});}}}cout<<d[n-1][m-1]<<\"\\n\";}\n"
+}

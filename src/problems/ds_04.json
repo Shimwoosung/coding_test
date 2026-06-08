@@ -1,0 +1,36 @@
+{
+  "id": "ds_04",
+  "title": "최소 스패닝 트리(크루스칼)",
+  "stage": 3,
+  "level": 3,
+  "topic": "dsu",
+  "concept": "dsu",
+  "mode": "stdio",
+  "description": "정점 V, 간선 E인 무방향 가중 그래프에서 최소 스패닝 트리의 가중치 합을 구하라.",
+  "constraints": [
+    "1 ≤ V ≤ 10,000",
+    "1 ≤ E ≤ 100,000",
+    "|가중치| ≤ 1,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 V E. 다음 E줄 a b w.",
+    "output": "MST 가중치 합."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "3 3\n1 2 1\n2 3 2\n1 3 3\n",
+      "output": "3\n"
+    },
+    {
+      "input": "5 5\n1 2 1\n2 3 2\n3 4 3\n4 5 4\n1 5 100\n",
+      "output": "10\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "간선을 가중치 오름차순 정렬(크루스칼).",
+    "사이클 안 생기는 간선만 union으로 채택."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;vector<int>p;\nint f(int x){return p[x]==x?x:p[x]=f(p[x]);}\nint main(){int v,e;scanf(\"%d %d\",&v,&e);vector<array<long long,3>>ed(e);for(auto&x:ed)scanf(\"%lld %lld %lld\",&x[1],&x[2],&x[0]);sort(ed.begin(),ed.end());p.resize(v+1);for(int i=1;i<=v;i++)p[i]=i;long long ans=0;for(auto&x:ed){int a=f(x[1]),b=f(x[2]);if(a!=b){p[a]=b;ans+=x[0];}}printf(\"%lld\\n\",ans);}\n"
+}

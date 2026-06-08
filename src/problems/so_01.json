@@ -1,0 +1,40 @@
+{
+  "id": "so_01",
+  "title": "수 정렬하기",
+  "stage": 0,
+  "level": 1,
+  "topic": "sorting",
+  "concept": "sorting",
+  "mode": "stdio",
+  "description": "N개의 수를 오름차순으로 정렬해 한 줄에 하나씩 출력하라.",
+  "constraints": [
+    "1 ≤ N ≤ 1,000,000",
+    "|수| ≤ 1,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 다음 N줄 정수.",
+    "output": "정렬된 수를 한 줄에 하나씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5\n5\n2\n3\n4\n1\n",
+      "output": "1\n2\n3\n4\n5\n"
+    },
+    {
+      "input": "1\n7\n",
+      "output": "7\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "3\n-1\n-5\n0\n",
+      "output": "-5\n-1\n0\n"
+    }
+  ],
+  "hints": [
+    "std::sort O(N log N).",
+    "N이 크면 입출력 속도 주의(scanf/printf 또는 sync off)."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n;scanf(\"%d\",&n);vector<int>a(n);for(auto&x:a)scanf(\"%d\",&x);sort(a.begin(),a.end());string o;for(int x:a){o+=to_string(x);o+='\\n';}printf(\"%s\",o.c_str());}\n"
+}

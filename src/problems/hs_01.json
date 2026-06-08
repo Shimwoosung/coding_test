@@ -1,0 +1,35 @@
+{
+  "id": "hs_01",
+  "title": "숫자 카드",
+  "stage": 0,
+  "level": 2,
+  "topic": "hash",
+  "concept": "hash",
+  "mode": "stdio",
+  "description": "가진 카드 N장과 질의 M개가 주어진다. 각 질의 수가 카드에 있으면 1, 없으면 0을 출력하라.",
+  "constraints": [
+    "1 ≤ N, M ≤ 500,000",
+    "|값| ≤ 10^7"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 둘째 줄 카드, 셋째 줄 M, 넷째 줄 질의들.",
+    "output": "0/1을 공백으로 한 줄에."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5\n6 3 2 10 -10\n8\n10 9 -5 2 3 4 5 -10\n",
+      "output": "1 0 0 1 1 0 0 1\n"
+    },
+    {
+      "input": "1\n1\n2\n1 2\n",
+      "output": "1 0\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "unordered_set 또는 정렬+이분탐색.",
+    "멤버십 조회만 하면 됨."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n;scanf(\"%d\",&n);unordered_set<int>st;st.reserve(n*2);for(int i=0;i<n;i++){int x;scanf(\"%d\",&x);st.insert(x);}int m;scanf(\"%d\",&m);string o;while(m--){int x;scanf(\"%d\",&x);o+=(st.count(x)?\"1\":\"0\");o+=' ';}o.pop_back();printf(\"%s\\n\",o.c_str());}\n"
+}

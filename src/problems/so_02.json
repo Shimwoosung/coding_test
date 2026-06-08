@@ -1,0 +1,35 @@
+{
+  "id": "so_02",
+  "title": "좌표 정렬하기",
+  "stage": 1,
+  "level": 2,
+  "topic": "sorting",
+  "concept": "sorting",
+  "mode": "stdio",
+  "description": "2차원 점 N개를 x좌표 오름차순, x가 같으면 y좌표 오름차순으로 정렬해 출력하라.",
+  "constraints": [
+    "1 ≤ N ≤ 100,000",
+    "|좌표| ≤ 100,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 다음 N줄 x y.",
+    "output": "정렬된 점들 x y 한 줄씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5\n3 4\n1 1\n1 -1\n2 2\n3 3\n",
+      "output": "1 -1\n1 1\n2 2\n3 3\n3 4\n"
+    },
+    {
+      "input": "1\n0 0\n",
+      "output": "0 0\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "pair<int,int> 정렬은 first 우선, 그다음 second.",
+    "그게 곧 문제 조건과 일치."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n;scanf(\"%d\",&n);vector<pair<int,int>>v(n);for(auto&p:v)scanf(\"%d %d\",&p.first,&p.second);sort(v.begin(),v.end());string o;for(auto&p:v){o+=to_string(p.first)+\" \"+to_string(p.second)+\"\\n\";}printf(\"%s\",o.c_str());}\n"
+}

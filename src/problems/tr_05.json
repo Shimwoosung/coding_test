@@ -1,0 +1,34 @@
+{
+  "id": "tr_05",
+  "title": "트리 리프 노드 개수",
+  "stage": 2,
+  "level": 2,
+  "topic": "tree",
+  "concept": "tree",
+  "mode": "stdio",
+  "description": "루트가 주어진 트리에서 특정 노드 하나를 지웠을 때(그 서브트리 전체 제거), 남은 트리의 리프 노드 개수를 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 50"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N. 둘째 줄 각 노드의 부모(루트는 -1). 셋째 줄 지울 노드.",
+    "output": "남은 리프 노드 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "5\n-1 0 0 1 1\n2\n",
+      "output": "2\n"
+    },
+    {
+      "input": "5\n-1 0 0 1 1\n1\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "지운 노드와 그 자손을 제거 표시(DFS).",
+    "남은 노드 중 자식이 하나도 없으면 리프."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;vector<int>ch[55];bool del[55];int n;\nvoid rm(int u){del[u]=true;for(int v:ch[u])rm(v);}\nint main(){cin>>n;int root=-1;for(int i=0;i<n;i++){int p;cin>>p;if(p==-1)root=i;else ch[p].push_back(i);}int d;cin>>d;rm(d);int cnt=0;for(int i=0;i<n;i++){if(del[i])continue;int c=0;for(int v:ch[i])if(!del[v])c++;if(c==0)cnt++;}cout<<cnt<<\"\\n\";}\n"
+}

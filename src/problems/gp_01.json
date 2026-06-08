@@ -1,0 +1,40 @@
+{
+  "id": "gp_01",
+  "title": "연결 요소의 개수",
+  "stage": 1,
+  "level": 2,
+  "topic": "graph",
+  "concept": "graph",
+  "mode": "stdio",
+  "description": "정점 N개, 간선 M개인 방향 없는 그래프에서 연결 요소(서로 이어진 덩어리)의 개수를 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 1,000",
+    "0 ≤ M ≤ N(N-1)/2"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M. 다음 M줄 간선 u v.",
+    "output": "연결 요소 개수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "6 5\n1 2\n2 5\n5 1\n3 4\n4 6\n",
+      "output": "2\n"
+    },
+    {
+      "input": "1 0\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "5 0\n",
+      "output": "5\n"
+    }
+  ],
+  "hints": [
+    "인접 리스트 구성 후, 방문 안 한 정점에서 DFS/BFS 시작할 때마다 +1.",
+    "무방향이므로 양쪽 다 간선 추가."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;vector<int>g[1001];bool vis[1001];\nvoid dfs(int u){vis[u]=1;for(int v:g[u])if(!vis[v])dfs(v);}\nint main(){int n,m;cin>>n>>m;for(int i=0;i<m;i++){int a,b;cin>>a>>b;g[a].push_back(b);g[b].push_back(a);}int c=0;for(int i=1;i<=n;i++)if(!vis[i]){c++;dfs(i);}cout<<c<<\"\\n\";}\n"
+}

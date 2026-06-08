@@ -1,0 +1,35 @@
+{
+  "id": "ds_02",
+  "title": "사이클 게임",
+  "stage": 2,
+  "level": 3,
+  "topic": "dsu",
+  "concept": "dsu",
+  "mode": "stdio",
+  "description": "0~n-1 정점에 간선을 하나씩 추가한다. 처음으로 사이클이 생기는 차례(1-based)를 출력하라. 끝까지 없으면 0.",
+  "constraints": [
+    "1 ≤ n ≤ 100,000",
+    "1 ≤ m ≤ 1,500,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 n m. 다음 m줄 간선 a b.",
+    "output": "사이클이 처음 생기는 간선 번호(없으면 0)."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "6 5\n0 1\n1 2\n2 3\n5 4\n0 4\n",
+      "output": "0\n"
+    },
+    {
+      "input": "6 7\n0 1\n1 2\n1 3\n3 4\n2 4\n5 4\n5 0\n",
+      "output": "5\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "간선 추가 시 두 끝이 이미 같은 집합이면 사이클.",
+    "union으로 합치며 진행."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;vector<int>p;\nint f(int x){return p[x]==x?x:p[x]=f(p[x]);}\nint main(){int n,m;scanf(\"%d %d\",&n,&m);p.resize(n);for(int i=0;i<n;i++)p[i]=i;int ans=0;for(int i=1;i<=m;i++){int a,b;scanf(\"%d %d\",&a,&b);if(ans)continue;if(f(a)==f(b)){ans=i;}else p[f(a)]=f(b);}printf(\"%d\\n\",ans);}\n"
+}

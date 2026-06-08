@@ -1,0 +1,35 @@
+{
+  "id": "tp_04",
+  "title": "주몽의 명령",
+  "stage": 1,
+  "level": 2,
+  "topic": "two_pointer",
+  "concept": "two_pointer",
+  "mode": "stdio",
+  "description": "재료 두 개의 번호 합이 정확히 M이 되는 (서로 다른 인덱스) 쌍의 개수를 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 15,000",
+    "1 ≤ M ≤ 10,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N, 둘째 줄 M, 셋째 줄 N개 재료 번호.",
+    "output": "만들 수 있는 쌍의 개수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "6\n9\n2 7 4 1 5 3\n",
+      "output": "2\n"
+    },
+    {
+      "input": "4\n10\n1 2 3 4\n",
+      "output": "0\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "정렬 후 양끝 투포인터.",
+    "합 비교로 lo/hi 이동, 같으면 카운트."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){int n;cin>>n;long long M;cin>>M;vector<long long>a(n);for(auto&x:a)cin>>x;sort(a.begin(),a.end());int lo=0,hi=n-1;long long c=0;while(lo<hi){long long s=a[lo]+a[hi];if(s==M){c++;lo++;hi--;}else if(s<M)lo++;else hi--;}cout<<c<<\"\\n\";}\n"
+}

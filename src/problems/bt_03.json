@@ -1,0 +1,39 @@
+{
+  "id": "bt_03",
+  "title": "N-Queen",
+  "stage": 3,
+  "level": 3,
+  "topic": "backtracking",
+  "concept": "backtracking",
+  "mode": "stdio",
+  "description": "N×N 체스판에 서로 공격할 수 없게 퀸 N개를 놓는 방법의 수를 구하라.",
+  "constraints": [
+    "1 ≤ N ≤ 13"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N.",
+    "output": "가능한 경우의 수."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "8\n",
+      "output": "92\n"
+    },
+    {
+      "input": "4\n",
+      "output": "2\n"
+    }
+  ],
+  "hiddenTests": [
+    {
+      "input": "1\n",
+      "output": "1\n"
+    }
+  ],
+  "hints": [
+    "행마다 하나씩 놓으며 열/대각선 충돌 체크.",
+    "열, 두 대각선을 배열로 표시하고 백트래킹."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int n,ans=0;bool col[20],d1[40],d2[40];\nvoid bt(int r){if(r==n){ans++;return;}for(int c=0;c<n;c++)if(!col[c]&&!d1[r+c]&&!d2[r-c+n]){col[c]=d1[r+c]=d2[r-c+n]=1;bt(r+1);col[c]=d1[r+c]=d2[r-c+n]=0;}}\nint main(){cin>>n;bt(0);cout<<ans<<\"\\n\";}\n"
+}

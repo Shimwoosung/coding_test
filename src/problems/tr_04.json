@@ -1,0 +1,35 @@
+{
+  "id": "tr_04",
+  "title": "이진 검색 트리(전위→후위)",
+  "stage": 3,
+  "level": 3,
+  "topic": "tree",
+  "concept": "tree",
+  "mode": "stdio",
+  "description": "이진 검색 트리(BST)의 전위 순회 결과가 주어진다. 후위 순회 결과를 출력하라.",
+  "constraints": [
+    "1 ≤ N ≤ 1,000,000",
+    "노드 값은 서로 다른 양의 정수"
+  ],
+  "ioDescription": {
+    "input": "여러 줄에 걸쳐 전위 순회 값들이 EOF까지.",
+    "output": "후위 순회 결과를 한 줄에 하나씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "50\n30\n24\n5\n28\n45\n98\n52\n60\n",
+      "output": "5\n28\n24\n45\n30\n60\n52\n98\n50\n"
+    },
+    {
+      "input": "1\n",
+      "output": "1\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "전위의 첫 값이 루트. 루트보다 작은 구간=왼쪽 서브트리, 큰 구간=오른쪽.",
+    "분할정복으로 후위 출력(왼-오-루트)."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;vector<int>a;string o;\nvoid solve(int s,int e){if(s>=e)return;int root=a[s],mid=s+1;while(mid<e&&a[mid]<root)mid++;solve(s+1,mid);solve(mid,e);o+=to_string(root)+\"\\n\";}\nint main(){int x;while(scanf(\"%d\",&x)==1)a.push_back(x);solve(0,a.size());printf(\"%s\",o.c_str());}\n"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "ps_04",
+  "title": "문자 구간 등장 횟수",
+  "stage": 2,
+  "level": 2,
+  "topic": "prefix_sum",
+  "concept": "prefix_sum",
+  "mode": "stdio",
+  "description": "소문자 문자열 S와 Q개의 질의(문자 c, 구간 l r)가 주어진다. 각 질의에서 구간 [l,r] 안에 문자 c가 몇 번 나오는지 구하라(0-based).",
+  "constraints": [
+    "문자열 길이 ≤ 200,000",
+    "1 ≤ Q ≤ 200,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 S. 둘째 줄 Q. 다음 Q줄 c l r.",
+    "output": "각 질의의 등장 횟수를 한 줄씩."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "seungjaehwang\n3\na 0 5\ne 5 10\ng 0 12\n",
+      "output": "0\n1\n2\n"
+    },
+    {
+      "input": "aaaa\n1\na 0 3\n",
+      "output": "4\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "알파벳 26개 각각에 대해 누적합 배열을 만든다.",
+    "구간 등장 = pre[c][r+1]-pre[c][l]."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;int main(){string s;cin>>s;int n=s.size();vector<array<int,26>>pre(n+1);pre[0].fill(0);for(int i=0;i<n;i++){pre[i+1]=pre[i];pre[i+1][s[i]-'a']++;}int q;cin>>q;string o;while(q--){char c;int l,r;cin>>c>>l>>r;o+=to_string(pre[r+1][c-'a']-pre[l][c-'a'])+\"\\n\";}cout<<o;}\n"
+}

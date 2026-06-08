@@ -1,0 +1,35 @@
+{
+  "id": "ds_05",
+  "title": "도시 분할 계획",
+  "stage": 3,
+  "level": 3,
+  "topic": "dsu",
+  "concept": "dsu",
+  "mode": "stdio",
+  "description": "N개 집을 잇는 길(가중치) 정보로 마을을 두 개로 분할하려 한다. 두 마을 각각이 연결되도록 유지비 합을 최소화하라(MST에서 가장 큰 간선 하나 제거).",
+  "constraints": [
+    "1 ≤ N ≤ 100,000",
+    "1 ≤ M ≤ 1,000,000"
+  ],
+  "ioDescription": {
+    "input": "첫 줄 N M. 다음 M줄 A B C.",
+    "output": "최소 유지비 합."
+  },
+  "boilerplate": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    // 여기에 작성\n\n    return 0;\n}\n",
+  "examples": [
+    {
+      "input": "7 12\n1 2 3\n1 3 2\n3 2 1\n2 5 2\n3 4 4\n7 3 6\n5 1 5\n1 6 2\n6 4 1\n6 5 3\n4 5 3\n6 7 4\n",
+      "output": "8\n"
+    },
+    {
+      "input": "4 3\n1 2 1\n2 3 2\n3 4 3\n",
+      "output": "3\n"
+    }
+  ],
+  "hiddenTests": [],
+  "hints": [
+    "MST를 만들면 전체 연결.",
+    "두 마을로 나누려면 MST의 최대 간선 하나를 끊는다 → MST합 - 최대간선."
+  ],
+  "solution": "#include <bits/stdc++.h>\nusing namespace std;vector<int>p;\nint f(int x){return p[x]==x?x:p[x]=f(p[x]);}\nint main(){int n,m;scanf(\"%d %d\",&n,&m);vector<array<long long,3>>ed(m);for(auto&x:ed)scanf(\"%lld %lld %lld\",&x[1],&x[2],&x[0]);sort(ed.begin(),ed.end());p.resize(n+1);for(int i=1;i<=n;i++)p[i]=i;long long sum=0,mx=0;for(auto&x:ed){int a=f(x[1]),b=f(x[2]);if(a!=b){p[a]=b;sum+=x[0];mx=max(mx,x[0]);}}printf(\"%lld\\n\",sum-mx);}\n"
+}
