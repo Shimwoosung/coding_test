@@ -8,6 +8,7 @@ import CodeEditor from './CodeEditor';
 import ResultPanel from './ResultPanel';
 import Markdown from './Markdown';
 import SolutionModal from './SolutionModal';
+import TimerWidget from './TimerWidget';
 import type { View } from './Sidebar';
 
 interface Props {
@@ -172,6 +173,7 @@ export default function ProblemPage({ id, onNavigate }: Props) {
       <div className="work-pane" ref={workRef}>
         <div className="editor-toolbar">
           <span className="file-name">solution.cpp</span>
+          <TimerWidget inline />
           <span className="zoom-hint">Ctrl + 휠 = 글씨 크기</span>
           <div className="spacer" />
           <button onClick={resetCode} className="ghost">초기화</button>

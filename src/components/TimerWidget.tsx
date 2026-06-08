@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { timer, fmtTime, type TimerState } from '../storage/timer';
 
-// 화면 우상단에 떠 있는 타이머. 문제를 이동해도 유지된다.
-export default function TimerWidget() {
+// 타이머. inline=true 면 툴바/화면에 박아 넣어 버튼을 가리지 않는다(전역 상태 공유).
+export default function TimerWidget({ inline = false }: { inline?: boolean }) {
   const [st, setSt] = useState<TimerState>(timer.get());
   const [open, setOpen] = useState(false);
   const [custom, setCustom] = useState(60);
@@ -13,7 +13,7 @@ export default function TimerWidget() {
   const active = st.totalSec > 0;
 
   return (
-    <div className={`timer-widget ${st.finished ? 'finished' : ''} ${low ? 'low' : ''}`}>
+    <div className={`timer-widget ${inline ? 'inline' : ''} ${st.finished ? 'finished' : ''} ${low ? 'low' : ''}`}>
       <button className="timer-face" onClick={() => setOpen(o => !o)} title="타이머">
         <span className="t-ico">⏱</span>
         <span className="t-time">

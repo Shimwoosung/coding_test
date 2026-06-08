@@ -5,7 +5,6 @@ import ConceptPage from './components/ConceptPage';
 import ProblemPage from './components/ProblemPage';
 import ExamPage from './components/ExamPage';
 import SettingsModal from './components/SettingsModal';
-import TimerWidget from './components/TimerWidget';
 import { problems } from './data/problems';
 import {
   subscribe, getProgress, initSync, onSyncStatus, type SyncState,
@@ -48,7 +47,6 @@ export default function App() {
         {view.kind === 'exam' && <ExamPage key={view.id} id={view.id} onNavigate={setView} />}
       </main>
 
-      <TimerWidget />
       {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
     </div>
   );

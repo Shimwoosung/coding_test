@@ -309,3 +309,8 @@ button.big:hover { filter: brightness(1.1); }
 .round-chip { width: 20px; height: 20px; padding: 0; border-radius: 5px; border: 1px solid var(--border); background: var(--bg-3); color: var(--text-dim); font-size: 11px; line-height: 1; }
 .round-chip:hover { border-color: var(--accent); color: var(--accent); }
 .round-chip.active { background: var(--accent); color: #07101f; border-color: var(--accent); font-weight: 700; }
+
+/* ===== 인라인 타이머 (툴바/모의고사 화면에 박아 넣음 — 버튼 안 가림) ===== */
+.timer-widget.inline { position: relative; bottom: auto; right: auto; z-index: auto; }
+.timer-widget.inline .timer-face { font-size: 13px; padding: 5px 10px; box-shadow: none; }
+.timer-widget.inline .timer-panel { position: absolute; top: calc(100% + 6px); bottom: auto; left: 0; right: auto; z-index: 70; }

@@ -3,6 +3,7 @@ import { examsById } from '../data/exams';
 import { problemsById } from '../data/problems';
 import { isSolved, subscribe } from '../storage/progress';
 import { timer } from '../storage/timer';
+import TimerWidget from './TimerWidget';
 import type { View } from './Sidebar';
 
 interface Props {
@@ -51,6 +52,7 @@ export default function ExamPage({ id, onNavigate }: Props) {
         <div className="exam-actions">
           <button className="primary big" onClick={startExam}>▶ 시험 시작 (타이머 {exam.timeLimitMinutes}분)</button>
           <button className="big" onClick={() => setGraded(true)}>채점하기</button>
+          <TimerWidget inline />
         </div>
       </div>
 
